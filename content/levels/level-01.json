@@ -1,0 +1,168 @@
+[
+  {
+    "id": "n-mann", "level": 1, "order": 1, "kind": "noun",
+    "german": "Mann", "article": "der", "plural": "Männer",
+    "meanings": ["man", "husband"], "prerequisites": [],
+    "example": { "de": "Der Mann trinkt Kaffee.", "en": "The man is drinking coffee." },
+    "mnemonic": "A man challenges the Bear to an arm wrestle and loses badly. Der Mann."
+  },
+  {
+    "id": "n-frau", "level": 1, "order": 2, "kind": "noun",
+    "german": "Frau", "article": "die", "plural": "Frauen",
+    "meanings": ["woman", "wife", "Mrs"], "prerequisites": [],
+    "example": { "de": "Die Frau wohnt in Berlin.", "en": "The woman lives in Berlin." },
+    "mnemonic": "The Diva sweeps in and announces: \"I am not just any woman.\" Die Frau."
+  },
+  {
+    "id": "n-kind", "level": 1, "order": 3, "kind": "noun",
+    "german": "Kind", "article": "das", "plural": "Kinder",
+    "meanings": ["child", "kid"], "prerequisites": [],
+    "example": { "de": "Das Kind spielt im Garten.", "en": "The child is playing in the garden." },
+    "mnemonic": "A child climbs inside the Box and refuses to come out. Das Kind. (Kindergarten: a garden of children.)"
+  },
+  {
+    "id": "n-haus", "level": 1, "order": 4, "kind": "noun",
+    "german": "Haus", "article": "das", "plural": "Häuser",
+    "meanings": ["house", "home"], "prerequisites": [],
+    "example": { "de": "Das Haus ist sehr alt.", "en": "The house is very old." },
+    "mnemonic": "Haus sounds like house. Someone has built a tiny house inside the Box. Das Haus."
+  },
+  {
+    "id": "n-tag", "level": 1, "order": 5, "kind": "noun",
+    "german": "Tag", "article": "der", "plural": "Tage",
+    "meanings": ["day"], "prerequisites": [],
+    "example": { "de": "Heute ist ein schöner Tag.", "en": "Today is a beautiful day." },
+    "mnemonic": "Every day the Bear sticks a new name tag on himself. Der Tag. (Guten Tag: good day.)"
+  },
+  {
+    "id": "n-zeit", "level": 1, "order": 6, "kind": "noun",
+    "german": "Zeit", "article": "die", "plural": "Zeiten",
+    "meanings": ["time"], "prerequisites": [],
+    "example": { "de": "Ich habe keine Zeit.", "en": "I have no time." },
+    "mnemonic": "The Diva taps her watch. Time is the zeitgeist, and she never has enough of it. Die Zeit."
+  },
+  {
+    "id": "n-jahr", "level": 1, "order": 7, "kind": "noun",
+    "german": "Jahr", "article": "das", "plural": "Jahre",
+    "meanings": ["year"], "prerequisites": [],
+    "example": { "de": "Das Jahr hat zwölf Monate.", "en": "The year has twelve months." },
+    "mnemonic": "Jahr sounds like year. A whole year of calendars is packed into the Box. Das Jahr."
+  },
+  {
+    "id": "n-hand", "level": 1, "order": 8, "kind": "noun",
+    "german": "Hand", "article": "die", "plural": "Hände",
+    "meanings": ["hand"], "prerequisites": [],
+    "example": { "de": "Gib mir deine Hand.", "en": "Give me your hand." },
+    "mnemonic": "Hand is just hand. The Diva holds out her hand to be kissed. Die Hand."
+  },
+  {
+    "id": "n-schuh", "level": 1, "order": 9, "kind": "noun",
+    "german": "Schuh", "article": "der", "plural": "Schuhe",
+    "meanings": ["shoe"], "prerequisites": [],
+    "example": { "de": "Der Schuh ist zu klein.", "en": "The shoe is too small." },
+    "mnemonic": "Schuh sounds like shoe. The Bear squeezes his huge paw into a shoe. Der Schuh."
+  },
+  {
+    "id": "n-buch", "level": 1, "order": 10, "kind": "noun",
+    "german": "Buch", "article": "das", "plural": "Bücher",
+    "meanings": ["book"], "prerequisites": [],
+    "example": { "de": "Das Buch liegt auf dem Tisch.", "en": "The book is lying on the table." },
+    "mnemonic": "Buch sounds like book. The Box is full of books. Das Buch."
+  },
+  {
+    "id": "n-tuer", "level": 1, "order": 11, "kind": "noun",
+    "german": "Tür", "article": "die", "plural": "Türen",
+    "meanings": ["door"], "prerequisites": [],
+    "example": { "de": "Bitte mach die Tür zu.", "en": "Please close the door." },
+    "mnemonic": "The Diva goes on tour and slams every dressing-room door behind her. Die Tür."
+  },
+  {
+    "id": "v-sein", "level": 1, "order": 12, "kind": "verb",
+    "german": "sein",
+    "verbForms": { "present3sg": "ist", "pastParticiple": "gewesen", "auxiliary": "sein" },
+    "meanings": ["to be"], "prerequisites": [],
+    "example": { "de": "Ich bin müde.", "en": "I am tired." },
+    "mnemonic": "To sein or not to sein: that is the question."
+  },
+  {
+    "id": "v-haben", "level": 1, "order": 13, "kind": "verb",
+    "german": "haben",
+    "verbForms": { "present3sg": "hat", "pastParticiple": "gehabt", "auxiliary": "haben" },
+    "meanings": ["to have"], "prerequisites": [],
+    "example": { "de": "Wir haben einen Hund.", "en": "We have a dog." },
+    "mnemonic": "Haben sounds like \"have 'em\": whatever you want, I have 'em."
+  },
+  {
+    "id": "v-gehen", "level": 1, "order": 14, "kind": "verb",
+    "german": "gehen",
+    "verbForms": { "present3sg": "geht", "pastParticiple": "gegangen", "auxiliary": "sein" },
+    "meanings": ["to go", "to walk"], "prerequisites": [],
+    "example": { "de": "Ich gehe nach Hause.", "en": "I'm going home." },
+    "mnemonic": "Gehen sounds like \"gay hen\": a cheerful hen going for a walk."
+  },
+  {
+    "id": "v-machen", "level": 1, "order": 15, "kind": "verb",
+    "german": "machen",
+    "verbForms": { "present3sg": "macht", "pastParticiple": "gemacht", "auxiliary": "haben" },
+    "meanings": ["to do", "to make"], "prerequisites": [],
+    "example": { "de": "Was machst du heute?", "en": "What are you doing today?" },
+    "mnemonic": "Machen sounds like machine. Machines make things and do things."
+  },
+  {
+    "id": "v-sehen", "level": 1, "order": 16, "kind": "verb",
+    "german": "sehen",
+    "verbForms": { "present3sg": "sieht", "pastParticiple": "gesehen", "auxiliary": "haben" },
+    "meanings": ["to see"], "prerequisites": [],
+    "example": { "de": "Ich sehe das Meer.", "en": "I can see the sea." },
+    "mnemonic": "Sehen sounds like \"say hen\": you see a hen, so you say hen."
+  },
+  {
+    "id": "a-gut", "level": 1, "order": 17, "kind": "adjective",
+    "german": "gut",
+    "meanings": ["good", "well"], "prerequisites": [],
+    "example": { "de": "Das Essen ist gut.", "en": "The food is good." },
+    "mnemonic": "Gut sounds like good, and good food fills your gut."
+  },
+  {
+    "id": "a-gross", "level": 1, "order": 18, "kind": "adjective",
+    "german": "groß",
+    "meanings": ["big", "large", "tall"], "prerequisites": [],
+    "example": { "de": "Berlin ist eine große Stadt.", "en": "Berlin is a big city." },
+    "mnemonic": "A gross monster is always a big, tall monster. Groß."
+  },
+  {
+    "id": "a-klein", "level": 1, "order": 19, "kind": "adjective",
+    "german": "klein",
+    "meanings": ["small", "little"], "prerequisites": [],
+    "example": { "de": "Die Wohnung ist klein.", "en": "The flat is small." },
+    "mnemonic": "A small Kleenex: klein. Tiny enough to fit in your pocket."
+  },
+  {
+    "id": "o-ja", "level": 1, "order": 20, "kind": "other",
+    "german": "ja",
+    "meanings": ["yes"], "prerequisites": [],
+    "example": { "de": "Ja, das stimmt.", "en": "Yes, that's right." },
+    "mnemonic": "Ja sounds like \"yah\": yes."
+  },
+  {
+    "id": "o-nein", "level": 1, "order": 21, "kind": "other",
+    "german": "nein",
+    "meanings": ["no"], "prerequisites": [],
+    "example": { "de": "Nein, danke.", "en": "No, thank you." },
+    "mnemonic": "Nein sounds like nine. \"Do you want nine more reviews?\" No!"
+  },
+  {
+    "id": "n-handschuh", "level": 1, "order": 22, "kind": "noun",
+    "german": "Handschuh", "article": "der", "plural": "Handschuhe",
+    "meanings": ["glove"], "prerequisites": ["n-hand", "n-schuh"],
+    "example": { "de": "Im Winter trage ich Handschuhe.", "en": "In winter I wear gloves." },
+    "mnemonic": "A shoe for your hand is a glove. A compound takes the gender of its last part: der Schuh, so der Handschuh."
+  },
+  {
+    "id": "n-haustuer", "level": 1, "order": 23, "kind": "noun",
+    "german": "Haustür", "article": "die", "plural": "Haustüren",
+    "meanings": ["front door"], "prerequisites": ["n-haus", "n-tuer"],
+    "example": { "de": "Die Haustür ist offen.", "en": "The front door is open." },
+    "mnemonic": "The house's door is the front door. Last part wins: die Tür, so die Haustür."
+  }
+]
