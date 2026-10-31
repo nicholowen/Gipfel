@@ -1,0 +1,59 @@
+:root {
+  color-scheme: light dark;
+
+  --paper: #f6f3ec;
+  --surface: #ffffff;
+  --ink: #1d2430;
+  --ink-soft: #5c6676;
+  --line: #e2ddd1;
+
+  --accent: #2f5d50;
+  --accent-ink: #ffffff;
+
+  /* Grammatical gender */
+  --der: #2f6fd0;
+  --die: #cc3b4a;
+  --das: #2c9a5a;
+
+  /* Question types */
+  --meaning: #3b3f8f;
+  --german: #b5562b;
+
+  /* Stages */
+  --apprentice: #d9487c;
+  --guru: #8a4bc7;
+  --master: #3a6ad6;
+  --enlightened: #1d9ac6;
+  --burned: #3a3f48;
+
+  --good: #2c8a52;
+  --bad: #c43d3d;
+  --warn: #a8701a;
+
+  --radius: 14px;
+  --shadow: 0 1px 2px rgb(29 36 48 / 6%), 0 4px 16px rgb(29 36 48 / 6%);
+  --font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-word: ui-serif, 'Iowan Old Style', Georgia, serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #12161c;
+    --surface: #1b2129;
+    --ink: #eef1f5;
+    --ink-soft: #98a2b1;
+    --line: #2b333e;
+    --accent: #6fbf9f;
+    --accent-ink: #0e1a15;
+    --der: #6ea2f0;
+    --die: #f07a85;
+    --das: #5cc98a;
+    --meaning: #9aa0ff;
+    --german: #f09a6a;
+    --burned: #c9ced6;
+    --good: #5cc98a;
+    --bad: #f07a7a;
+    --warn: #e0ac55;
+    --shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 4px 16px rgb(0 0 0 / 25%);
+  }
+}

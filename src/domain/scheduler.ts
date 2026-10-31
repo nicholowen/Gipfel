@@ -4,7 +4,7 @@ export const GURU: Stage = 5;
 export const BURNED: Stage = 9;
 
 /** Hours to wait after reaching each stage (index = stage). */
-const WAIT_HOURS = [0, 4, 8, 24, 48, 168, 336, 720, 2880] as const;
+const WAIT_HOURS: readonly number[] = [0, 4, 8, 24, 48, 168, 336, 720, 2880];
 
 const HOUR_MS = 60 * 60 * 1000;
 

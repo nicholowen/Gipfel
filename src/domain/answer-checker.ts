@@ -67,7 +67,10 @@ function checkGerman(item: ContentItem, input: string, ctx: CheckContext): Check
 
   if (item.kind === 'noun' && item.article) {
     if (!article) {
-      return { outcome: 'shake', message: 'Include the article: der, die or das.' };
+      // Only nudge for the article when the word itself is right or nearly right.
+      return levenshtein(rest, target) <= 1
+        ? { outcome: 'shake', message: 'Include the article: der, die or das.' }
+        : { outcome: 'wrong' };
     }
     if (article !== item.article && levenshtein(rest, target) <= 1) {
       return { outcome: 'wrong', message: `It’s ${item.article}, not ${article}.` };
