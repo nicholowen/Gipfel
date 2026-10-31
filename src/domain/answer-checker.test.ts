@@ -1,0 +1,80 @@
+import { describe, expect, it } from 'vitest';
+import { check, type Outcome } from './answer-checker';
+import type { ContentItem, QuestionType } from './types';
+
+const base = { level: 1, order: 1, prerequisites: [], example: { de: '', en: '' } };
+
+const hund: ContentItem = { ...base, id: 'n-hund', kind: 'noun', german: 'Hund', article: 'der', plural: 'Hunde', meanings: ['dog'] };
+const handschuh: ContentItem = { ...base, id: 'n-handschuh', kind: 'noun', german: 'Handschuh', article: 'der', plural: 'Handschuhe', meanings: ['glove'] };
+const krankenhaus: ContentItem = { ...base, id: 'n-krankenhaus', kind: 'noun', german: 'Krankenhaus', article: 'das', plural: 'Krankenhäuser', meanings: ['hospital'] };
+const maedchen: ContentItem = { ...base, id: 'n-maedchen', kind: 'noun', german: 'Mädchen', article: 'das', plural: 'Mädchen', meanings: ['girl'] };
+const strasse: ContentItem = { ...base, id: 'n-strasse', kind: 'noun', german: 'Straße', article: 'die', plural: 'Straßen', meanings: ['street', 'road'] };
+const gehen: ContentItem = { ...base, id: 'v-gehen', kind: 'verb', german: 'gehen', meanings: ['to go', 'to walk'], verbForms: { present3sg: 'geht', pastParticiple: 'gegangen', auxiliary: 'sein' } };
+const schnell: ContentItem = { ...base, id: 'a-schnell', kind: 'adjective', german: 'schnell', meanings: ['fast', 'quick'] };
+
+type Row = [ContentItem, QuestionType, string, Outcome, { synonyms?: string[]; shookAlready?: boolean }?];
+
+const rows: Row[] = [
+  // Meaning questions
+  [hund, 'meaning', 'dog', 'correct'],
+  [hund, 'meaning', '  Dog ', 'correct'],
+  [hund, 'meaning', 'the dog', 'correct'],
+  [hund, 'meaning', 'a dog', 'correct'],
+  [hund, 'meaning', 'dgo', 'wrong'],
+  [hund, 'meaning', 'cat', 'wrong'],
+  [hund, 'meaning', 'pooch', 'correct', { synonyms: ['pooch'] }],
+  [handschuh, 'meaning', 'glov', 'close'],
+  [handschuh, 'meaning', 'glve', 'close'],
+  [handschuh, 'meaning', 'gluv', 'wrong'],
+  [handschuh, 'meaning', 'gluvv', 'wrong'],
+  [krankenhaus, 'meaning', 'hospitl', 'close'],
+  [krankenhaus, 'meaning', 'hosptl', 'close'],
+  [krankenhaus, 'meaning', 'hstpl', 'wrong'],
+  [strasse, 'meaning', 'road', 'correct'],
+  [gehen, 'meaning', 'go', 'correct'],
+  [gehen, 'meaning', 'to go', 'correct'],
+  [gehen, 'meaning', 'walk', 'correct'],
+  [schnell, 'meaning', 'quick', 'correct'],
+  // Wrong language or empty
+  [hund, 'meaning', 'hund', 'shake'],
+  [hund, 'meaning', 'der Hund', 'shake'],
+  [hund, 'meaning', '   ', 'shake'],
+  [hund, 'german', 'dog', 'shake'],
+  [gehen, 'german', 'to go', 'shake'],
+  // German questions
+  [hund, 'german', 'der Hund', 'correct'],
+  [hund, 'german', 'der hund', 'correct'],
+  [hund, 'german', 'Hund', 'shake'],
+  [hund, 'german', 'die Hund', 'wrong'],
+  [hund, 'german', 'der Hunf', 'shake'],
+  [hund, 'german', 'der Hunf', 'wrong', { shookAlready: true }],
+  [hund, 'german', 'der Hdnu', 'wrong'],
+  [maedchen, 'german', 'das Mädchen', 'correct'],
+  [maedchen, 'german', 'das Maedchen', 'correct'],
+  [maedchen, 'german', 'das Madchen', 'shake'],
+  [strasse, 'german', 'die Strasse', 'correct'],
+  [strasse, 'german', 'die straße', 'correct'],
+  [gehen, 'german', 'gehen', 'correct'],
+  [gehen, 'german', 'Gehen', 'correct'],
+  [gehen, 'german', 'gehn', 'shake'],
+  [schnell, 'german', 'schnell', 'correct'],
+  [schnell, 'german', 'langsam', 'wrong'],
+];
+
+describe('check', () => {
+  it.each(rows)('%o %s answer %j is %s', (item, question, input, expected, ctx) => {
+    expect(check(item, question, input, ctx ?? {}).outcome).toBe(expected);
+  });
+
+  it('names the right article when the article is wrong', () => {
+    expect(check(hund, 'german', 'die Hund', {}).message).toMatch(/der/);
+  });
+
+  it('asks for an article when it is missing', () => {
+    expect(check(hund, 'german', 'Hund', {}).message).toMatch(/der, die or das/);
+  });
+
+  it('calls a wrong article wrong even when the shake was already used', () => {
+    expect(check(hund, 'german', 'Hund', { shookAlready: true }).outcome).toBe('shake');
+  });
+});
