@@ -2,14 +2,9 @@ import { Link } from 'react-router-dom';
 import { curriculum } from '../../content/curriculum';
 import { useDashboard, useNow } from '../../data/instance';
 import { APPRENTICE_WARNING } from '../../domain/dashboard';
-
-const GROUPS = [
-  ['apprentice', 'Apprentice'],
-  ['guru', 'Guru'],
-  ['master', 'Master'],
-  ['enlightened', 'Enlightened'],
-  ['burned', 'Burned'],
-] as const;
+import { AppHeader } from '../../ui/AppHeader';
+import { useTheme } from '../../ui/theme-context';
+import { STAGE_KEYS } from '../../ui/themes';
 
 const time = (ms: number) => new Date(ms).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
 
@@ -25,7 +20,9 @@ function relative(ms: number, now: number): string {
 export function Dashboard() {
   const now = useNow();
   const d = useDashboard(now);
+  const { theme } = useTheme();
   if (!d) return null;
+  const stage = theme.stages;
 
   const levelTitle = curriculum.levels.find((l) => l.number === d.level.number)?.title;
   const { total, atGuru, needed } = d.level;
@@ -34,18 +31,11 @@ export function Dashboard() {
 
   return (
     <main className="page dashboard">
-      <header className="topbar">
-        <h1 className="brand">
-          <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
-            <path d="M3 27 L13 9 L18 17 L21 12 L29 27 Z" fill="currentColor" />
-            <path d="M13 9 L10.5 13.5 L13 12.5 L15.2 13 Z" fill="var(--paper)" />
-          </svg>
-          Gipfel
-        </h1>
+      <AppHeader>
         <p className="streak" title="Days in a row with a finished session">
           <strong>{d.streak}</strong> day streak
         </p>
-      </header>
+      </AppHeader>
 
       <div className="actions">
         <Link to="/lessons" className={`action action--lessons${d.lessonsAvailable === 0 ? ' is-empty' : ''}`}>
@@ -60,7 +50,7 @@ export function Dashboard() {
 
       {d.apprenticeWarning && (
         <p className="notice notice--shake">
-          Over {APPRENTICE_WARNING} words are in Apprentice. Clear some reviews before starting new lessons.
+          Over {APPRENTICE_WARNING} words are in <span lang="de">{stage.apprentice.de}</span>. Clear some reviews before starting new lessons.
         </p>
       )}
 
@@ -74,11 +64,11 @@ export function Dashboard() {
             {atGuru} / {needed} to level up
           </span>
         </div>
-        <div className="level-bar" role="img" aria-label={`${atGuru} of ${total} words at Guru; ${needed} needed`}>
+        <div className="level-bar" role="img" aria-label={`${atGuru} of ${total} words at ${stage.guru.de}; ${needed} needed`}>
           <span className="level-bar__fill" style={{ width: `${(atGuru / Math.max(1, total)) * 100}%` }} />
           <span className="level-bar__goal" style={{ left: `${(needed / Math.max(1, total)) * 100}%` }} />
         </div>
-        <p className="muted small">A word reaches Guru after about four days of correct reviews.</p>
+        <p className="muted small">A word reaches <span lang="de">{stage.guru.de}</span> after about four days of correct reviews.</p>
       </section>
 
       <section className="card">
@@ -105,10 +95,12 @@ export function Dashboard() {
       </section>
 
       <section className="stages">
-        {GROUPS.map(([key, label]) => (
-          <div key={key} className={`stage stage--${key}`}>
+        {STAGE_KEYS.map((key, i) => (
+          <div key={key} className={`stage stage--${i + 1}`} title={`${stage[key].de} (${stage[key].en})`}>
             <span className="stage__count">{d.groups[key]}</span>
-            <span className="stage__label">{label}</span>
+            <span className="stage__label" lang="de">
+              {stage[key].de}
+            </span>
           </div>
         ))}
       </section>

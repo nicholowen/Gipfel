@@ -13,6 +13,11 @@
     "validate-content": "tsx scripts/validate-content.ts"
   },
   "dependencies": {
+    "@fontsource/alegreya-sans": "^5.3.0",
+    "@fontsource/archivo": "^5.3.0",
+    "@fontsource/barlow-condensed": "^5.3.0",
+    "@fontsource/jost": "^5.3.0",
+    "@fontsource/unifrakturmaguntia": "^5.3.0",
     "dexie": "^4.4.7",
     "dexie-react-hooks": "^4.4.0",
     "react": "^19.3.1",

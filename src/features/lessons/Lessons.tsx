@@ -5,6 +5,7 @@ import { loadLessonBatch, repo, useSettings } from '../../data/instance';
 import { nextReviewAt } from '../../domain/scheduler';
 import { GermanWord, ItemInfo, SpeakButton } from '../../ui/ItemInfo';
 import { reportError } from '../../ui/errors';
+import { useTheme } from '../../ui/theme-context';
 import { speak, spokenForm } from '../../ui/speech';
 import { Quiz } from '../quiz/Quiz';
 
@@ -12,6 +13,7 @@ type Phase = { name: 'loading' } | { name: 'learn'; index: number } | { name: 'q
 
 export function Lessons() {
   const settings = useSettings();
+  const { theme } = useTheme();
   const [batch, setBatch] = useState<string[]>([]);
   const [phase, setPhase] = useState<Phase>({ name: 'loading' });
   const [round, setRound] = useState(0);
@@ -41,7 +43,7 @@ export function Lessons() {
     return (
       <main className="page centred">
         <h1>No lessons right now</h1>
-        <p className="muted">New words unlock as you level up, or when the words they are built from reach Guru.</p>
+        <p className="muted">New words unlock as you level up, or when the words they are built from reach <span lang="de">{theme.stages.guru.de}</span>.</p>
         <Link to="/" className="button">
           Back home
         </Link>

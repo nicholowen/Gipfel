@@ -1,0 +1,17 @@
+/*
+ * Theme fonts, bundled (Latin subset, which covers ä ö ü ß) so the app keeps its
+ * looks offline. Theme colours and font stacks are set as CSS variables by
+ * src/ui/theme-dom.ts from the palettes in src/ui/themes.ts.
+ */
+@import '@fontsource/archivo/latin-700.css';
+@import '@fontsource/archivo/latin-800.css';
+@import '@fontsource/jost/latin-400.css';
+@import '@fontsource/jost/latin-500.css';
+@import '@fontsource/jost/latin-700.css';
+@import '@fontsource/jost/latin-800.css';
+@import '@fontsource/barlow-condensed/latin-600.css';
+@import '@fontsource/barlow-condensed/latin-700.css';
+@import '@fontsource/alegreya-sans/latin-400.css';
+@import '@fontsource/alegreya-sans/latin-700.css';
+@import '@fontsource/alegreya-sans/latin-800.css';
+@import '@fontsource/unifrakturmaguntia/latin-400.css';
