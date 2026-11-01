@@ -21,7 +21,7 @@ npm run build          # typecheck + production build into dist/
 | `src/content/` | Loads and validates the curriculum |
 | `src/data/` | Dexie database and the transactions that change progress |
 | `src/features/` | Screens: dashboard, lessons, reviews, and the shared quiz |
-| `src/ui/` | Answer input, item info panel, speech |
+| `src/ui/` | Answer input, item info panel, speech, the header menu, and the four themes (`themes.ts`: palettes, fonts and each theme's German stage names) |
 
 Item ids in content (`n-hund`, `v-gehen`) are permanent: progress is keyed on them.
 

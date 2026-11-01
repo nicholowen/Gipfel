@@ -6,7 +6,9 @@ import { Dashboard } from './features/dashboard/Dashboard';
 import { Lessons } from './features/lessons/Lessons';
 import { Reviews } from './features/reviews/Reviews';
 import { ErrorBoundary, ErrorScreen, installGlobalErrorHandlers } from './ui/errors';
-import './styles/tokens.css';
+import { ThemeProvider } from './ui/theme-context';
+import { applyTheme, readStoredTheme } from './ui/theme-dom';
+import './styles/fonts.css';
 import './styles/app.css';
 
 const router = createBrowserRouter([
@@ -20,6 +22,9 @@ const router = createBrowserRouter([
 function RouteError() {
   return <ErrorScreen error={useRouteError()} />;
 }
+
+// Paint the saved theme before anything renders, so there is no flash of the default.
+applyTheme(readStoredTheme());
 
 const root = createRoot(document.getElementById('root')!);
 installGlobalErrorHandlers();
@@ -36,9 +41,11 @@ async function start() {
   navigator.storage?.persist?.().catch(() => undefined);
   root.render(
     <StrictMode>
-      <ErrorBoundary>
-        <RouterProvider router={router} />
-      </ErrorBoundary>
+      <ThemeProvider>
+        <ErrorBoundary>
+          <RouterProvider router={router} />
+        </ErrorBoundary>
+      </ThemeProvider>
     </StrictMode>,
   );
 }
