@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { curriculum } from '../content/curriculum';
 import { summarise } from '../domain/dashboard';
+import type { Stage } from '../domain/types';
 import { lessonQueue } from '../domain/unlock';
 import { GipfelDb } from './db';
 import { withReconnect } from './reconnect';
@@ -56,6 +57,14 @@ export function loadDueReviews(now: number): Promise<string[]> {
   return retry(async () => {
     const due = await db.progress.where('nextReviewAt').belowOrEqual(now).toArray();
     return due.filter((r) => r.stage >= 1 && r.stage <= 8).map((r) => r.itemId);
+  });
+}
+
+/** Each item's stage right now; read once at the start of a session so labels don't shift mid-quiz. */
+export function loadStages(itemIds: string[]): Promise<Map<string, Stage>> {
+  return retry(async () => {
+    const rows = await db.progress.bulkGet(itemIds);
+    return new Map(rows.filter((r) => r !== undefined).map((r) => [r.itemId, r.stage]));
   });
 }
 

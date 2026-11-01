@@ -1,4 +1,5 @@
-import type { StageGroup } from '../domain/scheduler';
+import { stageGroup, type StageGroup } from '../domain/scheduler';
+import type { Stage } from '../domain/types';
 
 /**
  * Visual themes. Each one is a palette (light, and dark where the theme has one),
@@ -39,6 +40,14 @@ export interface Palette {
   good: string;
   bad: string;
   warn: string;
+  /** A bold block: Alpen's pine header and prompt, Bauhaus's band, the departure board, the bakery's feedback box. */
+  hero: string;
+  onHero: string;
+  onHeroSoft: string;
+  /** der, die and das where they sit on the hero. */
+  heroDer: string;
+  heroDie: string;
+  heroDas: string;
   stages: Record<StageKey, { bg: string; fg: string }>;
   shadow: string;
   /** Card and button outline; 'none' for themes that rely on shadow. */
@@ -51,6 +60,13 @@ export interface Theme {
   /** One line for the theme menu. */
   tagline: string;
   stages: Record<StageKey, StageName>;
+  copy: {
+    /** Heading over the list of stages. */
+    stagesTitle: string;
+    /** Feedback headlines, in German. */
+    right: string;
+    wrong: string;
+  };
   fonts: { body: string; display: string; brand: string; word: string };
   radius: string;
   light: Palette;
@@ -73,6 +89,7 @@ const alpen: Theme = {
     enlightened: { de: 'Grat', en: 'ridge' },
     burned: { de: 'Gipfel', en: 'summit' },
   },
+  copy: { stagesTitle: 'Your route', right: 'Trittsicher!', wrong: 'Ausgerutscht!' },
   fonts: {
     body: SYSTEM,
     display: `'Archivo', ${SYSTEM}`,
@@ -98,6 +115,12 @@ const alpen: Theme = {
     good: '#2f6b3a',
     bad: '#b4232c',
     warn: '#8a5a00',
+    hero: '#1f3a2e',
+    onHero: '#ffffff',
+    onHeroSoft: '#c9d6ce',
+    heroDer: '#9cc3ff',
+    heroDie: '#ffa3ab',
+    heroDas: '#a8e0b0',
     stages: {
       apprentice: { bg: '#7a5c3e', fg: '#ffffff' },
       guru: { bg: '#3f7a3a', fg: '#ffffff' },
@@ -126,6 +149,12 @@ const alpen: Theme = {
     good: '#7fd18f',
     bad: '#ff8a94',
     warn: '#e0ac55',
+    hero: '#1f3a2e',
+    onHero: '#eef3f0',
+    onHeroSoft: '#a9b8b0',
+    heroDer: '#9cc3ff',
+    heroDie: '#ffa3ab',
+    heroDas: '#a8e0b0',
     stages: {
       apprentice: { bg: '#c9a27e', fg: '#0f1a15' },
       guru: { bg: '#9bd08a', fg: '#0f1a15' },
@@ -149,6 +178,7 @@ const bauhaus: Theme = {
     enlightened: { de: 'Meister', en: 'master' },
     burned: { de: 'Meisterwerk', en: 'masterpiece' },
   },
+  copy: { stagesTitle: 'the workshop', right: 'Gut gebaut!', wrong: 'Nochmal!' },
   fonts: {
     body: `'Jost', ${SYSTEM}`,
     display: `'Jost', ${SYSTEM}`,
@@ -174,6 +204,12 @@ const bauhaus: Theme = {
     good: '#1c6b3a',
     bad: '#d52b1e',
     warn: '#7a5d00',
+    hero: '#1c4e9d',
+    onHero: '#ffffff',
+    onHeroSoft: '#dbe6f7',
+    heroDer: '#cfe0ff',
+    heroDie: '#ffc2bd',
+    heroDas: '#ffe27a',
     stages: {
       apprentice: { bg: '#6e6a60', fg: '#ffffff' },
       guru: { bg: '#1c4e9d', fg: '#ffffff' },
@@ -202,6 +238,12 @@ const bauhaus: Theme = {
     good: '#7fd18f',
     bad: '#ff7a70',
     warn: '#f4c20d',
+    hero: '#1c4e9d',
+    onHero: '#ffffff',
+    onHeroSoft: '#dbe6f7',
+    heroDer: '#cfe0ff',
+    heroDie: '#ffc2bd',
+    heroDas: '#ffe27a',
     stages: {
       apprentice: { bg: '#b5b0a4', fg: '#111111' },
       guru: { bg: '#7fa6f0', fg: '#111111' },
@@ -225,6 +267,7 @@ const bahn: Theme = {
     enlightened: { de: 'Schnellzug', en: 'express' },
     burned: { de: 'Endstation', en: 'terminus' },
   },
+  copy: { stagesTitle: 'Timetable', right: 'Pünktlich!', wrong: 'Verspätung!' },
   fonts: {
     body: SYSTEM,
     display: `'Barlow Condensed', ${SYSTEM}`,
@@ -251,6 +294,12 @@ const bahn: Theme = {
     good: '#7fd18f',
     bad: '#ff7a7a',
     warn: '#ffce00',
+    hero: '#16233f',
+    onHero: '#ffffff',
+    onHeroSoft: '#b9c3d9',
+    heroDer: '#8db4ff',
+    heroDie: '#ff7a7a',
+    heroDas: '#7fd18f',
     stages: {
       apprentice: { bg: '#4b5263', fg: '#ffffff' },
       guru: { bg: '#2a4c9a', fg: '#ffffff' },
@@ -274,6 +323,7 @@ const backstube: Theme = {
     enlightened: { de: 'Ofen', en: 'oven' },
     burned: { de: 'Brezel', en: 'pretzel' },
   },
+  copy: { stagesTitle: 'The shelf', right: 'Gut gebacken!', wrong: 'Angebrannt!' },
   fonts: {
     body: `'Alegreya Sans', ${SYSTEM}`,
     display: `'Alegreya Sans', ${SYSTEM}`,
@@ -299,6 +349,12 @@ const backstube: Theme = {
     good: '#2f6b3a',
     bad: '#8c2b1e',
     warn: '#7a5300',
+    hero: '#221d18',
+    onHero: '#fbf6ec',
+    onHeroSoft: '#d8cbb6',
+    heroDer: '#a9c1f2',
+    heroDie: '#f0a090',
+    heroDas: '#a8d49a',
     stages: {
       apprentice: { bg: '#7a6e5e', fg: '#ffffff' },
       guru: { bg: '#9c6b2e', fg: '#ffffff' },
@@ -327,6 +383,12 @@ const backstube: Theme = {
     good: '#9ccb8a',
     bad: '#f0a090',
     warn: '#e0ac55',
+    hero: '#3a2614',
+    onHero: '#f3eadb',
+    onHeroSoft: '#d8cbb6',
+    heroDer: '#a9c1f2',
+    heroDie: '#f0a090',
+    heroDas: '#a8d49a',
     stages: {
       apprentice: { bg: '#cfc2ab', fg: '#1a1511' },
       guru: { bg: '#e0b47a', fg: '#1a1511' },
@@ -378,6 +440,12 @@ export function cssVariables(theme: Theme, prefersDark: boolean): Record<string,
     '--good': p.good,
     '--bad': p.bad,
     '--warn': p.warn,
+    '--hero': p.hero,
+    '--on-hero': p.onHero,
+    '--on-hero-soft': p.onHeroSoft,
+    '--hero-der': p.heroDer,
+    '--hero-die': p.heroDie,
+    '--hero-das': p.heroDas,
     '--shadow': p.shadow,
     '--border': p.border,
     '--radius': theme.radius,
@@ -391,4 +459,26 @@ export function cssVariables(theme: Theme, prefersDark: boolean): Record<string,
     vars[`--on-stage-${i + 1}`] = p.stages[key].fg;
   });
   return vars;
+}
+
+/** How long words rest at each stage group, in plain English. */
+export const STAGE_INTERVAL: Record<StageKey, string> = {
+  apprentice: '4 h – 2 days',
+  guru: '1–2 weeks',
+  master: '1 month',
+  enlightened: '4 months',
+  burned: 'learned for good',
+};
+
+/**
+ * The label for one SRS stage in this theme: the group's German name, numbered
+ * within the group where it has several steps (Tal 1–4, Alm 1–2). Stage 0 is a new word.
+ */
+export function stageLabel(theme: Theme, stage: Stage): string {
+  const group = stageGroup(stage);
+  if (group === 'lesson') return 'Neu';
+  const name = theme.stages[group].de;
+  if (group === 'apprentice') return `${name} ${stage}`;
+  if (group === 'guru') return `${name} ${stage - 4}`;
+  return name;
 }

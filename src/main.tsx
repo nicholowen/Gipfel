@@ -10,6 +10,7 @@ import { ThemeProvider } from './ui/theme-context';
 import { applyTheme, readStoredTheme } from './ui/theme-dom';
 import './styles/fonts.css';
 import './styles/app.css';
+import './styles/themes.css';
 
 const router = createBrowserRouter([
   { path: '/', element: <Dashboard />, errorElement: <RouteError /> },

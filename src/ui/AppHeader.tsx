@@ -3,8 +3,29 @@ import { useTheme } from './theme-context';
 import { darkQuery } from './theme-dom';
 import { paletteFor, THEMES } from './themes';
 
-/** The Gipfel header: logo, an optional slot (e.g. the streak), and the menu. */
-export function AppHeader({ children }: { children?: ReactNode }) {
+export const MOUNTAIN_LOGO = (
+  <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
+    <path d="M3 27 L13 9 L18 17 L21 12 L29 27 Z" fill="currentColor" />
+    <path d="M13 9 L10.5 13.5 L13 12.5 L15.2 13 Z" fill="var(--logo-snow, var(--paper))" />
+  </svg>
+);
+
+interface Props {
+  /** Replaces the mountain mark. */
+  logo?: ReactNode;
+  /** Small line above the name (e.g. "Departures"). */
+  kicker?: ReactNode;
+  /** Defaults to "Gipfel". */
+  name?: ReactNode;
+  /** Small line below the name. */
+  tagline?: ReactNode;
+  className?: string;
+  /** Shown beside the menu button (e.g. the streak). */
+  children?: ReactNode;
+}
+
+/** The Gipfel header: logo and name, an optional slot (e.g. the streak), and the menu. */
+export function AppHeader({ logo = MOUNTAIN_LOGO, kicker, name = 'Gipfel', tagline, className = '', children }: Props) {
   const [open, setOpen] = useState(false);
   const button = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -34,14 +55,15 @@ export function AppHeader({ children }: { children?: ReactNode }) {
   }, [open]);
 
   return (
-    <header className="app-header">
-      <h1 className="brand">
-        <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
-          <path d="M3 27 L13 9 L18 17 L21 12 L29 27 Z" fill="currentColor" />
-          <path d="M13 9 L10.5 13.5 L13 12.5 L15.2 13 Z" fill="var(--paper)" />
-        </svg>
-        <span className="brand__name">Gipfel</span>
-      </h1>
+    <header className={`app-header ${className}`}>
+      <div className="brand-block">
+        {kicker && <p className="brand__kicker">{kicker}</p>}
+        <h1 className="brand">
+          {logo}
+          <span className="brand__name">{name}</span>
+        </h1>
+        {tagline && <p className="brand__tagline">{tagline}</p>}
+      </div>
       <div className="app-header__end">
         {children}
         <button

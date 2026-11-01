@@ -1,0 +1,890 @@
+/*
+ * Each theme's layout and character. Colours and fonts come from src/ui/themes.ts as
+ * CSS variables; this file arranges them. Dashboard layouts are scoped by .dash--<theme>
+ * (see features/dashboard/layouts.tsx); everything else by [data-theme] on <html>.
+ */
+
+/* ────────────────────────────── Alpen ────────────────────────────── */
+
+.alpen-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin: calc(-1 * max(16px, env(safe-area-inset-top))) -16px 0;
+  padding: max(16px, env(safe-area-inset-top)) 20px 24px;
+  border-radius: 0 0 24px 24px;
+  background: var(--hero);
+  color: var(--on-hero);
+}
+
+.alpen-hero > :not(.contours) {
+  position: relative;
+}
+
+.app-header--hero .brand {
+  color: var(--on-hero);
+  --logo-snow: var(--hero);
+}
+
+.app-header--hero .menu-button {
+  color: var(--on-hero);
+}
+
+.app-header--hero .menu-button[aria-expanded='true'] {
+  background: rgb(255 255 255 / 15%);
+}
+
+.app-header--hero .menu {
+  color: var(--ink);
+}
+
+.streak-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 12%);
+  font-size: 0.88rem;
+}
+
+.alpen-hero__level {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.alpen-hero__kicker,
+.alpen-hero__hint {
+  color: var(--on-hero-soft);
+}
+
+.alpen-hero__hint {
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+
+.alpen-hero__number {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.alpen-hero .level-bar {
+  height: 8px;
+  margin-top: 10px;
+  background: rgb(255 255 255 / 18%);
+}
+
+.alpen-hero .level-bar__fill {
+  background: var(--on-hero);
+}
+
+.alpen-hero .level-bar__goal {
+  background: var(--on-hero-soft);
+}
+
+.dash--alpen .action {
+  min-height: 96px;
+}
+
+.dash--alpen .action--lessons:not(.is-empty) {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--accent), var(--shadow);
+}
+
+.dash--alpen .action--lessons:not(.is-empty) .action__label {
+  color: var(--accent);
+}
+
+/* The route: stage icons strung along a dashed trail. */
+.dash--alpen .stage-rows {
+  position: relative;
+}
+
+.dash--alpen .stage-rows::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 16px;
+  border-left: 2px dashed color-mix(in srgb, var(--ink-soft) 55%, transparent);
+}
+
+.dash--alpen .stage-icon {
+  position: relative;
+  background: var(--surface);
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.dash--alpen .stage-icon--5 {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.stage-icon--waymark {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1.5px solid var(--accent);
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.stage-icon--waymark span {
+  flex: 1;
+}
+
+.stage-icon--waymark span:nth-child(odd) {
+  background: #c8102e;
+}
+
+[data-theme='alpen'] .brand__name {
+  padding-bottom: 2px;
+  background: linear-gradient(to right, #c8102e 0 33%, transparent 33% 66%, #c8102e 66%) bottom / 100% 3px no-repeat;
+}
+
+/* Quiz: a pine card with contour lines; German-answer questions are trail red. */
+[data-theme='alpen'] .prompt--meaning {
+  background: var(--hero);
+  color: var(--on-hero);
+}
+
+[data-theme='alpen'] .prompt--meaning .prompt__hint,
+[data-theme='alpen'] .prompt--meaning .prompt__label {
+  color: var(--on-hero-soft);
+}
+
+[data-theme='alpen'] .prompt__stage {
+  background: rgb(255 255 255 / 14%);
+}
+
+[data-theme='alpen'] .prompt__article--der { color: var(--hero-der); }
+[data-theme='alpen'] .prompt__article--die { color: var(--hero-die); }
+[data-theme='alpen'] .prompt__article--das { color: var(--hero-das); }
+
+[data-theme='alpen'] .quiz__progress {
+  position: relative;
+  height: 2px;
+  overflow: visible;
+  border-radius: 0;
+  background: none;
+  border-top: 2px dashed color-mix(in srgb, var(--ink-soft) 55%, transparent);
+}
+
+[data-theme='alpen'] .quiz__progress span {
+  position: absolute;
+  top: -2.5px;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+}
+
+[data-theme='alpen'] .quiz__progress span::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: -7px;
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  background: #c8102e;
+  box-sizing: border-box;
+}
+
+[data-theme='alpen'] .notice--good .notice__title { color: var(--good); }
+[data-theme='alpen'] .notice--bad .notice__title { color: var(--bad); }
+
+/* ────────────────────────────── Bauhaus ────────────────────────────── */
+
+[data-theme='bauhaus'] .button,
+[data-theme='bauhaus'] .icon-button,
+[data-theme='bauhaus'] .answer__field,
+[data-theme='bauhaus'] .umlauts__key,
+[data-theme='bauhaus'] .level-bar,
+[data-theme='bauhaus'] .level-bar__fill,
+[data-theme='bauhaus'] .quiz__progress,
+[data-theme='bauhaus'] .quiz__progress span,
+[data-theme='bauhaus'] .notice,
+[data-theme='bauhaus'] .stage-row__bar {
+  border-radius: 0;
+}
+
+[data-theme='bauhaus'] .answer__field {
+  box-shadow: inset 0 0 0 3px var(--ink);
+}
+
+[data-theme='bauhaus'] .brand__name {
+  text-transform: lowercase;
+  letter-spacing: -0.03em;
+}
+
+.app-header--ruled {
+  padding-bottom: 12px;
+  border-bottom: 4px solid var(--ink);
+}
+
+.dash--bauhaus .brand {
+  font-size: 2rem;
+}
+
+.dash--bauhaus .header-note {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.bauhaus-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 190px 60px;
+  border: 4px solid var(--ink);
+}
+
+.bauhaus-grid .action {
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+}
+
+.bauhaus-grid__reviews {
+  grid-row: 1 / span 2;
+  justify-content: space-between;
+  padding: 18px;
+  border-right: 4px solid var(--ink) !important;
+}
+
+.bauhaus-grid__reviews .action__count {
+  font-size: 5.5rem;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+}
+
+.bauhaus-grid__lessons,
+.bauhaus-grid__lessons.is-empty {
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: var(--paper);
+}
+
+.bauhaus-grid__disc {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--meaning);
+}
+
+.bauhaus-grid__lessons .action__count,
+.bauhaus-grid__lessons .action__label {
+  position: relative;
+  color: var(--on-meaning);
+}
+
+.bauhaus-grid__lessons.is-empty .bauhaus-grid__disc {
+  background: var(--line);
+}
+
+.bauhaus-grid__lessons.is-empty .action__count,
+.bauhaus-grid__lessons.is-empty .action__label {
+  color: var(--ink);
+}
+
+.bauhaus-grid__streak {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-top: 4px solid var(--ink);
+  background: var(--hero);
+  color: var(--on-hero);
+  font-weight: 500;
+}
+
+.bauhaus-grid__streak strong {
+  font-size: 1.4rem;
+}
+
+.bauhaus-level {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 4px solid var(--ink);
+  background: var(--surface);
+}
+
+.dash--bauhaus h2 {
+  font-weight: 800;
+}
+
+.dash--bauhaus .stage-icon {
+  background: none;
+  color: var(--ink);
+}
+
+.dash--bauhaus .stage-row__bar {
+  height: 12px;
+}
+
+.dash--bauhaus .upcoming {
+  padding: 14px 0 0;
+  border-top: 4px solid var(--ink);
+  border-radius: 0;
+  background: none;
+}
+
+/* A shape for each gender: der ■, die ●, das ▲. */
+[data-theme='bauhaus'] .article::before,
+[data-theme='bauhaus'] .prompt__article::before,
+[data-theme='bauhaus'] .legend span::before {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.3em;
+  vertical-align: 0.08em;
+  background: currentColor;
+}
+
+[data-theme='bauhaus'] .article--die::before,
+[data-theme='bauhaus'] .prompt__article--die::before,
+[data-theme='bauhaus'] .legend .gender--die::before {
+  border-radius: 50%;
+}
+
+[data-theme='bauhaus'] .article--das::before,
+[data-theme='bauhaus'] .prompt__article--das::before,
+[data-theme='bauhaus'] .legend .gender--das::before {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+/* Quiz: paper card, a disc in the corner, a black block, and the word set left. */
+[data-theme='bauhaus'] .prompt {
+  min-height: 270px;
+  border: 4px solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+}
+
+[data-theme='bauhaus'] .prompt__disc {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: var(--german);
+}
+
+[data-theme='bauhaus'] .prompt--german .prompt__disc {
+  background: var(--meaning);
+}
+
+[data-theme='bauhaus'] .prompt__block {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 56px;
+  background: var(--ink);
+}
+
+[data-theme='bauhaus'] .prompt__body {
+  align-items: flex-start;
+  padding: 0 4px 40px;
+}
+
+[data-theme='bauhaus'] .prompt__stage {
+  border-radius: 0;
+  background: var(--ink);
+  color: var(--surface);
+}
+
+[data-theme='bauhaus'] .prompt__label {
+  padding: 3px 8px;
+  border: 2px solid var(--ink);
+  background: var(--surface);
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+[data-theme='bauhaus'] .prompt__article--der { color: var(--der); }
+[data-theme='bauhaus'] .prompt__article--die { color: var(--die); }
+[data-theme='bauhaus'] .prompt__article--das { color: var(--das); }
+
+[data-theme='bauhaus'] .prompt__text {
+  font-size: 3.6rem;
+  letter-spacing: -0.04em;
+}
+
+[data-theme='bauhaus'] .prompt--long .prompt__text { font-size: 2.6rem; }
+[data-theme='bauhaus'] .prompt--longer .prompt__text { font-size: 1.9rem; }
+
+[data-theme='bauhaus'] .quiz__progress {
+  height: 12px;
+}
+
+[data-theme='bauhaus'] .quiz__progress span {
+  background: var(--ink);
+}
+
+[data-theme='bauhaus'] .notice {
+  border: 3px solid currentColor;
+}
+
+/* ────────────────────────── Schwarz-Rot-Gold ────────────────────────── */
+
+[data-theme='bahn'] .app-header {
+  padding-top: 18px;
+  background: linear-gradient(to bottom, #000 0 4px, #dd0000 4px 8px, #ffce00 8px 12px) top / 100% 12px no-repeat;
+}
+
+[data-theme='bahn'] .brand {
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+[data-theme='bahn'] .brand svg {
+  color: var(--accent);
+}
+
+.brand__kicker {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.app-header--board .brand {
+  font-size: 1.9rem;
+  line-height: 1.05;
+}
+
+.board-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.15;
+}
+
+.board-clock__time {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.board-clock__streak {
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+}
+
+.board {
+  padding: 2px 0;
+  border-radius: var(--radius);
+  background: var(--hero);
+  color: var(--on-hero);
+}
+
+.board__row {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+
+.board__row--head {
+  padding: 8px 14px 6px;
+  border-top: 0;
+  color: var(--on-hero-soft);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.board__row--head span:last-child {
+  text-align: right;
+}
+
+.board__row--link:active {
+  background: rgb(255 255 255 / 6%);
+}
+
+.board__time {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.board__row--later .board__time {
+  color: var(--on-hero);
+}
+
+.board__dest {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.board__title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.board__row--later .board__title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.board__sub {
+  color: var(--on-hero-soft);
+  font-size: 0.82rem;
+}
+
+.board__platform {
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  background: var(--on-hero);
+  color: var(--hero);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.board__platform--quiet {
+  background: none;
+  color: var(--on-hero-soft);
+  font-size: 1.2rem;
+}
+
+.board__row.is-empty .board__time,
+.board__row.is-empty .board__title {
+  color: var(--on-hero-soft);
+}
+
+.board__row.is-empty .board__platform {
+  background: none;
+  color: var(--on-hero-soft);
+  box-shadow: inset 0 0 0 1.5px var(--line);
+}
+
+.board__empty {
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  color: var(--on-hero-soft);
+  font-size: 0.88rem;
+}
+
+.dash--bahn .stage-section h2 {
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dash--bahn .stage-row,
+.dash--bahn .stage-row:has(.stage-row__bar) {
+  grid-template-columns: 6px minmax(0, 1fr) minmax(56px, 34%) 40px;
+}
+
+.stage-icon--badge {
+  width: 6px;
+  height: 32px;
+  border-radius: 3px;
+}
+
+.dash--bahn .stage-row__bar span {
+  background: var(--accent);
+}
+
+/* Quiz: the board itself, with the German word on split-flap tiles. */
+[data-theme='bahn'] .prompt {
+  background: var(--hero);
+  color: var(--on-hero);
+}
+
+[data-theme='bahn'] .prompt__stage {
+  border-radius: 4px;
+  background: var(--on-hero);
+  color: var(--hero);
+}
+
+[data-theme='bahn'] .prompt__label,
+[data-theme='bahn'] .prompt__hint {
+  color: var(--on-hero-soft);
+}
+
+[data-theme='bahn'] .prompt--german .prompt__text {
+  color: var(--accent);
+}
+
+[data-theme='bahn'] .prompt__article--der { color: var(--hero-der); }
+[data-theme='bahn'] .prompt__article--die { color: var(--hero-die); }
+[data-theme='bahn'] .prompt__article--das { color: var(--hero-das); }
+
+.flaps {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  margin: 2px 0 4px;
+}
+
+.flap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 1 40px;
+  min-width: 0;
+  height: 62px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--on-hero);
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.flap::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--hero);
+}
+
+.flap--gap {
+  flex-basis: 14px;
+  background: none;
+}
+
+.flap--gap::after {
+  display: none;
+}
+
+[data-theme='bahn'] .quiz__progress {
+  position: relative;
+  overflow: visible;
+}
+
+[data-theme='bahn'] .quiz__progress span {
+  position: relative;
+}
+
+[data-theme='bahn'] .quiz__progress span::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  width: 12px;
+  height: 12px;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  background: var(--paper);
+  box-sizing: border-box;
+}
+
+[data-theme='bahn'] .notice__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ────────────────────────────── Backstube ────────────────────────────── */
+
+/* Alegreya Sans runs small, so size the whole app up a little. */
+html[data-theme='backstube'],
+html[data-theme='backstube'] body {
+  font-size: 17.5px;
+}
+
+[data-theme='backstube'] .button {
+  border-radius: 4px;
+}
+
+[data-theme='backstube'] .app-header {
+  padding-bottom: 10px;
+  border-bottom: 4px double var(--ink);
+}
+
+[data-theme='backstube'] .brand {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.app-header--masthead {
+  flex-direction: column;
+  padding-bottom: 14px;
+}
+
+.app-header--masthead .brand-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-header--masthead .brand {
+  flex-direction: column;
+  gap: 2px;
+  color: var(--ink);
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.brand__pretzel {
+  color: var(--accent);
+}
+
+.brand__tagline {
+  margin-top: 4px;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.app-header--masthead .app-header__end {
+  position: absolute;
+  top: 0;
+  right: -6px;
+}
+
+.actions--stacked .action {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 76px;
+  padding: 14px 20px;
+}
+
+.dash--backstube .action__label {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.dash--backstube .action--lessons:not(.is-empty) {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+.dash--backstube .section-head {
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.dash--backstube .stage-row:not(:last-child) {
+  border-bottom: 1px dashed var(--line);
+}
+
+.dash--backstube .stage-icon {
+  background: none;
+  color: var(--ink);
+}
+
+.dash--backstube .stage-icon--5 {
+  color: var(--accent);
+}
+
+.dash--backstube .upcoming {
+  padding: 12px 0 0;
+  border-top: 2px solid var(--ink);
+  border-radius: 0;
+  background: none;
+}
+
+/* Quiz: a printed card with an offset shadow; German-answer questions are dark rye. */
+[data-theme='backstube'] .prompt--meaning {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+[data-theme='backstube'] .prompt--german {
+  background: var(--hero);
+  color: var(--on-hero);
+  box-shadow: var(--shadow);
+}
+
+[data-theme='backstube'] .prompt__stage {
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  background: none;
+}
+
+[data-theme='backstube'] .prompt__label {
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.9rem;
+}
+
+[data-theme='backstube'] .prompt--meaning .prompt__label,
+[data-theme='backstube'] .prompt--meaning .prompt__hint {
+  color: var(--ink-soft);
+}
+
+[data-theme='backstube'] .prompt--german .prompt__hint {
+  color: var(--on-hero-soft);
+}
+
+[data-theme='backstube'] .prompt__hint {
+  font-style: italic;
+}
+
+[data-theme='backstube'] .prompt__article--der { color: var(--der); }
+[data-theme='backstube'] .prompt__article--die { color: var(--die); }
+[data-theme='backstube'] .prompt__article--das { color: var(--das); }
+
+[data-theme='backstube'] .quiz__progress {
+  height: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  background: none;
+}
+
+[data-theme='backstube'] .quiz__progress span {
+  background: var(--ink);
+}
+
+[data-theme='backstube'] .notice--bad {
+  background: var(--hero);
+  color: var(--on-hero);
+}
+
+[data-theme='backstube'] .notice__title {
+  display: block;
+  font-family: var(--font-brand);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
