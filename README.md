@@ -25,15 +25,15 @@ npm run build          # typecheck + production build into dist/
 
 Item ids in content (`n-hund`, `v-gehen`) are permanent: progress is keyed on them.
 
-## Deploy to Cloudflare Pages
+## Deploy to Cloudflare
 
-1. In the Cloudflare dashboard, go to **Workers & Pages → Create → Pages → Connect to Git** and pick this repo.
-2. Build settings: framework preset **Vite** (or none), build command `npm run build`, output directory `dist`.
-3. Under **Environment variables**, set `NODE_VERSION` to `22`.
-4. After the first deploy, open the project's **Custom domains** tab and add `gipfel.owennicholson.com`. If owennicholson.com's DNS is on Cloudflare, the record is created for you; otherwise add the CNAME it shows at your DNS provider.
-5. Every branch gets its own preview URL, handy for testing changes on your phone.
+The site deploys as a Cloudflare Worker with static assets. `wrangler.jsonc` points at `dist/` and sends unknown paths to `index.html`, so routes like `/lessons` work on reload.
 
-Cloudflare Pages serves `index.html` for unknown paths by default, so the client-side routes work without extra config.
+1. In the Cloudflare dashboard, go to **Workers & Pages → Create** and import this repo from GitHub.
+2. Build command `npm run build`, deploy command `npx wrangler deploy` (the defaults).
+3. If the build complains about Node, set a build variable `NODE_VERSION` to `22`.
+4. After the first deploy, open the Worker's **Settings → Domains & Routes** and add the custom domain `gipfel.owennicholson.com`. This needs owennicholson.com's DNS to be on Cloudflare.
+5. Every push to `main` redeploys automatically.
 
 ## Install on your phone
 

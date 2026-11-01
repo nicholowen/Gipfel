@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers static-assets deploy. No Worker script: just the built site.
+  "name": "gipfel",
+  "compatibility_date": "2026-10-31",
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html for app routes like /lessons and /reviews.
+    "not_found_handling": "single-page-application"
+  }
+}
