@@ -10,13 +10,18 @@ export const canSpeak = (): boolean => typeof speechSynthesis !== 'undefined';
 
 export function speak(text: string): void {
   if (!canSpeak()) return;
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'de-DE';
-  u.rate = 0.9;
-  const voice = germanVoice();
-  if (voice) u.voice = voice;
-  speechSynthesis.speak(u);
+  // Speech engines vary a lot between phones; audio is a nice-to-have, so never let it crash a screen.
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'de-DE';
+    u.rate = 0.9;
+    const voice = germanVoice();
+    if (voice) u.voice = voice;
+    speechSynthesis.speak(u);
+  } catch (error) {
+    console.warn('Speech failed', error);
+  }
 }
 
 /** The full spoken form: nouns with their article. */
