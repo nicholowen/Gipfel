@@ -68,7 +68,8 @@ export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false }: Pr
     return { done: state.completed.length, accuracy: answered === 0 ? null : Math.round(((answered - wrong) / answered) * 100) };
   }, [state]);
 
-  if (!question || !item) return null;
+  // Queue finished: the parent is saving and will move on.
+  if (!question || !item) return <p className="muted centred-text">Saving…</p>;
 
   const finishIfDone = (next: SessionState) => {
     if (isFinished(next)) {

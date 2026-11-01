@@ -4,10 +4,23 @@ import { curriculum } from '../content/curriculum';
 import { summarise } from '../domain/dashboard';
 import { lessonQueue } from '../domain/unlock';
 import { GipfelDb } from './db';
+import { withReconnect } from './reconnect';
 import { currentStreak, DEFAULT_SETTINGS, makeRepo, type Settings, type Streak } from './repo';
 
 export const db = new GipfelDb();
-export const repo = makeRepo(db, curriculum);
+const rawRepo = makeRepo(db, curriculum);
+
+const retry = <T,>(work: () => Promise<T>) => withReconnect(db, work);
+
+/** The repo, with every storage call given one reconnect-and-retry (see reconnect.ts). */
+export const repo: typeof rawRepo = {
+  getMeta: (key, fallback) => retry(() => rawRepo.getMeta(key, fallback)),
+  init: (now) => retry(() => rawRepo.init(now)),
+  finishLessons: (ids, now) => retry(() => rawRepo.finishLessons(ids, now)),
+  recordReviews: (items, now) => retry(() => rawRepo.recordReviews(items, now)),
+  getSettings: () => retry(() => rawRepo.getSettings()),
+  saveSettings: (s) => retry(() => rawRepo.saveSettings(s)),
+};
 
 /** Current time, refreshed every 30 seconds so due counts tick over on their own. */
 export function useNow(intervalMs = 30_000): number {
@@ -30,16 +43,20 @@ export function useDashboard(now: number) {
   }, [now]);
 }
 
-export async function loadLessonBatch(size: number): Promise<string[]> {
-  const rows = await db.progress.toArray();
-  return lessonQueue(curriculum.items, new Map(rows.map((r) => [r.itemId, r])))
-    .slice(0, size)
-    .map((i) => i.id);
+export function loadLessonBatch(size: number): Promise<string[]> {
+  return retry(async () => {
+    const rows = await db.progress.toArray();
+    return lessonQueue(curriculum.items, new Map(rows.map((r) => [r.itemId, r])))
+      .slice(0, size)
+      .map((i) => i.id);
+  });
 }
 
-export async function loadDueReviews(now: number): Promise<string[]> {
-  const due = await db.progress.where('nextReviewAt').belowOrEqual(now).toArray();
-  return due.filter((r) => r.stage >= 1 && r.stage <= 8).map((r) => r.itemId);
+export function loadDueReviews(now: number): Promise<string[]> {
+  return retry(async () => {
+    const due = await db.progress.where('nextReviewAt').belowOrEqual(now).toArray();
+    return due.filter((r) => r.stage >= 1 && r.stage <= 8).map((r) => r.itemId);
+  });
 }
 
 export function useSettings(): Settings {

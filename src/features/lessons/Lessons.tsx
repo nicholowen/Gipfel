@@ -4,6 +4,7 @@ import { getItem } from '../../content/curriculum';
 import { loadLessonBatch, repo, useSettings } from '../../data/instance';
 import { nextReviewAt } from '../../domain/scheduler';
 import { GermanWord, ItemInfo, SpeakButton } from '../../ui/ItemInfo';
+import { reportError } from '../../ui/errors';
 import { speak, spokenForm } from '../../ui/speech';
 import { Quiz } from '../quiz/Quiz';
 
@@ -17,11 +18,13 @@ export function Lessons() {
 
   useEffect(() => {
     let live = true;
-    loadLessonBatch(settings.lessonBatchSize).then((ids) => {
-      if (!live) return;
-      setBatch(ids);
-      setPhase({ name: 'learn', index: 0 });
-    });
+    loadLessonBatch(settings.lessonBatchSize)
+      .then((ids) => {
+        if (!live) return;
+        setBatch(ids);
+        setPhase({ name: 'learn', index: 0 });
+      })
+      .catch(reportError);
     return () => {
       live = false;
     };
@@ -71,10 +74,12 @@ export function Lessons() {
         <PageBar title="Lesson quiz" />
         <Quiz
           itemIds={batch}
-          onFinished={async () => {
-            await repo.finishLessons(batch, Date.now());
-            setPhase({ name: 'done' });
-          }}
+          onFinished={() =>
+            repo
+              .finishLessons(batch, Date.now())
+              .then(() => setPhase({ name: 'done' }))
+              .catch(reportError)
+          }
         />
       </main>
     );

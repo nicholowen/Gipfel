@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getItem } from '../../content/curriculum';
 import { loadDueReviews, repo } from '../../data/instance';
 import type { CompletedItem } from '../../domain/review-session';
+import { reportError } from '../../ui/errors';
 import { GermanWord } from '../../ui/ItemInfo';
 import { PageBar } from '../lessons/Lessons';
 import { Quiz } from '../quiz/Quiz';
@@ -19,12 +20,16 @@ export function Reviews() {
   const [levelUp, setLevelUp] = useState<number | null>(null);
 
   useEffect(() => {
-    loadDueReviews(Date.now()).then(setDue);
+    loadDueReviews(Date.now()).then(setDue).catch(reportError);
   }, []);
 
-  const save = useCallback(async (items: CompletedItem[]) => {
-    const { levelBefore, levelAfter } = await repo.recordReviews(items, Date.now());
-    if (levelAfter > levelBefore) setLevelUp(levelAfter);
+  const save = useCallback((items: CompletedItem[]) => {
+    repo
+      .recordReviews(items, Date.now())
+      .then(({ levelBefore, levelAfter }) => {
+        if (levelAfter > levelBefore) setLevelUp(levelAfter);
+      })
+      .catch(reportError);
   }, []);
 
   if (due === null) return null;
