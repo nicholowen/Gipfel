@@ -43,7 +43,10 @@ const rows: Row[] = [
   [gehen, 'german', 'to go', 'shake'],
   // German questions
   [hund, 'german', 'der Hund', 'correct'],
-  [hund, 'german', 'der hund', 'correct'],
+  [hund, 'german', 'der hund', 'shake'],
+  [hund, 'german', 'Der Hund', 'correct'],
+  [hund, 'german', '  der Hund ', 'correct'],
+  [hund, 'german', 'die hund', 'wrong'],
   [hund, 'german', 'Hund', 'shake'],
   [hund, 'german', 'Hunf', 'shake'],
   [hund, 'german', 'xyzzy', 'wrong'],
@@ -56,7 +59,9 @@ const rows: Row[] = [
   [maedchen, 'german', 'das Maedchen', 'correct'],
   [maedchen, 'german', 'das Madchen', 'shake'],
   [strasse, 'german', 'die Strasse', 'correct'],
-  [strasse, 'german', 'die straße', 'correct'],
+  [strasse, 'german', 'die straße', 'shake'],
+  [strasse, 'german', 'die Straße', 'correct'],
+  [maedchen, 'german', 'das maedchen', 'shake'],
   [gehen, 'german', 'gehen', 'correct'],
   [gehen, 'german', 'Gehen', 'correct'],
   [gehen, 'german', 'gehn', 'shake'],
@@ -75,6 +80,19 @@ describe('check', () => {
 
   it('asks for an article when it is missing', () => {
     expect(check(hund, 'german', 'Hund', {}).message).toMatch(/der, die or das/);
+  });
+
+  it('explains that nouns are capitalised, showing the right form', () => {
+    expect(check(hund, 'german', 'der hund', {}).message).toBe('Nouns are capitalised: der Hund.');
+  });
+
+  it('keeps nudging about capitals even after a spelling shake', () => {
+    expect(check(hund, 'german', 'der hund', { shookAlready: true }).outcome).toBe('shake');
+  });
+
+  it('does not ask for capitals on verbs or adjectives', () => {
+    expect(check(gehen, 'german', 'gehen', {}).outcome).toBe('correct');
+    expect(check(schnell, 'german', 'schnell', {}).outcome).toBe('correct');
   });
 
   it('calls a wrong article wrong even when the shake was already used', () => {

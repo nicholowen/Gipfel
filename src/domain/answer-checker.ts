@@ -49,6 +49,13 @@ function isTheGerman(item: ContentItem, input: string): boolean {
   return rest === fold(item.german);
 }
 
+/** True when the word after the article starts with a capital letter (the article itself may be any case). */
+function nounIsCapitalised(input: string): boolean {
+  const words = input.trim().split(/\s+/);
+  const first = (words.length > 1 ? words[1] : words[0]).charAt(0);
+  return first !== first.toLowerCase() && first === first.toUpperCase();
+}
+
 function checkMeaning(item: ContentItem, input: string, ctx: CheckContext): CheckResult {
   const match = matchesMeaning(item, input, ctx);
   if (match === 'exact') return { outcome: 'correct' };
@@ -79,9 +86,13 @@ function checkGerman(item: ContentItem, input: string, ctx: CheckContext): Check
 
   const answer = item.kind === 'noun' ? rest : fold(input);
   if (answer === target) {
-    return item.kind === 'noun' && article !== item.article
-      ? { outcome: 'wrong', message: `It’s ${item.article}, not ${article}.` }
-      : { outcome: 'correct' };
+    if (item.kind === 'noun' && article !== item.article) {
+      return { outcome: 'wrong', message: `It’s ${item.article}, not ${article}.` };
+    }
+    if (item.kind === 'noun' && !nounIsCapitalised(input)) {
+      return { outcome: 'shake', message: `Nouns are capitalised: ${item.article} ${item.german}.` };
+    }
+    return { outcome: 'correct' };
   }
 
   if (levenshtein(answer, target) === 1 && !ctx.shookAlready) {
