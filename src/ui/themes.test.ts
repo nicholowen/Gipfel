@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cssVariables, DEFAULT_THEME, getTheme, paletteFor, parseThemeId, STAGE_KEYS, THEMES, type Palette } from './themes';
+import { cssVariables, DEFAULT_THEME, getTheme, paletteFor, parseThemeId, STAGE_KEYS, stageLabel, THEMES, type Palette } from './themes';
 
 /** WCAG 2 relative luminance of a #rrggbb colour. */
 function luminance(hex: string): number {
@@ -51,6 +51,18 @@ describe('themes', () => {
     expect(paletteFor(getTheme('bahn'), false).scheme).toBe('dark');
   });
 
+  it('label each stage with its group name, numbered within the group', () => {
+    const alpen = getTheme('alpen');
+    expect(stageLabel(alpen, 0)).toBe('Neu');
+    expect(stageLabel(alpen, 1)).toBe('Tal 1');
+    expect(stageLabel(alpen, 4)).toBe('Tal 4');
+    expect(stageLabel(alpen, 5)).toBe('Alm 1');
+    expect(stageLabel(alpen, 6)).toBe('Alm 2');
+    expect(stageLabel(alpen, 7)).toBe('Hütte');
+    expect(stageLabel(alpen, 9)).toBe('Gipfel');
+    expect(stageLabel(getTheme('backstube'), 8)).toBe('Ofen');
+  });
+
   it('produce every CSS variable the stylesheet reads', () => {
     const vars = cssVariables(getTheme('backstube'), false);
     for (const name of ['--paper', '--ink', '--accent', '--der', '--die', '--das', '--border', '--font-brand', '--stage-1', '--on-stage-5']) {
@@ -87,6 +99,14 @@ describe.each(palettes)('%s contrast', (_, p) => {
     text(p.onMeaning, p.meaning);
     text(p.onGerman, p.german);
     for (const key of STAGE_KEYS) text(p.stages[key].fg, p.stages[key].bg);
+  });
+
+  it('text and der, die, das read on the hero block', () => {
+    text(p.onHero, p.hero);
+    text(p.onHeroSoft, p.hero);
+    text(p.heroDer, p.hero);
+    text(p.heroDie, p.hero);
+    text(p.heroDas, p.hero);
   });
 
   it('the brand (large, bold) stands out from the paper', () => {

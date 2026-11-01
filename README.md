@@ -20,8 +20,8 @@ npm run build          # typecheck + production build into dist/
 | `src/domain/` | Pure logic, no React or Dexie: scheduler, answer checker, unlocking, review session, dashboard summary |
 | `src/content/` | Loads and validates the curriculum |
 | `src/data/` | Dexie database and the transactions that change progress |
-| `src/features/` | Screens: dashboard, lessons, reviews, and the shared quiz |
-| `src/ui/` | Answer input, item info panel, speech, the header menu, and the four themes (`themes.ts`: palettes, fonts and each theme's German stage names) |
+| `src/features/` | Screens: dashboard (one layout per theme in `dashboard/layouts.tsx`), lessons, reviews, and the shared quiz |
+| `src/ui/` | Answer input, item info panel, speech, the header menu, and the four themes (`themes.ts`: palettes, fonts, copy and each theme's German stage names; layouts styled in `src/styles/themes.css`) |
 
 Item ids in content (`n-hund`, `v-gehen`) are permanent: progress is keyed on them.
 

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { getItem } from '../../content/curriculum';
-import { useSettings, useSynonyms } from '../../data/instance';
+import { loadStages, useSettings, useSynonyms } from '../../data/instance';
 import { check, type CheckResult } from '../../domain/answer-checker';
 import {
   answer,
@@ -18,6 +18,9 @@ import {
 import { AnswerInput, type AnswerInputHandle } from '../../ui/AnswerInput';
 import { ItemInfo } from '../../ui/ItemInfo';
 import { speak, spokenForm } from '../../ui/speech';
+import { useTheme } from '../../ui/theme-context';
+import { stageLabel, type Theme } from '../../ui/themes';
+import type { ContentItem, Stage } from '../../domain/types';
 
 interface Props {
   itemIds: string[];
@@ -42,6 +45,13 @@ export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false }: Pr
   const field = useRef<AnswerInputHandle>(null);
   const reported = useRef(0);
   const settings = useSettings();
+  const { theme } = useTheme();
+  const [stages, setStages] = useState<Map<string, Stage>>(new Map());
+
+  useEffect(() => {
+    // Read once per session (the id list doesn't change), so labels show where each word started.
+    loadStages(itemIds).then(setStages).catch(() => undefined);
+  }, [itemIds]);
 
   const question = shown?.question ?? current(state);
   const item = question ? getItem(question.itemId) : undefined;
@@ -140,13 +150,7 @@ export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false }: Pr
         <span style={{ width: `${(stats.done / total) * 100}%` }} />
       </div>
 
-      <section className={`prompt prompt--${question.type}`}>
-        <p className="prompt__label">{isGerman ? 'German' : 'Meaning'}</p>
-        <p className="prompt__text" lang={isGerman ? 'en' : 'de'}>
-          {isGerman ? item.meanings.join(', ') : item.german}
-        </p>
-        <p className="prompt__hint">{isGerman ? (item.kind === 'noun' ? 'with der, die or das' : ' ') : 'in English'}</p>
-      </section>
+      <Prompt item={item} german={isGerman} theme={theme} stage={stages.get(item.id) ?? 0} />
 
       <AnswerInput
         key={`${question.itemId}:${question.type}:${stats.done}`}
@@ -163,11 +167,14 @@ export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false }: Pr
         {shown && (
           <>
             <p className={`notice ${passed ? 'notice--good' : 'notice--bad'}`}>
-              {shown.result.message ?? (passed ? 'Richtig!' : 'Not quite.')}{' '}
+              <strong className="notice__title" lang="de">
+                {passed ? theme.copy.right : theme.copy.wrong}
+              </strong>{' '}
+              {shown.result.message && <span>{shown.result.message} </span>}
               {!passed && (
-                <>
+                <span>
                   Answer: <strong>{isGerman ? spokenForm(item) : item.meanings[0]}</strong>
-                </>
+                </span>
               )}
             </p>
             <div className="quiz__actions">
@@ -186,5 +193,60 @@ export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false }: Pr
       </div>
       {shown && infoOpen && <ItemInfo item={item} />}
     </div>
+  );
+}
+
+/** The question card. Every theme shares this markup; the Bahn theme spells German words on split-flap tiles. */
+function Prompt({ item, german, theme, stage }: { item: ContentItem; german: boolean; theme: Theme; stage: Stage }) {
+  const text = german ? item.meanings.join(', ') : item.german;
+  const size = text.length > 14 ? ' prompt--longer' : text.length > 9 ? ' prompt--long' : '';
+  const flaps = theme.id === 'bahn' && !german && item.german.length <= 12;
+
+  return (
+    <section className={`prompt prompt--${german ? 'german' : 'meaning'}${size}`}>
+      {theme.id === 'alpen' && (
+        <svg className="contours" viewBox="0 0 350 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <path d="M-10 190 C 60 160, 120 180, 190 140 S 300 100, 360 120" />
+          <path d="M-10 165 C 70 135, 130 155, 200 115 S 300 75, 360 95" />
+          <path d="M-10 140 C 80 110, 140 130, 210 92 S 300 52, 360 70" />
+          <path d="M-10 115 C 90 88, 150 105, 220 70 S 300 32, 360 46" />
+        </svg>
+      )}
+      {theme.id === 'bauhaus' && (
+        <>
+          <span className="prompt__disc" aria-hidden="true" />
+          <span className="prompt__block" aria-hidden="true" />
+        </>
+      )}
+      <div className="prompt__top">
+        <span className="prompt__stage" lang="de">
+          {stageLabel(theme, stage)}
+        </span>
+        <span className="prompt__label">{german ? 'German' : 'Meaning'}</span>
+      </div>
+      <div className="prompt__body">
+        {!german && item.article && (
+          <span className={`prompt__article prompt__article--${item.article}`} lang="de">
+            {item.article}
+          </span>
+        )}
+        {flaps ? (
+          <p className="flaps" role="img" aria-label={item.german} lang="de">
+            {[...item.german].map((ch, i) => (
+              <span key={i} className={ch === ' ' ? 'flap flap--gap' : 'flap'} aria-hidden="true">
+                {ch}
+              </span>
+            ))}
+          </p>
+        ) : (
+          <p className="prompt__text" lang={german ? 'en' : 'de'}>
+            {text}
+          </p>
+        )}
+        <p className="prompt__hint" lang={german ? 'en' : 'de'}>
+          {german ? (item.kind === 'noun' ? 'in German, with der, die or das' : 'in German') : item.example.de}
+        </p>
+      </div>
+    </section>
   );
 }

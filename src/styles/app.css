@@ -246,17 +246,10 @@ a {
   box-shadow: inset 0 0 0 1px rgb(128 128 128 / 40%);
 }
 
-/* Dashboard */
+/* Dashboard: shared parts. Each theme's layout lives in themes.css. */
 
-.brand + .streak,
-.streak {
-  color: var(--ink-soft);
-  font-size: 0.9rem;
-}
-
-.streak strong {
-  color: var(--ink);
-  font-size: 1.1rem;
+.dash {
+  gap: 18px;
 }
 
 .actions {
@@ -265,11 +258,15 @@ a {
   gap: 12px;
 }
 
+.actions--stacked {
+  grid-template-columns: 1fr;
+}
+
 .action {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 132px;
+  gap: 4px;
+  min-height: 104px;
   padding: 16px;
   border: var(--border);
   border-radius: var(--radius);
@@ -287,21 +284,40 @@ a {
   color: var(--on-german);
 }
 
+/* Nothing to do: keep it legible, just quieter. */
 .action.is-empty {
-  opacity: 0.45;
+  background: var(--surface);
+  color: var(--ink-soft);
   box-shadow: none;
+  outline: 2px dashed var(--line);
+  outline-offset: -2px;
+}
+
+.action.is-empty .action__count {
+  color: var(--ink);
+}
+
+.action__label {
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .action__count {
   font-family: var(--font-display);
-  font-size: 2.8rem;
-  font-weight: 700;
+  font-size: 2.6rem;
+  font-weight: 800;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
-.action__label {
-  font-weight: 600;
-  font-size: 1.05rem;
+.action__sub {
+  font-size: 0.85rem;
+}
+
+.action__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .card {
@@ -315,7 +331,8 @@ a {
   gap: 10px;
 }
 
-.card__head {
+.card__head,
+.section-head {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -323,11 +340,17 @@ a {
   flex-wrap: wrap;
 }
 
-.card h2 {
-  font-size: 1.05rem;
+.section-head {
+  margin-bottom: 6px;
 }
 
-.card__head .muted {
+.card h2,
+.section-head h2 {
+  font-size: 1.1rem;
+}
+
+.card__head .muted,
+.section-head .muted {
   font-size: 0.85rem;
 }
 
@@ -354,85 +377,94 @@ a {
   background: var(--ink);
 }
 
-.forecast {
-  display: grid;
-  grid-template-columns: repeat(24, 1fr);
-  gap: 2px;
-  height: 96px;
-  align-items: end;
+.header-note,
+.streak {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
 }
 
-.forecast__col {
+.stage-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  height: 100%;
 }
 
-.forecast__bar {
-  position: relative;
-  min-height: 2px;
-  border-radius: 3px 3px 0 0;
-  background: var(--german);
-  opacity: 0.85;
-}
-
-.forecast__bar em {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-style: normal;
-  font-size: 0.65rem;
-  color: var(--ink-soft);
-  padding-bottom: 1px;
-}
-
-.forecast__tick {
-  height: 16px;
-  font-size: 0.65rem;
-  color: var(--ink-soft);
-  white-space: nowrap;
-  padding-top: 2px;
-}
-
-.stages {
+.stage-row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
-}
-
-.stage {
-  display: flex;
-  flex-direction: column;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
   align-items: center;
-  padding: 10px 2px;
-  border-radius: min(10px, var(--radius));
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.stage-row:has(.stage-row__bar) {
+  grid-template-columns: 34px minmax(0, 1fr) minmax(56px, 28%) 40px;
+}
+
+.stage-row__text {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
 }
 
-.stage__count {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
+.stage-row__name {
   font-weight: 700;
+  font-size: 1.02rem;
 }
 
-.stage__label {
-  max-width: 100%;
-  font-size: 0.68rem;
-  font-weight: 600;
-  line-height: 1.2;
-  text-align: center;
-  /* Long German names (Regionalzug, Meisterwerk) break rather than overflow on small phones. */
-  overflow-wrap: anywhere;
-  hyphens: auto;
+.stage-row__gloss {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
 }
 
-.stage--1 { background: var(--stage-1); color: var(--on-stage-1); }
-.stage--2 { background: var(--stage-2); color: var(--on-stage-2); }
-.stage--3 { background: var(--stage-3); color: var(--on-stage-3); }
-.stage--4 { background: var(--stage-4); color: var(--on-stage-4); }
-.stage--5 { background: var(--stage-5); color: var(--on-stage-5); }
+.stage-row__count {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.stage-row__bar {
+  height: 10px;
+  border-radius: min(5px, var(--radius));
+  background: var(--line);
+  overflow: hidden;
+}
+
+.stage-row__bar span {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+}
+
+.stage-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: min(8px, var(--radius));
+}
+
+.stage-icon--1 { background: var(--stage-1); color: var(--on-stage-1); }
+.stage-icon--2 { background: var(--stage-2); color: var(--on-stage-2); }
+.stage-icon--3 { background: var(--stage-3); color: var(--on-stage-3); }
+.stage-icon--4 { background: var(--stage-4); color: var(--on-stage-4); }
+.stage-icon--5 { background: var(--stage-5); color: var(--on-stage-5); }
+
+.upcoming {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--accent) 10%, var(--paper));
+  font-size: 0.95rem;
+}
 
 /* Words and gender */
 
@@ -626,12 +658,16 @@ a {
   transition: width 0.3s ease;
 }
 
+/* The question card. Theme looks are in themes.css. */
+
 .prompt {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 32px 16px 22px;
+  gap: 12px;
+  min-height: 230px;
+  padding: 14px 14px 24px;
   border: var(--border);
   border-radius: var(--radius);
   text-align: center;
@@ -647,25 +683,80 @@ a {
   color: var(--on-german);
 }
 
+.prompt__top {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.prompt__stage {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 16%);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .prompt__label {
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.85;
+}
+
+.prompt__body {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.prompt__article {
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 
 .prompt__text {
   font-family: var(--font-word);
-  font-size: 2.4rem;
-  line-height: 1.15;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   overflow-wrap: anywhere;
 }
 
+.prompt--long .prompt__text {
+  font-size: 2.3rem;
+}
+
+.prompt--longer .prompt__text {
+  font-size: 1.7rem;
+}
+
 .prompt__hint {
-  min-height: 1.2em;
-  font-size: 0.85rem;
-  opacity: 0.85;
+  max-width: 34ch;
+  font-size: 0.95rem;
+}
+
+.contours {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.notice__title {
+  font-weight: 800;
 }
 
 .answer {
@@ -874,84 +965,4 @@ a {
   background: var(--surface);
   text-align: left;
   overflow-wrap: anywhere;
-}
-
-/* Theme touches beyond colour and type. Colours and fonts come from src/ui/themes.ts. */
-
-/* Bauhaus: square everything, lowercase wordmark, and a shape for each gender. */
-[data-theme='bauhaus'] .button,
-[data-theme='bauhaus'] .icon-button,
-[data-theme='bauhaus'] .answer__field,
-[data-theme='bauhaus'] .umlauts__key,
-[data-theme='bauhaus'] .level-bar,
-[data-theme='bauhaus'] .level-bar__fill,
-[data-theme='bauhaus'] .quiz__progress {
-  border-radius: 0;
-}
-
-[data-theme='bauhaus'] .brand__name {
-  text-transform: lowercase;
-  letter-spacing: -0.03em;
-}
-
-[data-theme='bauhaus'] .article::before,
-[data-theme='bauhaus'] .legend span::before {
-  content: '';
-  display: inline-block;
-  width: 0.5em;
-  height: 0.5em;
-  margin-right: 0.3em;
-  vertical-align: 0.08em;
-  background: currentColor;
-}
-
-[data-theme='bauhaus'] .article--die::before,
-[data-theme='bauhaus'] .legend .gender--die::before {
-  border-radius: 50%;
-}
-
-[data-theme='bauhaus'] .article--das::before,
-[data-theme='bauhaus'] .legend .gender--das::before {
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-}
-
-/* Schwarz-Rot-Gold: a flag stripe across the top of the header. */
-[data-theme='bahn'] .app-header {
-  padding-top: 18px;
-  background: linear-gradient(to bottom, #000 0 4px, #dd0000 4px 8px, #ffce00 8px 12px) top / 100% 12px no-repeat;
-}
-
-[data-theme='bahn'] .brand {
-  color: var(--ink);
-  letter-spacing: 0.01em;
-}
-
-[data-theme='bahn'] .brand svg {
-  color: var(--accent);
-}
-
-/* Backstube: a blackletter masthead over a printer's double rule. Alegreya Sans runs small, so size up. */
-html[data-theme='backstube'],
-html[data-theme='backstube'] body {
-  font-size: 17.5px;
-}
-
-[data-theme='backstube'] .app-header {
-  padding-bottom: 10px;
-  border-bottom: 4px double var(--ink);
-}
-
-[data-theme='backstube'] .brand {
-  font-size: 2rem;
-  font-weight: 400;
-}
-
-[data-theme='backstube'] .button {
-  border-radius: 4px;
-}
-
-/* Alpen: the red-white-red trail marker under the wordmark. */
-[data-theme='alpen'] .brand__name {
-  padding-bottom: 2px;
-  background: linear-gradient(to right, #c8102e 0 33%, transparent 33% 66%, #c8102e 66%) bottom / 100% 3px no-repeat;
 }
