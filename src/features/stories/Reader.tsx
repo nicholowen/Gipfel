@@ -159,7 +159,7 @@ function WordSheet({ token, known, onClose }: { token: WordToken; known: boolean
       {items.map((item) => (
         <button key={item.id} type="button" className="word-sheet__item" onClick={() => speak(spokenForm(item))}>
           <GermanWord item={item} />
-          <span>{item.meanings.slice(0, 3).join(', ')}</span>
+          <span>{item.meanings.slice(0, 3).join(' · ')}</span>
         </button>
       ))}
       {token.type === 'word' && !known && <p className="muted small">You are still learning this one.</p>}
