@@ -83,12 +83,20 @@ Grammar comes in through items, phrases and stories, in this order.
 
 ## Principle 7: level size and pacing
 
-- **Levels of 25–35 items.** The WaniKani-style structure stays: the next level unlocks when 90% of the current one reaches the known stage (stage 5), which takes at least about 3.5 days. In code the review stages are numbered 1–9 and grouped 1–5; each theme gives the groups its own names, so the curriculum never uses WaniKani's names.
-- At 20–40 minutes a day that is a sustainable pace of a level roughly every 5–8 days.
+WaniKani's level gate works because Japanese has a dependency chain: radicals unlock kanji, kanji unlock vocabulary, so lessons trickle in all through a level. German words rarely build on each other (compounds are the exception), so the same gate turned each level into one batch on day one followed by three or four days with nothing new. Gipfel paces lessons directly instead:
+
+- **A steady daily drip.** Up to **5 new items per day** (local calendar day), taken in curriculum order. Research on L2 vocabulary (Nakata & Webb) finds the spacing of repetitions matters more than how many items are studied at once, so a steady drip beats big batches.
+- **German items are heavy.** Every noun carries an article and a plural, and each item is reviewed in both directions with typed answers, so a modest daily rate is deliberate. 5 a day is about 150 items a month.
+- **An early-stage guard.** New lessons pause while **40 or more items** sit in stages 1–4, and resume as they move up. This protects the review load better than a fixed gate.
+- **Levels are chapters, not locks.** Lessons flow straight across level boundaries. A level is still a scene with its own story, and completing it (90% of its items at the known stage, stage 5) is a milestone the app celebrates, but it no longer holds back new words.
+- **Levels of 25–35 items**, one or two scenes each. At 5 a day a level takes roughly a week to start.
+- The SRS intervals stay as they are (4 h, 8 h, 1 day, 2 days, 1 week, 2 weeks, 1 month, 4 months). They suit a learner who checks in several times a day. In code the review stages are numbered 1–9 and grouped 1–5; each theme names the groups, so the curriculum never uses WaniKani's names.
 - Each level mixes new words (mostly), phrases, and one grammar point at most.
-- Compounds unlock when their parts reach the known stage, as now. Use compounds freely: they are cheap to learn once the parts are known.
+- Compounds unlock when their parts reach the known stage. Use compounds freely: they are cheap to learn once the parts are known.
 - Item ids are permanent because progress is keyed on them. Never rename or reuse an id.
+- **Write ahead.** Keep at least three weeks of content (about 100 items) written beyond where the learner is.
 - **There is no final level.** Content is added in stages (below) for as long as the learner keeps going.
+- Later, consider an adaptive scheduler such as FSRS (now in Anki), which fits intervals to each item from review history. Worth trying once there are a few months of review data.
 
 ## Principle 8: graded stories
 
@@ -120,7 +128,7 @@ Coverage research gives rough targets. In everyday spoken language, around 2,000
 | 4. Fluent everyday (B2) | ~3,000–5,000+ | Follow natural speech, talk comfortably on most topics | Less frequent words, idioms, register, longer stories |
 | 5. Beyond | 5,000+ | Native content becomes the main input | Words met in real books, shows and conversation |
 
-Pacing: at about 30 items per level and a level every 5–8 days, 1,000 items takes roughly 5–9 months and 3,000 items roughly 1.5–2.5 years. That is the honest speed of this method; the other three strands make that vocabulary usable.
+Pacing: at 5 new items a day, 1,000 items takes roughly 7 months and 3,000 items roughly 1.5–2 years. That is the honest speed of this method; the other three strands make that vocabulary usable.
 
 Later stages change the balance rather than the method:
 
@@ -130,7 +138,7 @@ Later stages change the balance rather than the method:
 
 ## The speaking milestone
 
-When the learner has about 400–500 items at the known stage, the present tense, *du*/*Sie*, and a core set of phrases (greetings, introducing yourself, asking for repetition, likes and dislikes), the app says they are ready for simple real conversations. From then on, speaking practice is part of the daily routine, and the stories rehearse those conversations. At 20–40 minutes a day this is expected around two to three months in.
+When the learner has about 400–500 items at the known stage, the present tense, *du*/*Sie*, and a core set of phrases (greetings, introducing yourself, asking for repetition, likes and dislikes), the app says they are ready for simple real conversations. From then on, speaking practice is part of the daily routine, and the stories rehearse those conversations. At 5 new items a day this is expected around three months in.
 
 The milestone is a checkpoint, not a finish line. Levels continue as before.
 
@@ -155,6 +163,7 @@ The milestone is a checkpoint, not a finish line. Levels continue as before.
 - Nation, I.S.P. (2006). How large a vocabulary is needed for reading and listening? *Canadian Modern Language Review*, 63(1), 59–82.
 - Nation, I.S.P. (2013). *Learning Vocabulary in Another Language* (2nd ed.). Cambridge University Press.
 - Adolphs, S. & Schmitt, N. (2003). Lexical coverage of spoken discourse. *Applied Linguistics*, 24(4), 425–438.
+- Nakata, T. & Webb, S. (2016). Does studying vocabulary in smaller sets increase learning? *Studies in Second Language Acquisition*.
 - Kim, S.K. & Webb, S. (2022). The effects of spaced practice on second language learning: a meta-analysis. *Language Learning*, 72(1), 269–319.
 - Nakata, T. (2013). *Optimising second language vocabulary learning from flashcards.* PhD thesis, Victoria University of Wellington.
 - Hu, M. & Nation, I.S.P. (2000). Unknown vocabulary density and reading comprehension. *Reading in a Foreign Language*, 13(1).

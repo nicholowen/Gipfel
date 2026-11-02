@@ -56,8 +56,8 @@ describe('validateStories', () => {
   const story = (de: string, extra: object = {}) => ({ id: 's-test', title: 'T', titleEn: 'T', level: 1, kind: 'story', lines: [{ de, en: 'x' }], ...extra });
 
   it('reports words that are not taught, with a fix', () => {
-    const [r] = validateStories([story('Der Mann trinkt Kaffee.')], curriculum);
-    expect(r.problems.some((p) => p.includes('"trinkt" is not a taught word'))).toBe(true);
+    const [r] = validateStories([story('Der Mann backt Kuchen.')], curriculum);
+    expect(r.problems.some((p) => p.includes('"backt" is not a taught word'))).toBe(true);
   });
 
   it('rejects a story that is too hard for its level', () => {

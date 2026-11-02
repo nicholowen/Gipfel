@@ -43,6 +43,17 @@ describe('summarise', () => {
     expect(s.groups).toEqual({ 1: 2, 2: 1, 3: 0, 4: 0, 5: 1 });
   });
 
+  it('breaks the first group into stages 1–4', () => {
+    expect(s.earlySteps).toEqual([1, 1, 0, 0]);
+  });
+
+  it('caps lessons at the daily allowance and says why when none are left', () => {
+    const queue = Array.from({ length: 20 }, (_, i) => row(`q${i}`, 0, null));
+    expect(summarise(queue, items, 1, now)).toMatchObject({ lessonsAvailable: 5, lessonPause: null });
+    const started = Array.from({ length: 5 }, (_, i) => ({ ...row(`s${i}`, 1, now + HOUR), startedAt: now - 60_000 }));
+    expect(summarise([...queue, ...started], items, 1, now)).toMatchObject({ lessonsAvailable: 0, lessonPause: 'daily' });
+  });
+
   it('reports level progress against the 90% target', () => {
     expect(s.level).toEqual({ number: 1, total: 5, known: 2, needed: 5 });
   });

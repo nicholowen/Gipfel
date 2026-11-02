@@ -1,0 +1,222 @@
+[
+  {
+    "id": "p-guten-tag", "level": 3, "order": 1, "kind": "phrase",
+    "german": "Guten Tag!", "alternatives": ["Guten Tag"],
+    "meanings": ["Hello", "Good day", "Good afternoon"], "prerequisites": [],
+    "example": { "de": "Guten Tag! Ein Kaffee, bitte.", "en": "Hello! A coffee, please." },
+    "mnemonic": "Literally \"good day\". The polite hello for shops, cafés and people you call Sie. Hallo is for friends."
+  },
+  {
+    "id": "o-er", "level": 3, "order": 2, "kind": "other",
+    "german": "er",
+    "meanings": ["he", "it"], "prerequisites": [],
+    "example": { "de": "Ben ist hier. Er trinkt Kaffee.", "en": "Ben is here. He's drinking coffee." },
+    "mnemonic": "Er is he, and also \"it\" for any der word: der Tisch? Er ist groß. With er, the verb ends in -t: er trinkt, er macht."
+  },
+  {
+    "id": "o-sie", "level": 3, "order": 3, "kind": "other",
+    "german": "sie",
+    "meanings": ["she", "they"], "prerequisites": [],
+    "example": { "de": "Anna ist neu hier. Sie wohnt in Berlin.", "en": "Anna is new here. She lives in Berlin." },
+    "mnemonic": "Small sie is she, or they: you can tell from the verb. Sie wohnt = she lives, sie wohnen = they live."
+  },
+  {
+    "id": "o-es", "level": 3, "order": 4, "kind": "other",
+    "german": "es",
+    "meanings": ["it"], "prerequisites": [],
+    "example": { "de": "Das Buch? Es ist gut.", "en": "The book? It's good." },
+    "mnemonic": "Es is it, for das words: das Buch, es ist gut. Er, sie, es match der, die, das."
+  },
+  {
+    "id": "o-wir", "level": 3, "order": 5, "kind": "other",
+    "german": "wir",
+    "meanings": ["we"], "prerequisites": [],
+    "example": { "de": "Wir gehen jetzt.", "en": "We're going now." },
+    "mnemonic": "Wir sounds like \"we're\". With wir the verb keeps its -en: wir gehen, wir machen."
+  },
+  {
+    "id": "o-sie-formal", "level": 3, "order": 6, "kind": "other",
+    "german": "Sie",
+    "meanings": ["you (formal)", "you"], "prerequisites": [],
+    "example": { "de": "Was trinken Sie?", "en": "What would you like to drink?" },
+    "mnemonic": "Capital Sie is the polite you, for strangers, waiters and anyone you'd call Mr or Mrs. It always has a capital S and takes the -en verb: Sie trinken."
+  },
+  {
+    "id": "v-trinken", "level": 3, "order": 7, "kind": "verb",
+    "german": "trinken",
+    "verbForms": { "present": { "ich": "trinke", "du": "trinkst", "er": "trinkt", "wir": "trinken", "ihr": "trinkt", "sie": "trinken" }, "pastParticiple": "getrunken", "auxiliary": "haben" },
+    "meanings": ["to drink"], "prerequisites": [],
+    "example": { "de": "Ich trinke Kaffee und du trinkst Tee.", "en": "I drink coffee and you drink tea." },
+    "mnemonic": "Trinken sounds like drink. A regular verb, so watch the endings: ich trinke, du trinkst, er trinkt."
+  },
+  {
+    "id": "p-ich-moechte", "level": 3, "order": 8, "kind": "phrase",
+    "german": "Ich möchte …", "alternatives": ["Ich möchte"],
+    "meanings": ["I'd like …", "I would like …"], "prerequisites": [],
+    "example": { "de": "Ich möchte einen Kaffee, bitte.", "en": "I'd like a coffee, please." },
+    "mnemonic": "The polite way to order anything. Möchte is a soft \"would like\"; the grammar behind it comes much later."
+  },
+  {
+    "id": "n-wasser", "level": 3, "order": 9, "kind": "noun",
+    "german": "Wasser", "article": "das", "plural": "Wasser",
+    "meanings": ["water"], "prerequisites": [],
+    "example": { "de": "Ein Wasser, bitte.", "en": "A water, please." },
+    "mnemonic": "Wasser sounds like water. Someone has filled the Box with water and it's leaking. Das Wasser."
+  },
+  {
+    "id": "o-was", "level": 3, "order": 10, "kind": "other",
+    "german": "was",
+    "meanings": ["what"], "prerequisites": [],
+    "example": { "de": "Was machst du?", "en": "What are you doing?" },
+    "mnemonic": "\"What was that?\" Was is what. A question word comes first, then the verb: Was machst du?"
+  },
+  {
+    "id": "n-tee", "level": 3, "order": 11, "kind": "noun",
+    "german": "Tee", "article": "der", "plural": "Tees",
+    "meanings": ["tea"], "prerequisites": [],
+    "example": { "de": "Der Tee ist sehr warm.", "en": "The tea is very hot." },
+    "mnemonic": "Tee sounds like tea. The Bear holds a tiny teacup with his claws out. Der Tee."
+  },
+  {
+    "id": "o-mit", "level": 3, "order": 12, "kind": "other",
+    "german": "mit",
+    "meanings": ["with"], "prerequisites": [],
+    "example": { "de": "Kaffee mit Milch, bitte.", "en": "Coffee with milk, please." },
+    "mnemonic": "Mit sounds like \"meet\": you meet with someone."
+  },
+  {
+    "id": "o-oder", "level": 3, "order": 13, "kind": "other",
+    "german": "oder",
+    "meanings": ["or"], "prerequisites": [],
+    "example": { "de": "Kaffee oder Tee?", "en": "Coffee or tea?" },
+    "mnemonic": "Oder sounds like \"order\": coffee or tea, what's your order?"
+  },
+  {
+    "id": "o-wo", "level": 3, "order": 14, "kind": "other",
+    "german": "wo",
+    "meanings": ["where"], "prerequisites": [],
+    "example": { "de": "Wo wohnst du?", "en": "Where do you live?" },
+    "mnemonic": "Careful: wo looks like who but means where. \"Whoa, where are we?\""
+  },
+  {
+    "id": "v-essen", "level": 3, "order": 15, "kind": "verb",
+    "german": "essen",
+    "verbForms": { "present": { "ich": "esse", "du": "isst", "er": "isst", "wir": "essen", "ihr": "esst", "sie": "essen" }, "pastParticiple": "gegessen", "auxiliary": "haben" },
+    "meanings": ["to eat"], "prerequisites": [],
+    "example": { "de": "Was isst du heute?", "en": "What are you eating today?" },
+    "mnemonic": "Essen is to eat (the Essen of a meal). Watch the vowel change: du isst, er isst, like sehen becomes sieht."
+  },
+  {
+    "id": "n-kuchen", "level": 3, "order": 16, "kind": "noun",
+    "german": "Kuchen", "article": "der", "plural": "Kuchen",
+    "meanings": ["cake"], "prerequisites": [],
+    "example": { "de": "Der Kuchen ist sehr gut.", "en": "The cake is very good." },
+    "mnemonic": "Kuchen sounds like \"cooking\": the Bear has been cooking a whole cake, and he's not sharing. Der Kuchen."
+  },
+  {
+    "id": "o-gern", "level": 3, "order": 17, "kind": "other",
+    "german": "gern", "alternatives": ["gerne"],
+    "meanings": ["gladly", "like to"], "prerequisites": [],
+    "example": { "de": "Ich trinke gern Tee.", "en": "I like drinking tea." },
+    "mnemonic": "Add gern after a verb to say you like doing it: ich trinke gern = I like to drink. On its own, Gern! means \"with pleasure!\""
+  },
+  {
+    "id": "n-tisch", "level": 3, "order": 18, "kind": "noun",
+    "german": "Tisch", "article": "der", "plural": "Tische",
+    "meanings": ["table"], "prerequisites": [],
+    "example": { "de": "Der Tisch ist frei.", "en": "The table is free." },
+    "mnemonic": "Tisch sounds like dish: the dishes go on the table. The Bear sits at the head of it. Der Tisch."
+  },
+  {
+    "id": "v-nehmen", "level": 3, "order": 19, "kind": "verb",
+    "german": "nehmen",
+    "verbForms": { "present": { "ich": "nehme", "du": "nimmst", "er": "nimmt", "wir": "nehmen", "ihr": "nehmt", "sie": "nehmen" }, "pastParticiple": "genommen", "auxiliary": "haben" },
+    "meanings": ["to take", "to have (order)"], "prerequisites": [],
+    "example": { "de": "Ich nehme den Kuchen.", "en": "I'll have the cake." },
+    "mnemonic": "Nehmen: \"name 'em\" and take 'em. In a café, ich nehme … means \"I'll have …\". Watch du nimmst, er nimmt."
+  },
+  {
+    "id": "o-eins", "level": 3, "order": 20, "kind": "other",
+    "german": "eins",
+    "meanings": ["one"], "prerequisites": [],
+    "example": { "de": "Eins, zwei, drei!", "en": "One, two, three!" },
+    "mnemonic": "Eins is the number one when you count. In front of a noun it becomes ein: ein Kaffee."
+  },
+  {
+    "id": "o-zwei", "level": 3, "order": 21, "kind": "other",
+    "german": "zwei",
+    "meanings": ["two"], "prerequisites": [],
+    "example": { "de": "Zwei Kaffee, bitte.", "en": "Two coffees, please." },
+    "mnemonic": "Zwei sounds like \"twy\", a cousin of two and twice."
+  },
+  {
+    "id": "n-euro", "level": 3, "order": 22, "kind": "noun",
+    "german": "Euro", "article": "der", "plural": "Euros",
+    "meanings": ["euro"], "prerequisites": [],
+    "example": { "de": "Der Kaffee ist zwei Euro.", "en": "The coffee is two euros." },
+    "mnemonic": "The Bear guards the money. Der Euro. With a number, it stays singular: zwei Euro."
+  },
+  {
+    "id": "p-was-kostet-das", "level": 3, "order": 23, "kind": "phrase",
+    "german": "Was kostet das?",
+    "meanings": ["How much is that?", "What does that cost?"], "prerequisites": [],
+    "example": { "de": "Der Kuchen ist neu. Was kostet das?", "en": "The cake is new. How much is that?" },
+    "mnemonic": "Literally \"what costs that?\" Kosten sounds like cost."
+  },
+  {
+    "id": "o-noch", "level": 3, "order": 24, "kind": "other",
+    "german": "noch",
+    "meanings": ["still", "another", "more"], "prerequisites": [],
+    "example": { "de": "Noch ein Kaffee, bitte!", "en": "Another coffee, please!" },
+    "mnemonic": "Noch: \"not yet done\", there's still more. Noch ein Kaffee = one more coffee."
+  },
+  {
+    "id": "a-warm", "level": 3, "order": 25, "kind": "adjective",
+    "german": "warm",
+    "meanings": ["warm", "hot"], "prerequisites": [],
+    "example": { "de": "Der Tee ist warm.", "en": "The tea is hot." },
+    "mnemonic": "Same word as English. Germans use warm for hot food and drinks too."
+  },
+  {
+    "id": "a-lecker", "level": 3, "order": 26, "kind": "adjective",
+    "german": "lecker",
+    "meanings": ["tasty", "delicious"], "prerequisites": [],
+    "example": { "de": "Der Kuchen ist lecker!", "en": "The cake is delicious!" },
+    "mnemonic": "Lecker: so tasty you lick the plate."
+  },
+  {
+    "id": "p-zahlen-bitte", "level": 3, "order": 27, "kind": "phrase",
+    "german": "Zahlen, bitte!", "alternatives": ["Zahlen bitte", "Ich möchte zahlen."],
+    "meanings": ["The bill, please", "Can I pay, please"], "prerequisites": [],
+    "example": { "de": "Entschuldigung! Zahlen, bitte!", "en": "Excuse me! The bill, please!" },
+    "mnemonic": "Zahlen means to pay (think \"tally\"). In a German café you ask to pay; the bill rarely comes on its own."
+  },
+  {
+    "id": "p-entschuldigung", "level": 3, "order": 28, "kind": "phrase",
+    "german": "Entschuldigung!", "alternatives": ["Entschuldigung"],
+    "meanings": ["Excuse me", "Sorry"], "prerequisites": [],
+    "example": { "de": "Entschuldigung, wo ist der Tisch?", "en": "Excuse me, where's the table?" },
+    "mnemonic": "A long word for a short job: getting attention or saying sorry. Break it up: ent-SCHUL-di-gung."
+  },
+  {
+    "id": "o-viel", "level": 3, "order": 29, "kind": "other",
+    "german": "viel",
+    "meanings": ["a lot", "much"], "prerequisites": [],
+    "example": { "de": "Er trinkt viel Kaffee.", "en": "He drinks a lot of coffee." },
+    "mnemonic": "Viel sounds like \"feel\": I feel a lot. Vielen Dank = many thanks."
+  },
+  {
+    "id": "p-wie-heisst-du", "level": 3, "order": 30, "kind": "phrase",
+    "german": "Wie heißt du?", "alternatives": ["Wie heißen Sie?"],
+    "meanings": ["What's your name?"], "prerequisites": [],
+    "example": { "de": "Hallo! Wie heißt du?", "en": "Hi! What's your name?" },
+    "mnemonic": "Literally \"how are you called?\" Ask a stranger politely with Wie heißen Sie? The answer: Ich heiße …"
+  },
+  {
+    "id": "p-guten-morgen", "level": 3, "order": 31, "kind": "phrase",
+    "german": "Guten Morgen!", "alternatives": ["Guten Morgen"],
+    "meanings": ["Good morning"], "prerequisites": [],
+    "example": { "de": "Guten Morgen! Kaffee?", "en": "Good morning! Coffee?" },
+    "mnemonic": "Morgen sounds like morning. Friends often shorten it to just Morgen!"
+  }
+]

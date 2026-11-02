@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { AppHeader } from '../../ui/AppHeader';
 import {
   ActionLink,
-  EarlyStageWarning,
+  LessonPauseNotice,
+  lessonSub,
   clock,
   LevelBar,
   LevelHint,
@@ -55,7 +56,7 @@ export function AlpenDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         <ActionLink to="/lessons" kind="lessons" count={d.lessonsAvailable}>
           <span className="action__label">Lessons</span>
           <span className="action__count">{d.lessonsAvailable}</span>
-          <span className="action__sub">new words</span>
+          <span className="action__sub">{lessonSub(d, 'new words')}</span>
         </ActionLink>
         <ActionLink to="/reviews" kind="reviews" count={d.reviewsDue}>
           <span className="action__label">Reviews</span>
@@ -64,7 +65,7 @@ export function AlpenDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         </ActionLink>
       </div>
 
-      <EarlyStageWarning d={d} theme={theme} />
+      <LessonPauseNotice d={d} theme={theme} />
       <StoriesLink />
 
       <section className="stage-section">
@@ -110,7 +111,7 @@ export function BauhausDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         </p>
       </div>
 
-      <EarlyStageWarning d={d} theme={theme} />
+      <LessonPauseNotice d={d} theme={theme} />
       <StoriesLink />
 
       <section className="bauhaus-level">
@@ -167,7 +168,7 @@ export function BahnDashboard({ d, now, theme, levelTitle }: LayoutProps) {
           <span lang="de">Gleis</span>
         </div>
         <BoardLink to="/reviews" count={d.reviewsDue} title="Reviews" sub={`${plural(d.reviewsDue, 'word')} · all stages`} platform={1} />
-        <BoardLink to="/lessons" count={d.lessonsAvailable} title="Lessons" sub={`${plural(d.lessonsAvailable, 'new word')} · level ${d.level.number}`} platform={2} />
+        <BoardLink to="/lessons" count={d.lessonsAvailable} title="Lessons" sub={lessonSub(d, `${plural(d.lessonsAvailable, 'new word')} · level ${d.level.number}`)} platform={2} />
         {later.map((b) => (
           <div key={b.hourStart} className="board__row board__row--later">
             <span className="board__time">{clock(b.hourStart)}</span>
@@ -181,7 +182,7 @@ export function BahnDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         {later.length === 0 && <p className="board__empty">No further departures in the next 24 hours.</p>}
       </section>
 
-      <EarlyStageWarning d={d} theme={theme} />
+      <LessonPauseNotice d={d} theme={theme} />
       <StoriesLink />
 
       <section className="card">
@@ -253,13 +254,13 @@ export function BackstubeDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         <ActionLink to="/lessons" kind="lessons" count={d.lessonsAvailable}>
           <span className="action__text">
             <span className="action__label">Lessons</span>
-            <span className="action__sub">New dough for level {d.level.number}</span>
+            <span className="action__sub">{lessonSub(d, `New dough for level ${d.level.number}`)}</span>
           </span>
           <span className="action__count">{d.lessonsAvailable}</span>
         </ActionLink>
       </div>
 
-      <EarlyStageWarning d={d} theme={theme} />
+      <LessonPauseNotice d={d} theme={theme} />
       <StoriesLink />
 
       <section className="card">

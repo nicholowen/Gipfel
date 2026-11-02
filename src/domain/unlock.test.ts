@@ -33,22 +33,16 @@ const content = [
 ];
 
 describe('itemsToUnlock', () => {
-  it('unlocks level 1 items without prerequisites at the start', () => {
-    expect(itemsToUnlock(content, byId([]), 1)).toEqual(['hand', 'schuh']);
+  it('unlocks every item without prerequisites at the start, across levels, in curriculum order', () => {
+    expect(itemsToUnlock(content, byId([]))).toEqual(['hand', 'schuh', 'tag']);
   });
 
-  it('keeps a compound locked until every part reaches Guru', () => {
-    expect(itemsToUnlock(content, byId([at('hand', 5), at('schuh', 4)]), 1)).toEqual([]);
+  it('keeps a compound locked until every part reaches the known stage', () => {
+    expect(itemsToUnlock(content, byId([at('hand', 5), at('schuh', 4), at('tag', 0)]))).toEqual([]);
   });
 
-  it('unlocks a compound once every part reaches Guru', () => {
-    expect(itemsToUnlock(content, byId([at('hand', 5), at('schuh', 6)]), 1)).toEqual(['handschuh']);
-  });
-
-  it('unlocks the next level only when it is the current level', () => {
-    const progress = byId([at('hand', 5), at('schuh', 5), at('handschuh', 5)]);
-    expect(itemsToUnlock(content, progress, 1)).toEqual([]);
-    expect(itemsToUnlock(content, progress, 2)).toEqual(['tag']);
+  it('unlocks a compound once every part reaches the known stage', () => {
+    expect(itemsToUnlock(content, byId([at('hand', 5), at('schuh', 6), at('tag', 0)]))).toEqual(['handschuh']);
   });
 });
 

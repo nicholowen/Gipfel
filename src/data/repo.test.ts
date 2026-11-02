@@ -46,11 +46,12 @@ const stageOf = async (id: string) => (await db.progress.get(id))?.stage;
 const pass = (itemId: string) => ({ itemId, wasWrong: false, meaningWrong: 0, germanWrong: 0 });
 
 describe('repo', () => {
-  it('starts at level 1 with its unlockable items in the lesson queue', async () => {
+  it('starts at level 1 with every unlockable item, in any level, in the lesson queue', async () => {
     expect(await repo.getMeta('currentLevel', 0)).toBe(1);
     expect((await db.progress.toArray()).map((p) => [p.itemId, p.stage])).toEqual([
       ['n-a', 0],
       ['n-b', 0],
+      ['n-c', 0],
     ]);
   });
 
@@ -76,7 +77,7 @@ describe('repo', () => {
     expect(await stageOf('n-a')).toBe(1);
   });
 
-  it('levels up once 90% of the level is at the known stage and unlocks the next level', async () => {
+  it('completes a level once 90% of it is at the known stage', async () => {
     await repo.finishLessons(['n-a', 'n-b'], t0);
     for (let i = 0; i < 4; i++) await repo.recordReviews([pass('n-a'), pass('n-b')], t0);
     await repo.finishLessons(['n-ab'], t0);

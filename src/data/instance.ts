@@ -3,6 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { curriculum } from '../content/curriculum';
 import { stories, storyTokens } from '../content/stories';
 import { summarise } from '../domain/dashboard';
+import { lessonAllowance, type LessonPause } from '../domain/pacing';
 import { KNOWN_STAGE } from '../domain/scheduler';
 import { coverage, STORY_UNLOCK, type Coverage, type Story } from '../domain/stories';
 import type { Stage } from '../domain/types';
@@ -48,12 +49,15 @@ export function useDashboard(now: number) {
   }, [now]);
 }
 
-export function loadLessonBatch(size: number): Promise<string[]> {
+/** The next lessons to start, limited by the batch size and today's allowance (see pacing.ts). */
+export function loadLessonBatch(size: number, now: number): Promise<{ ids: string[]; pause: LessonPause }> {
   return retry(async () => {
     const rows = await db.progress.toArray();
-    return lessonQueue(curriculum.items, new Map(rows.map((r) => [r.itemId, r])))
-      .slice(0, size)
+    const allowance = lessonAllowance(rows, now);
+    const ids = lessonQueue(curriculum.items, new Map(rows.map((r) => [r.itemId, r])))
+      .slice(0, Math.min(size, allowance.available))
       .map((i) => i.id);
+    return { ids, pause: allowance.pause };
   });
 }
 

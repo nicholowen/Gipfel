@@ -1,7 +1,9 @@
 {
-  "contentVersion": 2,
+  "contentVersion": 3,
   "levels": [
     { "number": 1, "title": "First words" },
-    { "number": 2, "title": "Hallo!" }
+    { "number": 2, "title": "Hallo!" },
+    { "number": 3, "title": "Im Café" },
+    { "number": 4, "title": "Wer bist du?" }
   ]
 }

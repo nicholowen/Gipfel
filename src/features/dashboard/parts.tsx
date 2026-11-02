@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { useStories, type useDashboard } from '../../data/instance';
-import { EARLY_STAGE_WARNING } from '../../domain/dashboard';
+import { DAILY_NEW_ITEMS, EARLY_STAGE_LIMIT } from '../../domain/pacing';
 import { STAGE_INTERVAL, STAGE_KEYS, type StageKey, type Theme, type ThemeId } from '../../ui/themes';
 
 export type DashboardData = NonNullable<ReturnType<typeof useDashboard>>;
@@ -55,14 +55,23 @@ export function ActionLink({
   );
 }
 
-export function EarlyStageWarning({ d, theme }: { d: DashboardData; theme: Theme }) {
-  if (!d.earlyStageWarning) return null;
-  return (
-    <p className="notice notice--shake">
-      Over {EARLY_STAGE_WARNING} words are in <span lang="de">{theme.stages[1].de}</span>. Clear some reviews before starting
-      new lessons.
-    </p>
-  );
+/** Why the lessons button is empty, when it's because of pacing rather than running out. */
+export function LessonPauseNotice({ d, theme }: { d: DashboardData; theme: Theme }) {
+  if (d.lessonPause === 'busy') {
+    return (
+      <p className="notice notice--shake">
+        {EARLY_STAGE_LIMIT} words are in <span lang="de">{theme.stages[1].de}</span>. New lessons pause until some move up.
+      </p>
+    );
+  }
+  return null;
+}
+
+/** Subtitle for the lessons button: the theme's own wording, or why there are none today. */
+export function lessonSub(d: DashboardData, usual: string): string {
+  if (d.lessonPause === 'daily') return `today’s ${DAILY_NEW_ITEMS} done · more tomorrow`;
+  if (d.lessonPause === 'empty') return 'all caught up';
+  return usual;
 }
 
 export function LevelBar({ d, theme }: { d: DashboardData; theme: Theme }) {
@@ -117,7 +126,7 @@ export function StageRows({ d, theme, bars = false }: { d: DashboardData; theme:
                 {theme.stages[key].de}
               </span>
               <span className="stage-row__gloss">
-                {theme.stages[key].en} · {STAGE_INTERVAL[key]}
+                {theme.stages[key].en} · {key === 1 && wordCountIn(d, 1) > 0 ? <EarlySteps d={d} /> : STAGE_INTERVAL[key]}
               </span>
             </span>
             {bars && (
@@ -130,6 +139,23 @@ export function StageRows({ d, theme, bars = false }: { d: DashboardData; theme:
         );
       })}
     </ul>
+  );
+}
+
+const wordCountIn = (d: DashboardData, key: StageKey) => d.groups[key];
+
+/** The first group's four steps (4 h, 8 h, 1 day, 2 days), so early progress is visible every day. */
+function EarlySteps({ d }: { d: DashboardData }) {
+  const label = d.earlySteps.map((n, i) => `${n} at step ${i + 1}`).join(', ');
+  return (
+    <span className="early-steps" role="img" aria-label={label} title={`Steps 1–4 of 4: ${label}`}>
+      {d.earlySteps.map((n, i) => (
+        <span key={i} className={n === 0 ? 'is-empty' : ''}>
+          {n}
+        </span>
+      ))}
+      <span className="early-steps__arrow" aria-hidden="true">→</span>
+    </span>
   );
 }
 

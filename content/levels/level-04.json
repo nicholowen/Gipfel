@@ -1,0 +1,223 @@
+[
+  {
+    "id": "o-wer", "level": 4, "order": 1, "kind": "other",
+    "german": "wer",
+    "meanings": ["who"], "prerequisites": [],
+    "example": { "de": "Wer ist das?", "en": "Who is that?" },
+    "mnemonic": "Wer is who, and wo is where: the pair that trips everyone up. Wer has an r, like \"who are you?\""
+  },
+  {
+    "id": "v-heissen", "level": 4, "order": 2, "kind": "verb",
+    "german": "heißen",
+    "verbForms": { "present": { "ich": "heiße", "du": "heißt", "er": "heißt", "wir": "heißen", "ihr": "heißt", "sie": "heißen" }, "pastParticiple": "geheißen", "auxiliary": "haben" },
+    "meanings": ["to be called", "to be named"], "prerequisites": [],
+    "example": { "de": "Der Hund heißt Max.", "en": "The dog is called Max." },
+    "mnemonic": "You already know Ich heiße and Wie heißt du? Now the whole verb. Heißen: \"hi, son, what are you called?\""
+  },
+  {
+    "id": "o-wie", "level": 4, "order": 3, "kind": "other",
+    "german": "wie",
+    "meanings": ["how"], "prerequisites": [],
+    "example": { "de": "Wie ist der Kaffee?", "en": "How's the coffee?" },
+    "mnemonic": "Wie sounds like \"we\": how do we do it? You've met it in Wie geht's? Question word first, verb second."
+  },
+  {
+    "id": "n-vater", "level": 4, "order": 4, "kind": "noun",
+    "german": "Vater", "article": "der", "plural": "Väter",
+    "meanings": ["father"], "prerequisites": [],
+    "example": { "de": "Mein Vater wohnt in Hamburg.", "en": "My father lives in Hamburg." },
+    "mnemonic": "Vater sounds like father (the V is said like an F). Papa Bear. Der Vater."
+  },
+  {
+    "id": "v-sprechen", "level": 4, "order": 5, "kind": "verb",
+    "german": "sprechen",
+    "verbForms": { "present": { "ich": "spreche", "du": "sprichst", "er": "spricht", "wir": "sprechen", "ihr": "sprecht", "sie": "sprechen" }, "pastParticiple": "gesprochen", "auxiliary": "haben" },
+    "meanings": ["to speak", "to talk"], "prerequisites": [],
+    "example": { "de": "Wir sprechen Deutsch.", "en": "We speak German." },
+    "mnemonic": "Sprechen sounds like speak with a German sprinkle. Watch du sprichst, er spricht."
+  },
+  {
+    "id": "o-deutsch", "level": 4, "order": 6, "kind": "other",
+    "german": "Deutsch",
+    "meanings": ["German (language)", "German"], "prerequisites": [],
+    "example": { "de": "Ich spreche ein bisschen Deutsch.", "en": "I speak a little German." },
+    "mnemonic": "Deutsch is where \"Dutch\" came from: it once meant the people's language. Languages are capitalised: Deutsch."
+  },
+  {
+    "id": "p-sprichst-du-englisch", "level": 4, "order": 7, "kind": "phrase",
+    "german": "Sprichst du Englisch?", "alternatives": ["Sprechen Sie Englisch?"],
+    "meanings": ["Do you speak English?"], "prerequisites": [],
+    "example": { "de": "Entschuldigung, sprichst du Englisch?", "en": "Excuse me, do you speak English?" },
+    "mnemonic": "A yes/no question starts with the verb: Sprichst du …? To a stranger: Sprechen Sie Englisch?"
+  },
+  {
+    "id": "p-ich-verstehe-nicht", "level": 4, "order": 8, "kind": "phrase",
+    "german": "Ich verstehe nicht.", "alternatives": ["Ich verstehe das nicht."],
+    "meanings": ["I don't understand"], "prerequisites": [],
+    "example": { "de": "Entschuldigung, ich verstehe nicht.", "en": "Sorry, I don't understand." },
+    "mnemonic": "Verstehen: to stand under it, to understand. One of the most useful lines you'll have."
+  },
+  {
+    "id": "p-noch-einmal", "level": 4, "order": 9, "kind": "phrase",
+    "german": "Noch einmal, bitte.", "alternatives": ["Nochmal, bitte.", "Noch mal, bitte."],
+    "meanings": ["Again, please", "Once more, please"], "prerequisites": [],
+    "example": { "de": "Ich verstehe nicht. Noch einmal, bitte.", "en": "I don't understand. Again, please." },
+    "mnemonic": "Noch (still, more) + einmal (one time): one more time. Most people say nochmal."
+  },
+  {
+    "id": "v-arbeiten", "level": 4, "order": 10, "kind": "verb",
+    "german": "arbeiten",
+    "verbForms": { "present": { "ich": "arbeite", "du": "arbeitest", "er": "arbeitet", "wir": "arbeiten", "ihr": "arbeitet", "sie": "arbeiten" }, "pastParticiple": "gearbeitet", "auxiliary": "haben" },
+    "meanings": ["to work"], "prerequisites": [],
+    "example": { "de": "Sie arbeitet heute nicht.", "en": "She isn't working today." },
+    "mnemonic": "Arbeit: \"our bite\" of the day's work. The stem ends in t, so it adds an e: du arbeitest, er arbeitet."
+  },
+  {
+    "id": "n-arbeit", "level": 4, "order": 11, "kind": "noun",
+    "german": "Arbeit", "article": "die", "plural": "Arbeiten",
+    "meanings": ["work", "job"], "prerequisites": [],
+    "example": { "de": "Die Arbeit ist neu.", "en": "The job is new." },
+    "mnemonic": "The Diva's work never stops: rehearsals, fittings, interviews. Die Arbeit."
+  },
+  {
+    "id": "a-alt", "level": 4, "order": 12, "kind": "adjective",
+    "german": "alt",
+    "meanings": ["old"], "prerequisites": [],
+    "example": { "de": "Das Haus ist sehr alt.", "en": "The house is very old." },
+    "mnemonic": "Alt is old, as in alto, the older, lower voice. The opposite of neu."
+  },
+  {
+    "id": "p-wie-alt-bist-du", "level": 4, "order": 13, "kind": "phrase",
+    "german": "Wie alt bist du?", "alternatives": ["Wie alt sind Sie?"],
+    "meanings": ["How old are you?"], "prerequisites": [],
+    "example": { "de": "Und du? Wie alt bist du?", "en": "And you? How old are you?" },
+    "mnemonic": "Word for word: how old are you? German and English agree for once."
+  },
+  {
+    "id": "p-ich-bin-jahre-alt", "level": 4, "order": 14, "kind": "phrase",
+    "german": "Ich bin … Jahre alt.", "alternatives": ["Ich bin … Jahre alt"],
+    "meanings": ["I'm … years old"], "prerequisites": [],
+    "example": { "de": "Ich bin vierzig Jahre alt.", "en": "I'm forty years old." },
+    "mnemonic": "Same shape as English, with Jahre (years) from das Jahr."
+  },
+  {
+    "id": "n-hund", "level": 4, "order": 15, "kind": "noun",
+    "german": "Hund", "article": "der", "plural": "Hunde",
+    "meanings": ["dog"], "prerequisites": [],
+    "example": { "de": "Der Hund ist sehr groß.", "en": "The dog is very big." },
+    "mnemonic": "Hund sounds like hound. The Bear and the hound are not friends. Der Hund."
+  },
+  {
+    "id": "n-wohnung", "level": 4, "order": 16, "kind": "noun",
+    "german": "Wohnung", "article": "die", "plural": "Wohnungen",
+    "meanings": ["flat", "apartment"], "prerequisites": [],
+    "example": { "de": "Die Wohnung ist klein, aber schön.", "en": "The flat is small but nice." },
+    "mnemonic": "From wohnen, to live: the place you live. Every word ending in -ung belongs to the Diva. Die Wohnung."
+  },
+  {
+    "id": "p-zu-hause", "level": 4, "order": 17, "kind": "phrase",
+    "german": "zu Hause", "alternatives": ["zuhause"],
+    "meanings": ["at home"], "prerequisites": [],
+    "example": { "de": "Ich bin heute zu Hause.", "en": "I'm at home today." },
+    "mnemonic": "Zu Hause is at home; nach Hause is going home. Ich bin zu Hause, ich gehe nach Hause."
+  },
+  {
+    "id": "o-drei", "level": 4, "order": 18, "kind": "other",
+    "german": "drei",
+    "meanings": ["three"], "prerequisites": [],
+    "example": { "de": "Drei Kaffee, bitte.", "en": "Three coffees, please." },
+    "mnemonic": "Drei sounds like \"dry\": three dry towels."
+  },
+  {
+    "id": "a-schoen", "level": 4, "order": 19, "kind": "adjective",
+    "german": "schön",
+    "meanings": ["beautiful", "nice", "lovely"], "prerequisites": [],
+    "example": { "de": "Heute ist ein schöner Tag.", "en": "Today is a beautiful day." },
+    "mnemonic": "Schön sounds like \"shine\": anything that shines is beautiful. Germans use it for nice in general: Schön!"
+  },
+  {
+    "id": "o-schon", "level": 4, "order": 20, "kind": "other",
+    "german": "schon",
+    "meanings": ["already", "yet"], "prerequisites": [],
+    "example": { "de": "Bist du schon hier?", "en": "Are you here already?" },
+    "mnemonic": "Schon without the dots: \"shown already\". Don't mix it up with schön (beautiful)."
+  },
+  {
+    "id": "p-ich-auch", "level": 4, "order": 21, "kind": "phrase",
+    "german": "Ich auch.", "alternatives": ["Ich auch!"],
+    "meanings": ["Me too"], "prerequisites": [],
+    "example": { "de": "Ich trinke gern Tee. – Ich auch!", "en": "I like drinking tea. – Me too!" },
+    "mnemonic": "Ich (I) + auch (too). Short, friendly, and you'll use it daily."
+  },
+  {
+    "id": "n-schwester", "level": 4, "order": 22, "kind": "noun",
+    "german": "Schwester", "article": "die", "plural": "Schwestern",
+    "meanings": ["sister"], "prerequisites": [],
+    "example": { "de": "Meine Schwester wohnt in Wien.", "en": "My sister lives in Vienna." },
+    "mnemonic": "Schwester sounds like sister. The Diva's sister is also a Diva. Die Schwester."
+  },
+  {
+    "id": "o-immer", "level": 4, "order": 23, "kind": "other",
+    "german": "immer",
+    "meanings": ["always"], "prerequisites": [],
+    "example": { "de": "Er trinkt immer Kaffee.", "en": "He always drinks coffee." },
+    "mnemonic": "Immer sounds like \"ever\" (and \"forever\"): always."
+  },
+  {
+    "id": "v-finden", "level": 4, "order": 24, "kind": "verb",
+    "german": "finden",
+    "verbForms": { "present": { "ich": "finde", "du": "findest", "er": "findet", "wir": "finden", "ihr": "findet", "sie": "finden" }, "pastParticiple": "gefunden", "auxiliary": "haben" },
+    "meanings": ["to find", "to think (opinion)"], "prerequisites": [],
+    "example": { "de": "Ich finde den Kuchen lecker.", "en": "I think the cake is delicious." },
+    "mnemonic": "Finden is to find, and also how you give an opinion: Ich finde das gut = I think that's good (I find it good)."
+  },
+  {
+    "id": "o-nur", "level": 4, "order": 25, "kind": "other",
+    "german": "nur",
+    "meanings": ["only", "just"], "prerequisites": [],
+    "example": { "de": "Nur ein Wasser, bitte.", "en": "Just a water, please." },
+    "mnemonic": "Nur sounds like \"no more\": only this, no more."
+  },
+  {
+    "id": "n-woche", "level": 4, "order": 26, "kind": "noun",
+    "german": "Woche", "article": "die", "plural": "Wochen",
+    "meanings": ["week"], "prerequisites": [],
+    "example": { "de": "Die Woche ist sehr lang.", "en": "The week is very long." },
+    "mnemonic": "Woche sounds a bit like week. The Diva's week is fully booked. Die Woche."
+  },
+  {
+    "id": "a-kalt", "level": 4, "order": 27, "kind": "adjective",
+    "german": "kalt",
+    "meanings": ["cold"], "prerequisites": [],
+    "example": { "de": "Der Kaffee ist kalt!", "en": "The coffee is cold!" },
+    "mnemonic": "Kalt sounds like cold. The opposite of warm."
+  },
+  {
+    "id": "n-auto", "level": 4, "order": 28, "kind": "noun",
+    "german": "Auto", "article": "das", "plural": "Autos",
+    "meanings": ["car"], "prerequisites": [],
+    "example": { "de": "Das Auto ist neu.", "en": "The car is new." },
+    "mnemonic": "An automobile: das Auto. A toy car fits neatly in the Box."
+  },
+  {
+    "id": "o-da", "level": 4, "order": 29, "kind": "other",
+    "german": "da",
+    "meanings": ["there", "here"], "prerequisites": [],
+    "example": { "de": "Da ist der Hund!", "en": "There's the dog!" },
+    "mnemonic": "Da: \"ta-da, there it is!\" Ich bin da also means I'm here."
+  },
+  {
+    "id": "n-geld", "level": 4, "order": 30, "kind": "noun",
+    "german": "Geld", "article": "das", "plural": null,
+    "meanings": ["money"], "prerequisites": [],
+    "example": { "de": "Ich habe kein Geld.", "en": "I have no money." },
+    "mnemonic": "Geld sounds like gold. The Box is full of gold coins. Das Geld."
+  },
+  {
+    "id": "o-vier", "level": 4, "order": 31, "kind": "other",
+    "german": "vier",
+    "meanings": ["four"], "prerequisites": [],
+    "example": { "de": "Der Tisch ist für vier.", "en": "The table is for four." },
+    "mnemonic": "Vier sounds like four, said with an F."
+  }
+]

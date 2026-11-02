@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getItem } from '../../content/curriculum';
 import { loadLessonBatch, repo, useSettings } from '../../data/instance';
+import { DAILY_NEW_ITEMS, type LessonPause } from '../../domain/pacing';
 import { nextReviewAt } from '../../domain/scheduler';
 import { GermanWord, ItemInfo, SpeakButton } from '../../ui/ItemInfo';
 import { reportError } from '../../ui/errors';
@@ -15,15 +16,17 @@ export function Lessons() {
   const settings = useSettings();
   const { theme } = useTheme();
   const [batch, setBatch] = useState<string[]>([]);
+  const [pause, setPause] = useState<LessonPause>(null);
   const [phase, setPhase] = useState<Phase>({ name: 'loading' });
   const [round, setRound] = useState(0);
 
   useEffect(() => {
     let live = true;
-    loadLessonBatch(settings.lessonBatchSize)
-      .then((ids) => {
+    loadLessonBatch(settings.lessonBatchSize, Date.now())
+      .then(({ ids, pause }) => {
         if (!live) return;
         setBatch(ids);
+        setPause(pause);
         setPhase({ name: 'learn', index: 0 });
       })
       .catch(reportError);
@@ -42,8 +45,21 @@ export function Lessons() {
   if (batch.length === 0) {
     return (
       <main className="page centred">
-        <h1>No lessons right now</h1>
-        <p className="muted">New words unlock as you level up, or when the words they are built from reach <span lang="de">{theme.stages[2].de}</span>.</p>
+        <h1>{pause === 'daily' ? 'That’s today’s new words' : 'No lessons right now'}</h1>
+        <p className="muted">
+          {pause === 'daily' && <>You’ve started {DAILY_NEW_ITEMS} new words today. More arrive tomorrow; keep up with your reviews in the meantime.</>}
+          {pause === 'busy' && (
+            <>
+              Lots of words are still in <span lang="de">{theme.stages[1].de}</span>. Clear some reviews and new lessons will come back.
+            </>
+          )}
+          {pause === 'empty' && (
+            <>
+              You’re through every word written so far. Compounds unlock when the words they are built from reach{' '}
+              <span lang="de">{theme.stages[2].de}</span>, and new levels are on the way.
+            </>
+          )}
+        </p>
         <Link to="/" className="button">
           Back home
         </Link>

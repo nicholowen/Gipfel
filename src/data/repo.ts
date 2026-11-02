@@ -1,6 +1,7 @@
 import { FINAL_STAGE, nextReviewAt, nextStage } from '../domain/scheduler';
 import type { CompletedItem } from '../domain/review-session';
 import type { Curriculum, ItemProgress } from '../domain/types';
+import { localDay } from '../domain/pacing';
 import { canLevelUp, itemsToUnlock } from '../domain/unlock';
 import type { GipfelDb } from './db';
 
@@ -17,11 +18,7 @@ export interface Settings {
 
 export const DEFAULT_SETTINGS: Settings = { lessonBatchSize: 5, autoplayAudio: true };
 
-export function localDay(ms: number): string {
-  const d = new Date(ms);
-  const pad = (n: number) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-}
+export { localDay };
 
 function previousDay(ms: number): string {
   const d = new Date(ms);
@@ -45,13 +42,13 @@ export function makeRepo(db: GipfelDb, curriculum: Curriculum) {
 
   const setMeta = (key: string, value: unknown) => db.meta.put({ key, value });
 
-  /** Unlock whatever is now unlockable and level up as far as progress allows. */
+  /** Unlock whatever is now unlockable and complete levels as far as progress allows. */
   async function syncUnlocks(now: number): Promise<void> {
     let level = await getMeta('currentLevel', 1);
     for (;;) {
       const rows = await db.progress.toArray();
       const progress = new Map(rows.map((r) => [r.itemId, r]));
-      const ids = itemsToUnlock(curriculum.items, progress, level);
+      const ids = itemsToUnlock(curriculum.items, progress);
       if (ids.length > 0) {
         await db.progress.bulkAdd(
           ids.map((itemId): ItemProgress => ({ itemId, stage: 0, unlockedAt: now, nextReviewAt: null, correctCount: 0, wrongCount: 0 })),
