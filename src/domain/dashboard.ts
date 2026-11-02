@@ -1,8 +1,8 @@
-import { GURU, stageGroup, type StageGroup } from './scheduler';
+import { KNOWN_STAGE, stageGroup, type StageGroup } from './scheduler';
 import type { ContentItem, ItemProgress } from './types';
 import { LEVEL_UP_SHARE } from './unlock';
 
-export const APPRENTICE_WARNING = 100;
+export const EARLY_STAGE_WARNING = 100;
 
 export interface Summary {
   lessonsAvailable: number;
@@ -11,8 +11,8 @@ export interface Summary {
   /** 24 hourly buckets starting at the current hour: items that become due in that hour. */
   forecast: { hourStart: number; count: number }[];
   groups: Record<Exclude<StageGroup, 'lesson'>, number>;
-  level: { number: number; total: number; atGuru: number; needed: number };
-  apprenticeWarning: boolean;
+  level: { number: number; total: number; known: number; needed: number };
+  earlyStageWarning: boolean;
 }
 
 const HOUR = 3600_000;
@@ -28,7 +28,7 @@ export function summarise(rows: ItemProgress[], items: readonly ContentItem[], l
     return { hourStart, count };
   });
 
-  const groups = { apprentice: 0, guru: 0, master: 0, enlightened: 0, burned: 0 };
+  const groups = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
   for (const r of rows) {
     const g = stageGroup(r.stage);
     if (g !== 'lesson') groups[g] += 1;
@@ -36,7 +36,7 @@ export function summarise(rows: ItemProgress[], items: readonly ContentItem[], l
 
   const levelItems = items.filter((i) => i.level === level);
   const stageById = new Map(rows.map((r) => [r.itemId, r.stage]));
-  const atGuru = levelItems.filter((i) => (stageById.get(i.id) ?? 0) >= GURU).length;
+  const known = levelItems.filter((i) => (stageById.get(i.id) ?? 0) >= KNOWN_STAGE).length;
 
   return {
     lessonsAvailable: rows.filter((r) => r.stage === 0).length,
@@ -44,7 +44,7 @@ export function summarise(rows: ItemProgress[], items: readonly ContentItem[], l
     nextReviewAt: upcoming.length > 0 ? Math.min(...upcoming) : null,
     forecast,
     groups,
-    level: { number: level, total: levelItems.length, atGuru, needed: Math.ceil(levelItems.length * LEVEL_UP_SHARE) },
-    apprenticeWarning: groups.apprentice > APPRENTICE_WARNING,
+    level: { number: level, total: levelItems.length, known, needed: Math.ceil(levelItems.length * LEVEL_UP_SHARE) },
+    earlyStageWarning: groups[1] > EARLY_STAGE_WARNING,
   };
 }

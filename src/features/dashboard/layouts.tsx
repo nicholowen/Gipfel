@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppHeader } from '../../ui/AppHeader';
 import {
   ActionLink,
-  ApprenticeWarning,
+  EarlyStageWarning,
   clock,
   LevelBar,
   LevelHint,
@@ -63,7 +63,7 @@ export function AlpenDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         </ActionLink>
       </div>
 
-      <ApprenticeWarning d={d} theme={theme} />
+      <EarlyStageWarning d={d} theme={theme} />
 
       <section className="stage-section">
         <div className="section-head">
@@ -108,7 +108,7 @@ export function BauhausDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         </p>
       </div>
 
-      <ApprenticeWarning d={d} theme={theme} />
+      <EarlyStageWarning d={d} theme={theme} />
 
       <section className="bauhaus-level">
         <div className="section-head">
@@ -117,7 +117,7 @@ export function BauhausDashboard({ d, now, theme, levelTitle }: LayoutProps) {
             {levelTitle && <span className="muted"> · {levelTitle}</span>}
           </h2>
           <span className="muted">
-            {d.level.atGuru} / {d.level.needed}
+            {d.level.known} / {d.level.needed}
           </span>
         </div>
         <LevelBar d={d} theme={theme} />
@@ -178,7 +178,7 @@ export function BahnDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         {later.length === 0 && <p className="board__empty">No further departures in the next 24 hours.</p>}
       </section>
 
-      <ApprenticeWarning d={d} theme={theme} />
+      <EarlyStageWarning d={d} theme={theme} />
 
       <section className="card">
         <div className="card__head">
@@ -187,7 +187,7 @@ export function BahnDashboard({ d, now, theme, levelTitle }: LayoutProps) {
             {levelTitle && <span className="muted"> · {levelTitle}</span>}
           </h2>
           <span className="muted">
-            {d.level.atGuru} / {d.level.needed} to level up
+            {d.level.known} / {d.level.needed} to level up
           </span>
         </div>
         <LevelBar d={d} theme={theme} />
@@ -255,7 +255,7 @@ export function BackstubeDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         </ActionLink>
       </div>
 
-      <ApprenticeWarning d={d} theme={theme} />
+      <EarlyStageWarning d={d} theme={theme} />
 
       <section className="card">
         <div className="card__head">
@@ -264,7 +264,7 @@ export function BackstubeDashboard({ d, now, theme, levelTitle }: LayoutProps) {
             {levelTitle && <span className="muted"> · {levelTitle}</span>}
           </h2>
           <span className="muted">
-            {d.level.atGuru} / {d.level.needed}
+            {d.level.known} / {d.level.needed}
           </span>
         </div>
         <LevelBar d={d} theme={theme} />

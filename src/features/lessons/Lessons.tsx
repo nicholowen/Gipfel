@@ -43,7 +43,7 @@ export function Lessons() {
     return (
       <main className="page centred">
         <h1>No lessons right now</h1>
-        <p className="muted">New words unlock as you level up, or when the words they are built from reach <span lang="de">{theme.stages.guru.de}</span>.</p>
+        <p className="muted">New words unlock as you level up, or when the words they are built from reach <span lang="de">{theme.stages[2].de}</span>.</p>
         <Link to="/" className="button">
           Back home
         </Link>

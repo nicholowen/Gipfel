@@ -11,7 +11,7 @@ import type { Stage } from '../domain/types';
 export type ThemeId = 'alpen' | 'bauhaus' | 'bahn' | 'backstube';
 export type StageKey = Exclude<StageGroup, 'lesson'>;
 
-export const STAGE_KEYS: readonly StageKey[] = ['apprentice', 'guru', 'master', 'enlightened', 'burned'];
+export const STAGE_KEYS: readonly StageKey[] = [1, 2, 3, 4, 5];
 
 export interface StageName {
   /** Shown in the app. */
@@ -83,11 +83,11 @@ const alpen: Theme = {
   name: 'Alpen',
   tagline: 'Pine, snow and trail markers',
   stages: {
-    apprentice: { de: 'Tal', en: 'valley' },
-    guru: { de: 'Alm', en: 'alpine pasture' },
-    master: { de: 'Hütte', en: 'mountain hut' },
-    enlightened: { de: 'Grat', en: 'ridge' },
-    burned: { de: 'Gipfel', en: 'summit' },
+    1: { de: 'Tal', en: 'valley' },
+    2: { de: 'Alm', en: 'alpine pasture' },
+    3: { de: 'Hütte', en: 'mountain hut' },
+    4: { de: 'Grat', en: 'ridge' },
+    5: { de: 'Gipfel', en: 'summit' },
   },
   copy: { stagesTitle: 'Your route', right: 'Trittsicher!', wrong: 'Ausgerutscht!' },
   fonts: {
@@ -122,11 +122,11 @@ const alpen: Theme = {
     heroDie: '#ffa3ab',
     heroDas: '#a8e0b0',
     stages: {
-      apprentice: { bg: '#7a5c3e', fg: '#ffffff' },
-      guru: { bg: '#3f7a3a', fg: '#ffffff' },
-      master: { bg: '#9a4a22', fg: '#ffffff' },
-      enlightened: { bg: '#4a5560', fg: '#ffffff' },
-      burned: { bg: '#1f3a2e', fg: '#ffffff' },
+      1: { bg: '#7a5c3e', fg: '#ffffff' },
+      2: { bg: '#3f7a3a', fg: '#ffffff' },
+      3: { bg: '#9a4a22', fg: '#ffffff' },
+      4: { bg: '#4a5560', fg: '#ffffff' },
+      5: { bg: '#1f3a2e', fg: '#ffffff' },
     },
     shadow: '0 1px 2px rgb(27 31 29 / 6%), 0 4px 16px rgb(27 31 29 / 7%)',
     border: 'none',
@@ -156,11 +156,11 @@ const alpen: Theme = {
     heroDie: '#ffa3ab',
     heroDas: '#a8e0b0',
     stages: {
-      apprentice: { bg: '#c9a27e', fg: '#0f1a15' },
-      guru: { bg: '#9bd08a', fg: '#0f1a15' },
-      master: { bg: '#e89a6e', fg: '#0f1a15' },
-      enlightened: { bg: '#b7c2cc', fg: '#0f1a15' },
-      burned: { bg: '#eef3f0', fg: '#0f1a15' },
+      1: { bg: '#c9a27e', fg: '#0f1a15' },
+      2: { bg: '#9bd08a', fg: '#0f1a15' },
+      3: { bg: '#e89a6e', fg: '#0f1a15' },
+      4: { bg: '#b7c2cc', fg: '#0f1a15' },
+      5: { bg: '#eef3f0', fg: '#0f1a15' },
     },
     shadow: '0 1px 2px rgb(0 0 0 / 30%), 0 4px 16px rgb(0 0 0 / 25%)',
     border: 'none',
@@ -172,11 +172,11 @@ const bauhaus: Theme = {
   name: 'Bauhaus',
   tagline: 'Primary colours, hard edges, shapes for gender',
   stages: {
-    apprentice: { de: 'Lehrling', en: 'apprentice' },
-    guru: { de: 'Geselle', en: 'journeyman' },
-    master: { de: 'Jungmeister', en: 'young master' },
-    enlightened: { de: 'Meister', en: 'master' },
-    burned: { de: 'Meisterwerk', en: 'masterpiece' },
+    1: { de: 'Lehrling', en: 'apprentice' },
+    2: { de: 'Geselle', en: 'journeyman' },
+    3: { de: 'Jungmeister', en: 'young master' },
+    4: { de: 'Meister', en: 'master' },
+    5: { de: 'Meisterwerk', en: 'masterpiece' },
   },
   copy: { stagesTitle: 'the workshop', right: 'Gut gebaut!', wrong: 'Nochmal!' },
   fonts: {
@@ -211,11 +211,11 @@ const bauhaus: Theme = {
     heroDie: '#ffc2bd',
     heroDas: '#ffe27a',
     stages: {
-      apprentice: { bg: '#6e6a60', fg: '#ffffff' },
-      guru: { bg: '#1c4e9d', fg: '#ffffff' },
-      master: { bg: '#d52b1e', fg: '#ffffff' },
-      enlightened: { bg: '#f4c20d', fg: '#111111' },
-      burned: { bg: '#111111', fg: '#ffffff' },
+      1: { bg: '#6e6a60', fg: '#ffffff' },
+      2: { bg: '#1c4e9d', fg: '#ffffff' },
+      3: { bg: '#d52b1e', fg: '#ffffff' },
+      4: { bg: '#f4c20d', fg: '#111111' },
+      5: { bg: '#111111', fg: '#ffffff' },
     },
     shadow: 'none',
     border: '3px solid #111111',
@@ -245,11 +245,11 @@ const bauhaus: Theme = {
     heroDie: '#ffc2bd',
     heroDas: '#ffe27a',
     stages: {
-      apprentice: { bg: '#b5b0a4', fg: '#111111' },
-      guru: { bg: '#7fa6f0', fg: '#111111' },
-      master: { bg: '#ff7a70', fg: '#111111' },
-      enlightened: { bg: '#f4c20d', fg: '#111111' },
-      burned: { bg: '#f2f0ea', fg: '#111111' },
+      1: { bg: '#b5b0a4', fg: '#111111' },
+      2: { bg: '#7fa6f0', fg: '#111111' },
+      3: { bg: '#ff7a70', fg: '#111111' },
+      4: { bg: '#f4c20d', fg: '#111111' },
+      5: { bg: '#f2f0ea', fg: '#111111' },
     },
     shadow: 'none',
     border: '3px solid #f2f0ea',
@@ -261,11 +261,11 @@ const bahn: Theme = {
   name: 'Schwarz-Rot-Gold',
   tagline: 'Flag colours on a departure board',
   stages: {
-    apprentice: { de: 'Bummelzug', en: 'slow train' },
-    guru: { de: 'Regionalzug', en: 'regional train' },
-    master: { de: 'Eilzug', en: 'fast train' },
-    enlightened: { de: 'Schnellzug', en: 'express' },
-    burned: { de: 'Endstation', en: 'terminus' },
+    1: { de: 'Bummelzug', en: 'slow train' },
+    2: { de: 'Regionalzug', en: 'regional train' },
+    3: { de: 'Eilzug', en: 'fast train' },
+    4: { de: 'Schnellzug', en: 'express' },
+    5: { de: 'Endstation', en: 'terminus' },
   },
   copy: { stagesTitle: 'Timetable', right: 'Pünktlich!', wrong: 'Verspätung!' },
   fonts: {
@@ -301,11 +301,11 @@ const bahn: Theme = {
     heroDie: '#ff7a7a',
     heroDas: '#7fd18f',
     stages: {
-      apprentice: { bg: '#4b5263', fg: '#ffffff' },
-      guru: { bg: '#2a4c9a', fg: '#ffffff' },
-      master: { bg: '#dd0000', fg: '#ffffff' },
-      enlightened: { bg: '#ffce00', fg: '#0b0b0c' },
-      burned: { bg: '#ffffff', fg: '#0b0b0c' },
+      1: { bg: '#4b5263', fg: '#ffffff' },
+      2: { bg: '#2a4c9a', fg: '#ffffff' },
+      3: { bg: '#dd0000', fg: '#ffffff' },
+      4: { bg: '#ffce00', fg: '#0b0b0c' },
+      5: { bg: '#ffffff', fg: '#0b0b0c' },
     },
     shadow: 'none',
     border: 'none',
@@ -317,11 +317,11 @@ const backstube: Theme = {
   name: 'Backstube',
   tagline: 'Old print, bread and blackletter',
   stages: {
-    apprentice: { de: 'Mehl', en: 'flour' },
-    guru: { de: 'Teig', en: 'dough' },
-    master: { de: 'Gare', en: 'proofing' },
-    enlightened: { de: 'Ofen', en: 'oven' },
-    burned: { de: 'Brezel', en: 'pretzel' },
+    1: { de: 'Mehl', en: 'flour' },
+    2: { de: 'Teig', en: 'dough' },
+    3: { de: 'Gare', en: 'proofing' },
+    4: { de: 'Ofen', en: 'oven' },
+    5: { de: 'Brezel', en: 'pretzel' },
   },
   copy: { stagesTitle: 'The shelf', right: 'Gut gebacken!', wrong: 'Angebrannt!' },
   fonts: {
@@ -356,11 +356,11 @@ const backstube: Theme = {
     heroDie: '#f0a090',
     heroDas: '#a8d49a',
     stages: {
-      apprentice: { bg: '#7a6e5e', fg: '#ffffff' },
-      guru: { bg: '#9c6b2e', fg: '#ffffff' },
-      master: { bg: '#6d7a3a', fg: '#ffffff' },
-      enlightened: { bg: '#8c2b1e', fg: '#ffffff' },
-      burned: { bg: '#3a2614', fg: '#ffffff' },
+      1: { bg: '#7a6e5e', fg: '#ffffff' },
+      2: { bg: '#9c6b2e', fg: '#ffffff' },
+      3: { bg: '#6d7a3a', fg: '#ffffff' },
+      4: { bg: '#8c2b1e', fg: '#ffffff' },
+      5: { bg: '#3a2614', fg: '#ffffff' },
     },
     shadow: '4px 4px 0 #221d18',
     border: '2px solid #221d18',
@@ -390,11 +390,11 @@ const backstube: Theme = {
     heroDie: '#f0a090',
     heroDas: '#a8d49a',
     stages: {
-      apprentice: { bg: '#cfc2ab', fg: '#1a1511' },
-      guru: { bg: '#e0b47a', fg: '#1a1511' },
-      master: { bg: '#b8c78a', fg: '#1a1511' },
-      enlightened: { bg: '#e8a08f', fg: '#1a1511' },
-      burned: { bg: '#f3eadb', fg: '#1a1511' },
+      1: { bg: '#cfc2ab', fg: '#1a1511' },
+      2: { bg: '#e0b47a', fg: '#1a1511' },
+      3: { bg: '#b8c78a', fg: '#1a1511' },
+      4: { bg: '#e8a08f', fg: '#1a1511' },
+      5: { bg: '#f3eadb', fg: '#1a1511' },
     },
     shadow: '4px 4px 0 #000000',
     border: '2px solid #5a4a3a',
@@ -463,11 +463,11 @@ export function cssVariables(theme: Theme, prefersDark: boolean): Record<string,
 
 /** How long words rest at each stage group, in plain English. */
 export const STAGE_INTERVAL: Record<StageKey, string> = {
-  apprentice: '4 h – 2 days',
-  guru: '1–2 weeks',
-  master: '1 month',
-  enlightened: '4 months',
-  burned: 'learned for good',
+  1: '4 h – 2 days',
+  2: '1–2 weeks',
+  3: '1 month',
+  4: '4 months',
+  5: 'learned for good',
 };
 
 /**
@@ -478,7 +478,7 @@ export function stageLabel(theme: Theme, stage: Stage): string {
   const group = stageGroup(stage);
   if (group === 'lesson') return 'Neu';
   const name = theme.stages[group].de;
-  if (group === 'apprentice') return `${name} ${stage}`;
-  if (group === 'guru') return `${name} ${stage - 4}`;
+  if (group === 1) return `${name} ${stage}`;
+  if (group === 2) return `${name} ${stage - 4}`;
   return name;
 }

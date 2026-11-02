@@ -114,7 +114,7 @@ function ThemePicker() {
             <span className="theme-option__text">
               <span className="theme-option__name">{theme.name}</span>
               <span className="theme-option__stages" lang="de">
-                {theme.stages.apprentice.de} → {theme.stages.burned.de}
+                {theme.stages[1].de} → {theme.stages[5].de}
               </span>
               <span className="theme-option__tagline">{theme.tagline}</span>
             </span>

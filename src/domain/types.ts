@@ -24,7 +24,7 @@ export interface ContentItem {
   verbForms?: VerbForms;
   /** First entry is the primary meaning. */
   meanings: string[];
-  /** Item ids that must reach Guru before this item unlocks. */
+  /** Item ids that must reach the known stage (5) before this item unlocks. */
   prerequisites: string[];
   example: { de: string; en: string };
   mnemonic?: string;
@@ -41,7 +41,7 @@ export interface Curriculum {
   items: ContentItem[];
 }
 
-/** Stage 0 = unlocked, waiting in the lesson queue. 1–8 = in review. 9 = burned. */
+/** Stage 0 = unlocked, waiting in the lesson queue. 1–8 = in review. 9 = final (learned for good). */
 export type Stage = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 export interface ItemProgress {
@@ -49,9 +49,9 @@ export interface ItemProgress {
   stage: Stage;
   unlockedAt: number;
   startedAt?: number;
-  /** Epoch ms; null while in the lesson queue or once burned. */
+  /** Epoch ms; null while in the lesson queue or once at the final stage. */
   nextReviewAt: number | null;
-  burnedAt?: number;
+  finishedAt?: number;
   correctCount: number;
   wrongCount: number;
 }
