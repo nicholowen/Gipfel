@@ -83,16 +83,19 @@ Grammar comes in through items, phrases and stories, in this order.
 
 ## Principle 7: level size and pacing
 
-- **Levels of 25–35 items.** The WaniKani structure stays: a level unlocks when 90% of the current one reaches Guru, which takes at least about 3.5 days.
+- **Levels of 25–35 items.** The WaniKani-style structure stays: the next level unlocks when 90% of the current one reaches the known stage (stage 5), which takes at least about 3.5 days. In code the review stages are numbered 1–9 and grouped 1–5; each theme gives the groups its own names, so the curriculum never uses WaniKani's names.
 - At 20–40 minutes a day that is a sustainable pace of a level roughly every 5–8 days.
 - Each level mixes new words (mostly), phrases, and one grammar point at most.
-- Compounds unlock when their parts reach Guru, as now. Use compounds freely: they are cheap to learn once the parts are known.
+- Compounds unlock when their parts reach the known stage, as now. Use compounds freely: they are cheap to learn once the parts are known.
 - Item ids are permanent because progress is keyed on them. Never rename or reuse an id.
 - **There is no final level.** Content is added in stages (below) for as long as the learner keeps going.
 
 ## Principle 8: graded stories
 
-- **Coverage.** At least 95% of the running words in a story must be known (item at Guru or higher); aim for 98%. Everything else is glossed, tap to reveal.
+Stories live in `content/stories/`, one JSON file each, and are listed in `src/content/stories.ts`. Words are matched to items automatically; annotate only what can't be matched: `Wort{item-id}` for an ambiguous form, `Wort{?gloss}` for a word not taught yet, `Name{-}` for a name (or list names in `names`). `npm run validate-content` reports every word that doesn't resolve and each story's coverage.
+
+
+- **Coverage.** At least 95% of the running words in a story must be known (item at the known stage or higher); aim for 98%. Everything else is glossed, tap to reveal.
 - **Readiness is computed, not hand-assigned.** A story unlocks when the learner's known words cover at least 95% of it, and shows its coverage percentage.
 - **Every word is annotated** with its item id when the story is written, so coverage is exact and no language processing is needed.
 - **Mostly everyday scenes and dialogues:** meeting someone, a dinner with friends, a phone call, weekend plans, shopping, the doctor, work. They model the lines the learner will actually say.
@@ -111,7 +114,7 @@ Coverage research gives rough targets. In everyday spoken language, around 2,000
 | Stage | Roughly | What the learner can do | Content focus |
 | --- | --- | --- | --- |
 | 1. Foundations (A1) | First ~500 items | Simple exchanges, introduce yourself, follow slow simple speech | Most frequent words, function words, survival phrases, present tense |
-| **Speaking milestone** | ~400–500 items at Guru | Start simple real conversations | (see below) |
+| **Speaking milestone** | ~400–500 items known | Start simple real conversations | (see below) |
 | 2. Everyday (A2) | ~500–1,500 | Talk about your life, plans and past, handle routine situations | Perfekt, dative, everyday scenes, more phrases |
 | 3. Conversational (B1) | ~1,500–3,000 | Hold a conversation on familiar topics, follow most everyday speech with effort | Subordinate clauses, opinions, storytelling, collocations |
 | 4. Fluent everyday (B2) | ~3,000–5,000+ | Follow natural speech, talk comfortably on most topics | Less frequent words, idioms, register, longer stories |
@@ -127,7 +130,7 @@ Later stages change the balance rather than the method:
 
 ## The speaking milestone
 
-When the learner has about 400–500 items at Guru, the present tense, *du*/*Sie*, and a core set of phrases (greetings, introducing yourself, asking for repetition, likes and dislikes), the app says they are ready for simple real conversations. From then on, speaking practice is part of the daily routine, and the stories rehearse those conversations. At 20–40 minutes a day this is expected around two to three months in.
+When the learner has about 400–500 items at the known stage, the present tense, *du*/*Sie*, and a core set of phrases (greetings, introducing yourself, asking for repetition, likes and dislikes), the app says they are ready for simple real conversations. From then on, speaking practice is part of the daily routine, and the stories rehearse those conversations. At 20–40 minutes a day this is expected around two to three months in.
 
 The milestone is a checkpoint, not a finish line. Levels continue as before.
 

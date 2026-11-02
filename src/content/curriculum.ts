@@ -1,9 +1,10 @@
 import base from '../../content/curriculum.json';
 import level01 from '../../content/levels/level-01.json';
+import level02 from '../../content/levels/level-02.json';
 import type { ContentItem, Curriculum } from '../domain/types';
 
 /** Add each new level file here as it is written. */
-const levelFiles = [level01] as unknown as ContentItem[][];
+const levelFiles = [level01, level02] as unknown as ContentItem[][];
 
 export const curriculum: Curriculum = {
   contentVersion: base.contentVersion,

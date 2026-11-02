@@ -55,7 +55,7 @@ describe('itemsToUnlock', () => {
 describe('canLevelUp', () => {
   const twenty = Array.from({ length: 20 }, (_, i) => item(`w${i}`, 1, i));
 
-  it('levels up when 90% of the level is at Guru or above', () => {
+  it('levels up when 90% of the level is at the known stage or above', () => {
     const progress = byId(twenty.slice(0, 18).map((i) => at(i.id, 5)));
     expect(canLevelUp(twenty, progress, 1)).toBe(true);
   });

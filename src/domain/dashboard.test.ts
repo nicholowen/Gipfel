@@ -40,10 +40,10 @@ describe('summarise', () => {
   });
 
   it('counts stage groups', () => {
-    expect(s.groups).toEqual({ apprentice: 2, guru: 1, master: 0, enlightened: 0, burned: 1 });
+    expect(s.groups).toEqual({ 1: 2, 2: 1, 3: 0, 4: 0, 5: 1 });
   });
 
   it('reports level progress against the 90% target', () => {
-    expect(s.level).toEqual({ number: 1, total: 5, atGuru: 2, needed: 5 });
+    expect(s.level).toEqual({ number: 1, total: 5, known: 2, needed: 5 });
   });
 });

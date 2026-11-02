@@ -21,6 +21,14 @@ export function fold(input: string): string {
     .replace(/ß/g, 'ss');
 }
 
+/** Fold, then drop all punctuation (apostrophes, commas, ellipses): for whole phrases. */
+export function bare(input: string): string {
+  return fold(input)
+    .replace(/[^\p{L}\p{N} ]/gu, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export function splitArticle(input: string): { article: Article | undefined; rest: string } {
   const [first, ...others] = input.split(' ');
   if (others.length > 0 && (ARTICLES as readonly string[]).includes(first)) {

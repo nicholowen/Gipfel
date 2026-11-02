@@ -5,6 +5,8 @@ import { repo } from './data/instance';
 import { Dashboard } from './features/dashboard/Dashboard';
 import { Lessons } from './features/lessons/Lessons';
 import { Reviews } from './features/reviews/Reviews';
+import { Reader } from './features/stories/Reader';
+import { Stories } from './features/stories/Stories';
 import { ErrorBoundary, ErrorScreen, installGlobalErrorHandlers } from './ui/errors';
 import { ThemeProvider } from './ui/theme-context';
 import { applyTheme, readStoredTheme } from './ui/theme-dom';
@@ -16,6 +18,8 @@ const router = createBrowserRouter([
   { path: '/', element: <Dashboard />, errorElement: <RouteError /> },
   { path: '/lessons', element: <Lessons />, errorElement: <RouteError /> },
   { path: '/reviews', element: <Reviews />, errorElement: <RouteError /> },
+  { path: '/stories', element: <Stories />, errorElement: <RouteError /> },
+  { path: '/stories/:id', element: <Reader />, errorElement: <RouteError /> },
   { path: '*', element: <Dashboard />, errorElement: <RouteError /> },
 ]);
 

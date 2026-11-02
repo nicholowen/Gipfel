@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { curriculum } from '../content/curriculum';
+import { stories, storyTokens } from '../content/stories';
 import { summarise } from '../domain/dashboard';
+import { KNOWN_STAGE } from '../domain/scheduler';
+import { coverage, STORY_UNLOCK, type Coverage, type Story } from '../domain/stories';
 import type { Stage } from '../domain/types';
 import { lessonQueue } from '../domain/unlock';
 import { GipfelDb } from './db';
@@ -19,6 +22,7 @@ export const repo: typeof rawRepo = {
   init: (now) => retry(() => rawRepo.init(now)),
   finishLessons: (ids, now) => retry(() => rawRepo.finishLessons(ids, now)),
   recordReviews: (items, now) => retry(() => rawRepo.recordReviews(items, now)),
+  markStoryRead: (id) => retry(() => rawRepo.markStoryRead(id)),
   getSettings: () => retry(() => rawRepo.getSettings()),
   saveSettings: (s) => retry(() => rawRepo.saveSettings(s)),
 };
@@ -74,4 +78,32 @@ export function useSettings(): Settings {
 
 export function useSynonyms(itemId: string | undefined): string[] {
   return useLiveQuery(async () => (itemId ? (await db.overrides.get(itemId))?.synonyms ?? [] : []), [itemId], []);
+}
+
+export interface StoryStatus {
+  story: Story;
+  coverage: Coverage;
+  /** The learner knows enough of the words (see STORY_UNLOCK). */
+  ready: boolean;
+  read: boolean;
+}
+
+/** Every story with how much of it the learner can read right now. */
+export function useStories(): StoryStatus[] | undefined {
+  return useLiveQuery(async () => {
+    const [rows, read] = await Promise.all([db.progress.toArray(), repo.getMeta<string[]>('storiesRead', [])]);
+    const known = new Set(rows.filter((r) => r.stage >= KNOWN_STAGE).map((r) => r.itemId));
+    return stories.map((story) => {
+      const c = coverage(storyTokens.get(story.id)!, (id) => known.has(id));
+      return { story, coverage: c, ready: c.ratio >= STORY_UNLOCK, read: read.includes(story.id) };
+    });
+  }, []);
+}
+
+/** Item ids at the known stage or above, for marking words in the reader. */
+export function useKnownItems(): Set<string> | undefined {
+  return useLiveQuery(async () => {
+    const rows = await db.progress.where('stage').aboveOrEqual(KNOWN_STAGE).toArray();
+    return new Set(rows.map((r) => r.itemId));
+  }, []);
 }

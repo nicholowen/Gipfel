@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { GURU, nextReviewAt, nextStage, stageGroup } from './scheduler';
+import { KNOWN_STAGE, nextReviewAt, nextStage, stageGroup } from './scheduler';
 import type { Stage } from './types';
 
 describe('nextStage', () => {
@@ -22,7 +22,7 @@ describe('nextStage', () => {
     expect(nextStage(from, true)).toBe(to);
   });
 
-  it('never goes above burned', () => {
+  it('never goes above the final stage', () => {
     expect(nextStage(9, false)).toBe(9);
   });
 });
@@ -43,7 +43,7 @@ describe('nextReviewAt', () => {
     expect(new Date(nextReviewAt(stage, now)!).toISOString()).toBe(expected);
   });
 
-  it('never schedules a burned item', () => {
+  it('never schedules an item at the final stage', () => {
     expect(nextReviewAt(9, now)).toBeNull();
   });
 
@@ -56,17 +56,17 @@ describe('stageGroup', () => {
   it('names each stage', () => {
     expect([0, 1, 4, 5, 6, 7, 8, 9].map((s) => stageGroup(s as Stage))).toEqual([
       'lesson',
-      'apprentice',
-      'apprentice',
-      'guru',
-      'guru',
-      'master',
-      'enlightened',
-      'burned',
+      1,
+      1,
+      2,
+      2,
+      3,
+      4,
+      5,
     ]);
   });
 
-  it('treats stage 5 as Guru', () => {
-    expect(GURU).toBe(5);
+  it('treats stage 5 as the known stage', () => {
+    expect(KNOWN_STAGE).toBe(5);
   });
 });

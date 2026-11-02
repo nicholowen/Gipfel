@@ -1,4 +1,4 @@
-import { BURNED, nextReviewAt, nextStage } from '../domain/scheduler';
+import { FINAL_STAGE, nextReviewAt, nextStage } from '../domain/scheduler';
 import type { CompletedItem } from '../domain/review-session';
 import type { Curriculum, ItemProgress } from '../domain/types';
 import { canLevelUp, itemsToUnlock } from '../domain/unlock';
@@ -88,7 +88,7 @@ export function makeRepo(db: GipfelDb, curriculum: Curriculum) {
       });
     },
 
-    /** Lessons passed: items enter Apprentice 1. */
+    /** Lessons passed: items enter stage 1. */
     async finishLessons(itemIds: string[], now: number): Promise<void> {
       await db.transaction('rw', tables(), async () => {
         for (const itemId of itemIds) {
@@ -104,13 +104,13 @@ export function makeRepo(db: GipfelDb, curriculum: Curriculum) {
         const levelBefore = await getMeta('currentLevel', 1);
         for (const result of items) {
           const p = await db.progress.get(result.itemId);
-          if (!p || p.stage === 0 || p.stage === BURNED) continue;
+          if (!p || p.stage === 0 || p.stage === FINAL_STAGE) continue;
           const to = nextStage(p.stage, result.wasWrong);
           await db.progress.put({
             ...p,
             stage: to,
             nextReviewAt: nextReviewAt(to, now),
-            burnedAt: to === BURNED ? now : p.burnedAt,
+            finishedAt: to === FINAL_STAGE ? now : p.finishedAt,
             correctCount: p.correctCount + (result.wasWrong ? 0 : 1),
             wrongCount: p.wrongCount + (result.wasWrong ? 1 : 0),
           });
@@ -126,6 +126,14 @@ export function makeRepo(db: GipfelDb, curriculum: Curriculum) {
         await syncUnlocks(now);
         if (items.length > 0) await recordActivity(now);
         return { levelBefore, levelAfter: await getMeta('currentLevel', 1) };
+      });
+    },
+
+    /** Remember that a story has been opened, so the home screen can stop calling it new. */
+    async markStoryRead(storyId: string): Promise<void> {
+      await db.transaction('rw', [db.meta], async () => {
+        const read = await getMeta<string[]>('storiesRead', []);
+        if (!read.includes(storyId)) await setMeta('storiesRead', [...read, storyId]);
       });
     },
 

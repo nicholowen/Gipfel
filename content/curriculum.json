@@ -1,6 +1,7 @@
 {
-  "contentVersion": 1,
+  "contentVersion": 2,
   "levels": [
-    { "number": 1, "title": "First words" }
+    { "number": 1, "title": "First words" },
+    { "number": 2, "title": "Hallo!" }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "id": "s-hallo-ben",
+  "title": "Hallo, Ben!",
+  "titleEn": "Hi, Ben!",
+  "level": 2,
+  "kind": "dialogue",
+  "names": ["Anna", "Ben", "Berlin"],
+  "lines": [
+    { "speaker": "Anna", "de": "Hallo! Ich heiße Anna. Und du?", "en": "Hi! My name is Anna. And you?" },
+    { "speaker": "Ben", "de": "Hallo, Anna! Ich heiße Ben.", "en": "Hi, Anna! My name is Ben." },
+    { "speaker": "Anna", "de": "Wie geht’s?", "en": "How are you?" },
+    { "speaker": "Ben", "de": "Mir geht’s gut, danke. Und du?", "en": "I'm fine, thanks. And you?" },
+    { "speaker": "Anna", "de": "Auch gut. Wohnst du hier?", "en": "Good too. Do you live here?" },
+    { "speaker": "Ben", "de": "Nein, ich wohne nicht hier. Ich komme aus Berlin.", "en": "No, I don't live here. I'm from Berlin." },
+    { "speaker": "Anna", "de": "Berlin! Berlin ist sehr groß.", "en": "Berlin! Berlin is very big." },
+    { "speaker": "Ben", "de": "Ja. Aber die Stadt hier ist auch gut.", "en": "Yes. But the town here is good too." },
+    { "speaker": "Anna", "de": "Ich mache jetzt Kaffee. Kaffee?", "en": "I'm making coffee now. Coffee?" },
+    { "speaker": "Ben", "de": "Ja, bitte! Danke, Anna.", "en": "Yes, please! Thanks, Anna." },
+    { "speaker": "Anna", "de": "Bitte!", "en": "You're welcome!" }
+  ]
+}

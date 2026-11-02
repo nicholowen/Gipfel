@@ -54,14 +54,14 @@ describe('repo', () => {
     ]);
   });
 
-  it('moves finished lessons to Apprentice 1, due 4 hours later', async () => {
+  it('moves finished lessons to stage 1, due 4 hours later', async () => {
     await repo.finishLessons(['n-a'], t0);
     const p = await db.progress.get('n-a');
     expect(p?.stage).toBe(1);
     expect(p?.nextReviewAt).toBe(t0 + 4 * HOUR);
   });
 
-  it('records reviews, logs them, and unlocks a compound when its parts reach Guru', async () => {
+  it('records reviews, logs them, and unlocks a compound when its parts reach the known stage (5)', async () => {
     await repo.finishLessons(['n-a', 'n-b'], t0);
     for (let i = 0; i < 4; i++) await repo.recordReviews([pass('n-a'), pass('n-b')], t0 + i);
     expect(await stageOf('n-a')).toBe(5);
@@ -76,7 +76,7 @@ describe('repo', () => {
     expect(await stageOf('n-a')).toBe(1);
   });
 
-  it('levels up once 90% of the level is at Guru and unlocks the next level', async () => {
+  it('levels up once 90% of the level is at the known stage and unlocks the next level', async () => {
     await repo.finishLessons(['n-a', 'n-b'], t0);
     for (let i = 0; i < 4; i++) await repo.recordReviews([pass('n-a'), pass('n-b')], t0);
     await repo.finishLessons(['n-ab'], t0);
