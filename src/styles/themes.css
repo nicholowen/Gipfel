@@ -92,6 +92,16 @@
   min-height: 96px;
 }
 
+/* Sized to fit an S21 (360 × ~780 standalone) without scrolling: a tighter hero and route. */
+.dash--alpen .alpen-hero {
+  gap: 16px;
+  padding-bottom: 18px;
+}
+
+.dash--alpen .stage-row {
+  padding: 6px 0;
+}
+
 .dash--alpen .action--lessons:not(.is-empty) {
   background: var(--surface);
   color: var(--ink);
