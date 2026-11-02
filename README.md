@@ -16,7 +16,7 @@ npm run build          # typecheck + production build into dist/
 
 | Folder | What lives there |
 | --- | --- |
-| `content/` | Curriculum JSON: `curriculum.json` (levels) and one file per level in `levels/` |
+| `content/` | Curriculum JSON: `curriculum.json` (levels) and one file per level in `levels/`. `CURRICULUM.md` is the guideline every new level and story follows |
 | `src/domain/` | Pure logic, no React or Dexie: scheduler, answer checker, unlocking, review session, dashboard summary |
 | `src/content/` | Loads and validates the curriculum |
 | `src/data/` | Dexie database and the transactions that change progress |
