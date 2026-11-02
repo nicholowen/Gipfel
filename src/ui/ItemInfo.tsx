@@ -1,7 +1,16 @@
 import type { ContentItem } from '../domain/types';
 import { canSpeak, speak, spokenForm } from './speech';
 
-const KIND_LABEL = { noun: 'Noun', verb: 'Verb', adjective: 'Adjective', other: 'Word' } as const;
+const KIND_LABEL = { noun: 'Noun', verb: 'Verb', adjective: 'Adjective', other: 'Word', phrase: 'Phrase' } as const;
+
+const PERSONS = [
+  ['ich', 'ich'],
+  ['du', 'du'],
+  ['er', 'er / sie / es'],
+  ['wir', 'wir'],
+  ['ihr', 'ihr'],
+  ['sie', 'sie / Sie'],
+] as const;
 
 export function GermanWord({ item, size = 'md' }: { item: ContentItem; size?: 'md' | 'xl' }) {
   return (
@@ -48,11 +57,28 @@ export function ItemInfo({ item, showWord = true }: { item: ContentItem; showWor
             <dd>{item.plural ? `die ${item.plural}` : 'no plural'}</dd>
           </div>
         )}
+        {item.alternatives && item.alternatives.length > 0 && (
+          <div>
+            <dt>Also</dt>
+            <dd lang="de">{item.alternatives.join(' · ')}</dd>
+          </div>
+        )}
         {item.verbForms && (
           <>
-            <div>
-              <dt>er / sie / es</dt>
-              <dd>{item.verbForms.present3sg}</dd>
+            <div className="info__conjugation">
+              <dt>Present</dt>
+              <dd>
+                <table className="conjugation" lang="de">
+                  <tbody>
+                    {PERSONS.map(([key, label]) => (
+                      <tr key={key}>
+                        <th scope="row">{label}</th>
+                        <td>{item.verbForms!.present[key]}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </dd>
             </div>
             <div>
               <dt>Perfect</dt>

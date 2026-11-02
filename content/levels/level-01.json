@@ -79,7 +79,7 @@
   {
     "id": "v-sein", "level": 1, "order": 12, "kind": "verb",
     "german": "sein",
-    "verbForms": { "present3sg": "ist", "pastParticiple": "gewesen", "auxiliary": "sein" },
+    "verbForms": { "present": { "ich": "bin", "du": "bist", "er": "ist", "wir": "sind", "ihr": "seid", "sie": "sind" }, "pastParticiple": "gewesen", "auxiliary": "sein" },
     "meanings": ["to be"], "prerequisites": [],
     "example": { "de": "Ich bin müde.", "en": "I am tired." },
     "mnemonic": "To sein or not to sein: that is the question."
@@ -87,7 +87,7 @@
   {
     "id": "v-haben", "level": 1, "order": 13, "kind": "verb",
     "german": "haben",
-    "verbForms": { "present3sg": "hat", "pastParticiple": "gehabt", "auxiliary": "haben" },
+    "verbForms": { "present": { "ich": "habe", "du": "hast", "er": "hat", "wir": "haben", "ihr": "habt", "sie": "haben" }, "pastParticiple": "gehabt", "auxiliary": "haben" },
     "meanings": ["to have"], "prerequisites": [],
     "example": { "de": "Wir haben einen Hund.", "en": "We have a dog." },
     "mnemonic": "Haben sounds like \"have 'em\": whatever you want, I have 'em."
@@ -95,7 +95,7 @@
   {
     "id": "v-gehen", "level": 1, "order": 14, "kind": "verb",
     "german": "gehen",
-    "verbForms": { "present3sg": "geht", "pastParticiple": "gegangen", "auxiliary": "sein" },
+    "verbForms": { "present": { "ich": "gehe", "du": "gehst", "er": "geht", "wir": "gehen", "ihr": "geht", "sie": "gehen" }, "pastParticiple": "gegangen", "auxiliary": "sein" },
     "meanings": ["to go", "to walk"], "prerequisites": [],
     "example": { "de": "Ich gehe nach Hause.", "en": "I'm going home." },
     "mnemonic": "Gehen sounds like \"gay hen\": a cheerful hen going for a walk."
@@ -103,7 +103,7 @@
   {
     "id": "v-machen", "level": 1, "order": 15, "kind": "verb",
     "german": "machen",
-    "verbForms": { "present3sg": "macht", "pastParticiple": "gemacht", "auxiliary": "haben" },
+    "verbForms": { "present": { "ich": "mache", "du": "machst", "er": "macht", "wir": "machen", "ihr": "macht", "sie": "machen" }, "pastParticiple": "gemacht", "auxiliary": "haben" },
     "meanings": ["to do", "to make"], "prerequisites": [],
     "example": { "de": "Was machst du heute?", "en": "What are you doing today?" },
     "mnemonic": "Machen sounds like machine. Machines make things and do things."
@@ -111,7 +111,7 @@
   {
     "id": "v-sehen", "level": 1, "order": 16, "kind": "verb",
     "german": "sehen",
-    "verbForms": { "present3sg": "sieht", "pastParticiple": "gesehen", "auxiliary": "haben" },
+    "verbForms": { "present": { "ich": "sehe", "du": "siehst", "er": "sieht", "wir": "sehen", "ihr": "seht", "sie": "sehen" }, "pastParticiple": "gesehen", "auxiliary": "haben" },
     "meanings": ["to see"], "prerequisites": [],
     "example": { "de": "Ich sehe das Meer.", "en": "I can see the sea." },
     "mnemonic": "Sehen sounds like \"say hen\": you see a hen, so you say hen."

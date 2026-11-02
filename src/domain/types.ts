@@ -1,9 +1,19 @@
-export type ItemKind = 'noun' | 'verb' | 'adjective' | 'other';
+export type ItemKind = 'noun' | 'verb' | 'adjective' | 'other' | 'phrase';
 export type Article = 'der' | 'die' | 'das';
 export type QuestionType = 'meaning' | 'german';
 
+/** Present tense, by person. `er` covers er/sie/es; `sie` covers sie (they) and Sie. */
+export interface PresentForms {
+  ich: string;
+  du: string;
+  er: string;
+  wir: string;
+  ihr: string;
+  sie: string;
+}
+
 export interface VerbForms {
-  present3sg: string;
+  present: PresentForms;
   pastParticiple: string;
   auxiliary: 'haben' | 'sein';
 }
@@ -15,8 +25,12 @@ export interface ContentItem {
   /** Position within the level. */
   order: number;
   kind: ItemKind;
-  /** Lemma without article, e.g. 'Handschuh'. */
+  /** Lemma without article, e.g. 'Handschuh'. For phrases, the whole phrase: 'Wie geht's?'. */
   german: string;
+  /** Other German answers accepted in reviews, e.g. 'Wie geht es dir?' for 'Wie geht's?'. */
+  alternatives?: string[];
+  /** Extra word forms that count as this item when reading stories, e.g. 'eine', 'einen' for 'ein'. */
+  forms?: string[];
   /** Required for nouns. */
   article?: Article;
   /** null = the noun has no plural. */

@@ -1,4 +1,4 @@
-import { fold, levenshtein, normalise, splitArticle } from './german';
+import { bare, fold, levenshtein, normalise, splitArticle } from './german';
 import type { ContentItem, QuestionType } from './types';
 
 /**
@@ -27,7 +27,12 @@ export function check(item: ContentItem, question: QuestionType, input: string, 
 
 /** Strip the bits of an English answer that don't change its meaning. */
 function englishCore(text: string): string {
-  return normalise(text).replace(/^(to|the|a|an) /, '');
+  return normalise(text)
+    .replace(/['’]/g, '')
+    .replace(/[^\p{L}\p{N} ]/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/^(to|the|a|an) /, '');
 }
 
 function meaningTolerance(target: string): number {
@@ -44,9 +49,16 @@ function matchesMeaning(item: ContentItem, input: string, ctx: CheckContext): 'e
   return close ? 'close' : 'none';
 }
 
+/** Every accepted German answer, in the form answers are compared in. */
+function germanTargets(item: ContentItem): string[] {
+  const all = [item.german, ...(item.alternatives ?? [])];
+  return item.kind === 'phrase' ? all.map(bare) : all.map(fold);
+}
+
 function isTheGerman(item: ContentItem, input: string): boolean {
+  if (item.kind === 'phrase') return germanTargets(item).includes(bare(input));
   const { rest } = splitArticle(fold(input));
-  return rest === fold(item.german);
+  return germanTargets(item).includes(rest);
 }
 
 /** True when the word after the article starts with a capital letter (the article itself may be any case). */
@@ -65,12 +77,14 @@ function checkMeaning(item: ContentItem, input: string, ctx: CheckContext): Chec
 }
 
 function checkGerman(item: ContentItem, input: string, ctx: CheckContext): CheckResult {
-  const { article, rest } = splitArticle(fold(input));
-  const target = fold(item.german);
-
   if (matchesMeaning(item, input, ctx) === 'exact') {
     return { outcome: 'shake', message: 'That’s the English. Type it in German.' };
   }
+  if (item.kind === 'phrase') return checkPhrase(item, input, ctx);
+
+  const { article, rest } = splitArticle(fold(input));
+  const target = fold(item.german);
+  const targets = germanTargets(item);
 
   if (item.kind === 'noun' && item.article) {
     if (!article) {
@@ -85,7 +99,7 @@ function checkGerman(item: ContentItem, input: string, ctx: CheckContext): Check
   }
 
   const answer = item.kind === 'noun' ? rest : fold(input);
-  if (answer === target) {
+  if (targets.includes(answer)) {
     if (item.kind === 'noun' && article !== item.article) {
       return { outcome: 'wrong', message: `It’s ${item.article}, not ${article}.` };
     }
@@ -95,7 +109,18 @@ function checkGerman(item: ContentItem, input: string, ctx: CheckContext): Check
     return { outcome: 'correct' };
   }
 
-  if (levenshtein(answer, target) === 1 && !ctx.shookAlready) {
+  if (targets.some((t) => levenshtein(answer, t) === 1) && !ctx.shookAlready) {
+    return { outcome: 'shake', message: 'Almost. Check the spelling.' };
+  }
+  return { outcome: 'wrong' };
+}
+
+/** Phrases are compared whole, ignoring case and punctuation (geht's = gehts). */
+function checkPhrase(item: ContentItem, input: string, ctx: CheckContext): CheckResult {
+  const answer = bare(input);
+  const targets = germanTargets(item);
+  if (targets.includes(answer)) return { outcome: 'correct' };
+  if (targets.some((t) => levenshtein(answer, t) <= 2) && !ctx.shookAlready) {
     return { outcome: 'shake', message: 'Almost. Check the spelling.' };
   }
   return { outcome: 'wrong' };

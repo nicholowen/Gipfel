@@ -9,12 +9,37 @@ const handschuh: ContentItem = { ...base, id: 'n-handschuh', kind: 'noun', germa
 const krankenhaus: ContentItem = { ...base, id: 'n-krankenhaus', kind: 'noun', german: 'Krankenhaus', article: 'das', plural: 'Krankenhäuser', meanings: ['hospital'] };
 const maedchen: ContentItem = { ...base, id: 'n-maedchen', kind: 'noun', german: 'Mädchen', article: 'das', plural: 'Mädchen', meanings: ['girl'] };
 const strasse: ContentItem = { ...base, id: 'n-strasse', kind: 'noun', german: 'Straße', article: 'die', plural: 'Straßen', meanings: ['street', 'road'] };
-const gehen: ContentItem = { ...base, id: 'v-gehen', kind: 'verb', german: 'gehen', meanings: ['to go', 'to walk'], verbForms: { present3sg: 'geht', pastParticiple: 'gegangen', auxiliary: 'sein' } };
+const gehen: ContentItem = { ...base, id: 'v-gehen', kind: 'verb', german: 'gehen', meanings: ['to go', 'to walk'], verbForms: { present: { ich: 'gehe', du: 'gehst', er: 'geht', wir: 'gehen', ihr: 'geht', sie: 'gehen' }, pastParticiple: 'gegangen', auxiliary: 'sein' } };
+const wieGehts: ContentItem = { ...base, id: 'p-wie-gehts', kind: 'phrase', german: 'Wie geht’s?', alternatives: ['Wie geht es dir?', 'Wie geht es?'], meanings: ['How are you?', 'How’s it going?'] };
+const weissNicht: ContentItem = { ...base, id: 'p-ich-weiss-nicht', kind: 'phrase', german: 'Ich weiß nicht.', meanings: ['I don’t know'] };
+const heisse: ContentItem = { ...base, id: 'p-ich-heisse', kind: 'phrase', german: 'Ich heiße …', meanings: ['My name is …', 'I am called …'] };
+const ein: ContentItem = { ...base, id: 'o-ein', kind: 'other', german: 'ein', alternatives: ['eine'], forms: ['eine', 'einen'], meanings: ['a', 'an'] };
 const schnell: ContentItem = { ...base, id: 'a-schnell', kind: 'adjective', german: 'schnell', meanings: ['fast', 'quick'] };
 
 type Row = [ContentItem, QuestionType, string, Outcome, { synonyms?: string[]; shookAlready?: boolean }?];
 
 const rows: Row[] = [
+  // Phrases: whole-phrase answers, punctuation and apostrophes ignored, variants accepted
+  [wieGehts, 'german', 'Wie geht’s?', 'correct'],
+  [wieGehts, 'german', "wie gehts", 'correct'],
+  [wieGehts, 'german', "Wie geht's", 'correct'],
+  [wieGehts, 'german', 'wie geht es dir', 'correct'],
+  [wieGehts, 'german', 'wie geht dir', 'wrong'],
+  [wieGehts, 'german', 'wie gest es dir', 'shake'],
+  [wieGehts, 'german', 'wie gest es dir', 'wrong', { shookAlready: true }],
+  [wieGehts, 'german', 'was ist das', 'wrong'],
+  [wieGehts, 'german', 'how are you', 'shake'],
+  [wieGehts, 'meaning', 'how are you', 'correct'],
+  [wieGehts, 'meaning', 'hows it going', 'correct'],
+  [wieGehts, 'meaning', 'wie gehts', 'shake'],
+  [weissNicht, 'german', 'ich weiss nicht', 'correct'],
+  [weissNicht, 'meaning', 'i dont know', 'correct'],
+  [weissNicht, 'meaning', 'I don’t know.', 'correct'],
+  [heisse, 'german', 'ich heiße', 'correct'],
+  [heisse, 'meaning', 'my name is', 'correct'],
+  // Accepted alternatives for single words
+  [ein, 'german', 'ein', 'correct'],
+  [ein, 'german', 'eine', 'correct'],
   // Meaning questions
   [hund, 'meaning', 'dog', 'correct'],
   [hund, 'meaning', '  Dog ', 'correct'],

@@ -3,16 +3,27 @@ import type { Curriculum } from '../domain/types';
 
 const itemSchema = z
   .object({
-    id: z.string().regex(/^[noav]-[a-z0-9-]+$/, 'ids look like n-hund, v-gehen, a-gut, o-ja'),
+    id: z.string().regex(/^[noavp]-[a-z0-9-]+$/, 'ids look like n-hund, v-gehen, a-gut, o-ja, p-wie-gehts'),
     level: z.number().int().positive(),
     order: z.number().int().positive(),
-    kind: z.enum(['noun', 'verb', 'adjective', 'other']),
+    kind: z.enum(['noun', 'verb', 'adjective', 'other', 'phrase']),
     german: z.string().min(1),
+    alternatives: z.array(z.string().min(1)).optional(),
+    forms: z.array(z.string().min(1)).optional(),
     article: z.enum(['der', 'die', 'das']).optional(),
     plural: z.string().min(1).nullable().optional(),
     verbForms: z
       .object({
-        present3sg: z.string().min(1),
+        present: z
+          .object({
+            ich: z.string().min(1),
+            du: z.string().min(1),
+            er: z.string().min(1),
+            wir: z.string().min(1),
+            ihr: z.string().min(1),
+            sie: z.string().min(1),
+          })
+          .strict(),
         pastParticiple: z.string().min(1),
         auxiliary: z.enum(['haben', 'sein']),
       })
@@ -29,7 +40,7 @@ const itemSchema = z
     if (item.kind === 'noun' && item.plural === undefined) issue('nouns need a plural (or null)');
     if (item.kind !== 'noun' && item.article) issue('only nouns take an article');
     if (item.kind === 'verb' && !item.verbForms) issue('verbs need verbForms');
-    const prefix = { noun: 'n-', verb: 'v-', adjective: 'a-', other: 'o-' }[item.kind];
+    const prefix = { noun: 'n-', verb: 'v-', adjective: 'a-', other: 'o-', phrase: 'p-' }[item.kind];
     if (!item.id.startsWith(prefix)) issue(`id should start with ${prefix}`);
   });
 

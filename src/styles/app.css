@@ -604,6 +604,27 @@ a {
   margin: 2px 0 0;
 }
 
+.info__conjugation {
+  grid-column: 1 / -1;
+}
+
+.conjugation {
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.conjugation th {
+  padding: 2px 16px 2px 0;
+  font-weight: 400;
+  text-align: left;
+  color: var(--ink-soft);
+}
+
+.conjugation td {
+  padding: 2px 0;
+  font-weight: 600;
+}
+
 .info__example {
   margin: 0;
   padding-left: 12px;
