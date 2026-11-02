@@ -1,0 +1,20 @@
+{
+  "id": "s-der-handschuh",
+  "title": "Der Handschuh",
+  "titleEn": "The glove",
+  "level": 2,
+  "kind": "story",
+  "lines": [
+    { "de": "Das Kind hat Zeit.", "en": "The child has time." },
+    { "de": "Das Kind macht Schuhe.", "en": "The child makes shoes." },
+    { "de": "Der Mann sieht die Schuhe.", "en": "The man sees the shoes." },
+    { "de": "„Gut! Groß und gut!“, sagt der Mann.", "en": "\"Good! Big and good!\" says the man." },
+    { "de": "Die Frau sieht die Schuhe.", "en": "The woman sees the shoes." },
+    { "de": "„Ja, sehr gut!“, sagt die Frau.", "en": "\"Yes, very good!\" says the woman." },
+    { "de": "Aber ein Schuh ist klein. Sehr klein.", "en": "But one shoe is small. Very small." },
+    { "de": "„Ist das ein Schuh?“, sagt der Mann.", "en": "\"Is that a shoe?\" says the man." },
+    { "de": "„Nein“, sagt das Kind.", "en": "\"No,\" says the child." },
+    { "de": "„Das ist kein Schuh. Das ist ein Handschuh!“", "en": "\"That's not a shoe. That's a glove!\"" },
+    { "de": "Hand und Schuh: ein Handschuh!", "en": "Hand and shoe: a glove (in German, a hand-shoe)!" }
+  ]
+}

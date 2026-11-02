@@ -128,10 +128,10 @@ export function Lessons() {
   );
 }
 
-export function PageBar({ title }: { title: string }) {
+export function PageBar({ title, back = '/', backLabel = 'Home' }: { title: string; back?: string; backLabel?: string }) {
   return (
     <header className="pagebar">
-      <Link to="/" className="icon-button" aria-label="Home">
+      <Link to={back} className="icon-button" aria-label={backLabel}>
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
           <path d="M15 5l-7 7 7 7" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
         </svg>

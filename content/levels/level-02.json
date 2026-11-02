@@ -1,0 +1,243 @@
+[
+  {
+    "id": "o-der", "level": 2, "order": 1, "kind": "other",
+    "german": "der", "alternatives": ["die", "das"],
+    "meanings": ["the"], "prerequisites": [],
+    "example": { "de": "Der Mann, die Frau und das Kind.", "en": "The man, the woman and the child." },
+    "mnemonic": "German has three words for \"the\": der for the Bear, die for the Diva, das for the Box. You already know them from your nouns; any of the three is accepted here."
+  },
+  {
+    "id": "o-und", "level": 2, "order": 2, "kind": "other",
+    "german": "und",
+    "meanings": ["and"], "prerequisites": [],
+    "example": { "de": "Der Mann und die Frau.", "en": "The man and the woman." },
+    "mnemonic": "Und is \"and\" said with a German accent."
+  },
+  {
+    "id": "o-ich", "level": 2, "order": 3, "kind": "other",
+    "german": "ich",
+    "meanings": ["I"], "prerequisites": [],
+    "example": { "de": "Ich bin klein.", "en": "I am small." },
+    "mnemonic": "Ich is the start of \"itch\": I itch."
+  },
+  {
+    "id": "o-hallo", "level": 2, "order": 4, "kind": "other",
+    "german": "hallo",
+    "meanings": ["hello", "hi"], "prerequisites": [],
+    "example": { "de": "Hallo, Anna!", "en": "Hi, Anna!" },
+    "mnemonic": "Hallo is hello."
+  },
+  {
+    "id": "p-ich-heisse", "level": 2, "order": 5, "kind": "phrase",
+    "german": "Ich heiße …",
+    "meanings": ["My name is …", "I'm called …"], "prerequisites": [],
+    "example": { "de": "Hallo! Ich heiße Ben.", "en": "Hi! My name is Ben." },
+    "mnemonic": "Literally \"I am called …\". The everyday way to give your name."
+  },
+  {
+    "id": "n-kaffee", "level": 2, "order": 6, "kind": "noun",
+    "german": "Kaffee", "article": "der", "plural": "Kaffees",
+    "meanings": ["coffee"], "prerequisites": [],
+    "example": { "de": "Der Kaffee ist sehr gut.", "en": "The coffee is very good." },
+    "mnemonic": "The Bear needs his coffee before he hibernates. Der Kaffee."
+  },
+  {
+    "id": "o-nicht", "level": 2, "order": 7, "kind": "other",
+    "german": "nicht",
+    "meanings": ["not"], "prerequisites": [],
+    "example": { "de": "Das Haus ist nicht groß.", "en": "The house is not big." },
+    "mnemonic": "Nicht sounds like \"nix it\": not."
+  },
+  {
+    "id": "v-wohnen", "level": 2, "order": 8, "kind": "verb",
+    "german": "wohnen",
+    "verbForms": { "present": { "ich": "wohne", "du": "wohnst", "er": "wohnt", "wir": "wohnen", "ihr": "wohnt", "sie": "wohnen" }, "pastParticiple": "gewohnt", "auxiliary": "haben" },
+    "meanings": ["to live", "to reside"], "prerequisites": [],
+    "example": { "de": "Ich wohne hier.", "en": "I live here." },
+    "mnemonic": "Wohnen is where you've won a home: where you live. (Die Wohnung is a flat.)"
+  },
+  {
+    "id": "o-hier", "level": 2, "order": 9, "kind": "other",
+    "german": "hier",
+    "meanings": ["here"], "prerequisites": [],
+    "example": { "de": "Das Buch ist hier.", "en": "The book is here." },
+    "mnemonic": "Hier sounds like \"here\"."
+  },
+  {
+    "id": "o-du", "level": 2, "order": 10, "kind": "other",
+    "german": "du",
+    "meanings": ["you"], "prerequisites": [],
+    "example": { "de": "Du bist groß!", "en": "You're tall!" },
+    "mnemonic": "Du is the friendly \"you\": for friends, family and children. Strangers get Sie."
+  },
+  {
+    "id": "p-wie-gehts", "level": 2, "order": 11, "kind": "phrase",
+    "german": "Wie geht’s?", "alternatives": ["Wie geht es dir?", "Wie geht es?"],
+    "meanings": ["How are you?", "How's it going?"], "prerequisites": [],
+    "example": { "de": "Hallo, Anna! Wie geht’s?", "en": "Hi, Anna! How are you?" },
+    "mnemonic": "Literally \"How goes it?\" Use it with people you call du."
+  },
+  {
+    "id": "a-neu", "level": 2, "order": 12, "kind": "adjective",
+    "german": "neu",
+    "meanings": ["new"], "prerequisites": [],
+    "example": { "de": "Das Buch ist neu.", "en": "The book is new." },
+    "mnemonic": "Neu sounds like new."
+  },
+  {
+    "id": "o-ein", "level": 2, "order": 13, "kind": "other",
+    "german": "ein", "alternatives": ["eine"], "forms": ["einen"],
+    "meanings": ["a", "an"], "prerequisites": [],
+    "example": { "de": "Das ist ein Buch.", "en": "That's a book." },
+    "mnemonic": "Ein looks like \"one\", and that's what \"a\" is: ein Mann, eine Frau, ein Kind. The Diva gets the extra e."
+  },
+  {
+    "id": "p-mir-gehts-gut", "level": 2, "order": 14, "kind": "phrase",
+    "german": "Mir geht’s gut.", "alternatives": ["Mir geht es gut."],
+    "meanings": ["I'm fine", "I'm good", "I'm doing well"], "prerequisites": [],
+    "example": { "de": "Mir geht’s gut, danke!", "en": "I'm fine, thanks!" },
+    "mnemonic": "Literally \"to me it goes well\". The answer to Wie geht's?"
+  },
+  {
+    "id": "o-danke", "level": 2, "order": 15, "kind": "other",
+    "german": "danke",
+    "meanings": ["thank you", "thanks"], "prerequisites": [],
+    "example": { "de": "Ja, danke!", "en": "Yes, thanks!" },
+    "mnemonic": "Danke sounds like \"thank\" (and \"donkey\": thank the donkey)."
+  },
+  {
+    "id": "n-mutter", "level": 2, "order": 16, "kind": "noun",
+    "german": "Mutter", "article": "die", "plural": "Mütter",
+    "meanings": ["mother"], "prerequisites": [],
+    "example": { "de": "Die Mutter ist heute hier.", "en": "The mother is here today." },
+    "mnemonic": "Mutter sounds like mother. The Diva is everyone's mother, darling. Die Mutter."
+  },
+  {
+    "id": "v-sagen", "level": 2, "order": 17, "kind": "verb",
+    "german": "sagen",
+    "verbForms": { "present": { "ich": "sage", "du": "sagst", "er": "sagt", "wir": "sagen", "ihr": "sagt", "sie": "sagen" }, "pastParticiple": "gesagt", "auxiliary": "haben" },
+    "meanings": ["to say", "to tell"], "prerequisites": [],
+    "example": { "de": "Das Kind sagt: „Nein!“", "en": "The child says: \"No!\"" },
+    "mnemonic": "A saga is something people say, and say, and say."
+  },
+  {
+    "id": "o-aber", "level": 2, "order": 18, "kind": "other",
+    "german": "aber",
+    "meanings": ["but"], "prerequisites": [],
+    "example": { "de": "Das Haus ist klein, aber gut.", "en": "The house is small but good." },
+    "mnemonic": "Aber sounds like \"a bear\": a nice picnic, but… a bear!"
+  },
+  {
+    "id": "n-name", "level": 2, "order": 19, "kind": "noun",
+    "german": "Name", "article": "der", "plural": "Namen",
+    "meanings": ["name"], "prerequisites": [],
+    "example": { "de": "Das ist ein guter Name.", "en": "That's a good name." },
+    "mnemonic": "The Bear writes his name in huge letters on every tree. Der Name."
+  },
+  {
+    "id": "o-sehr", "level": 2, "order": 20, "kind": "other",
+    "german": "sehr",
+    "meanings": ["very"], "prerequisites": [],
+    "example": { "de": "Das Buch ist sehr gut.", "en": "The book is very good." },
+    "mnemonic": "Sehr sounds like \"sure\": sure good means very good."
+  },
+  {
+    "id": "v-kommen", "level": 2, "order": 21, "kind": "verb",
+    "german": "kommen",
+    "verbForms": { "present": { "ich": "komme", "du": "kommst", "er": "kommt", "wir": "kommen", "ihr": "kommt", "sie": "kommen" }, "pastParticiple": "gekommen", "auxiliary": "sein" },
+    "meanings": ["to come"], "prerequisites": [],
+    "example": { "de": "Kommst du heute?", "en": "Are you coming today?" },
+    "mnemonic": "Kommen sounds like \"come in\"."
+  },
+  {
+    "id": "p-ich-komme-aus", "level": 2, "order": 22, "kind": "phrase",
+    "german": "Ich komme aus …",
+    "meanings": ["I'm from …", "I come from …"], "prerequisites": ["v-kommen"],
+    "example": { "de": "Ich komme aus Berlin.", "en": "I'm from Berlin." },
+    "mnemonic": "Aus means \"out of\": I come out of Berlin."
+  },
+  {
+    "id": "o-heute", "level": 2, "order": 23, "kind": "other",
+    "german": "heute",
+    "meanings": ["today"], "prerequisites": [],
+    "example": { "de": "Heute ist ein guter Tag.", "en": "Today is a good day." },
+    "mnemonic": "Heute: \"hoy, today!\" Shout it when the day starts."
+  },
+  {
+    "id": "o-auch", "level": 2, "order": 24, "kind": "other",
+    "german": "auch",
+    "meanings": ["also", "too"], "prerequisites": [],
+    "example": { "de": "Ich bin auch klein.", "en": "I'm small too." },
+    "mnemonic": "\"Ouch!\" \"Ouch, me too!\" Auch."
+  },
+  {
+    "id": "n-stadt", "level": 2, "order": 25, "kind": "noun",
+    "german": "Stadt", "article": "die", "plural": "Städte",
+    "meanings": ["city", "town"], "prerequisites": [],
+    "example": { "de": "Berlin ist eine große Stadt.", "en": "Berlin is a big city." },
+    "mnemonic": "The Diva only sings in the big city. Die Stadt."
+  },
+  {
+    "id": "o-kein", "level": 2, "order": 26, "kind": "other",
+    "german": "kein", "alternatives": ["keine"], "forms": ["keinen"],
+    "meanings": ["no", "not a", "not any"], "prerequisites": ["o-ein"],
+    "example": { "de": "Das ist kein Haus.", "en": "That's not a house." },
+    "mnemonic": "Kein is k + ein: not a. Use it instead of nicht ein."
+  },
+  {
+    "id": "o-bitte", "level": 2, "order": 27, "kind": "other",
+    "german": "bitte",
+    "meanings": ["please", "you're welcome"], "prerequisites": [],
+    "example": { "de": "Kaffee, bitte.", "en": "Coffee, please." },
+    "mnemonic": "A little bit, please: bitte. It's also the reply to danke."
+  },
+  {
+    "id": "p-und-du", "level": 2, "order": 28, "kind": "phrase",
+    "german": "Und du?",
+    "meanings": ["And you?", "What about you?"], "prerequisites": [],
+    "example": { "de": "Mir geht’s gut. Und du?", "en": "I'm fine. And you?" },
+    "mnemonic": "Throw the question back. With people you call Sie, it's Und Sie?"
+  },
+  {
+    "id": "o-in", "level": 2, "order": 29, "kind": "other",
+    "german": "in",
+    "meanings": ["in", "into"], "prerequisites": [],
+    "example": { "de": "Ich wohne in Berlin.", "en": "I live in Berlin." },
+    "mnemonic": "Same word, same meaning."
+  },
+  {
+    "id": "n-freund", "level": 2, "order": 30, "kind": "noun",
+    "german": "Freund", "article": "der", "plural": "Freunde",
+    "meanings": ["friend", "boyfriend"], "prerequisites": [],
+    "example": { "de": "Ben ist ein Freund.", "en": "Ben is a friend." },
+    "mnemonic": "The Bear is your friend, as long as you bring honey. Der Freund. A female friend is eine Freundin."
+  },
+  {
+    "id": "o-jetzt", "level": 2, "order": 31, "kind": "other",
+    "german": "jetzt",
+    "meanings": ["now"], "prerequisites": [],
+    "example": { "de": "Ich gehe jetzt.", "en": "I'm going now." },
+    "mnemonic": "Jetzt sounds like \"jets\": the jets leave now!"
+  },
+  {
+    "id": "p-ich-weiss-nicht", "level": 2, "order": 32, "kind": "phrase",
+    "german": "Ich weiß nicht.",
+    "meanings": ["I don't know"], "prerequisites": [],
+    "example": { "de": "Ist das ein Buch? Ich weiß nicht.", "en": "Is that a book? I don't know." },
+    "mnemonic": "Weiß comes from wissen, to know (think \"wise\"). You'll use this one a lot."
+  },
+  {
+    "id": "o-tschuess", "level": 2, "order": 33, "kind": "other",
+    "german": "tschüss",
+    "meanings": ["bye", "see you"], "prerequisites": [],
+    "example": { "de": "Tschüss, Ben!", "en": "Bye, Ben!" },
+    "mnemonic": "Tschüss sounds like \"choose\": you choose to leave. Bye!"
+  },
+  {
+    "id": "p-alles-gut", "level": 2, "order": 34, "kind": "phrase",
+    "german": "Alles gut.",
+    "meanings": ["All good", "Everything's fine", "No worries"], "prerequisites": [],
+    "example": { "de": "Danke! – Alles gut.", "en": "Thanks! – No worries." },
+    "mnemonic": "Alles is \"all\": all good. Answers thanks, apologies and how-are-yous."
+  }
+]

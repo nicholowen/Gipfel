@@ -129,6 +129,14 @@ export function makeRepo(db: GipfelDb, curriculum: Curriculum) {
       });
     },
 
+    /** Remember that a story has been opened, so the home screen can stop calling it new. */
+    async markStoryRead(storyId: string): Promise<void> {
+      await db.transaction('rw', [db.meta], async () => {
+        const read = await getMeta<string[]>('storiesRead', []);
+        if (!read.includes(storyId)) await setMeta('storiesRead', [...read, storyId]);
+      });
+    },
+
     async getSettings(): Promise<Settings> {
       return { ...DEFAULT_SETTINGS, ...(await getMeta<Partial<Settings>>('settings', {})) };
     },

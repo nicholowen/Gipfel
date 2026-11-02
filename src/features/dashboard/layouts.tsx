@@ -7,6 +7,7 @@ import {
   LevelBar,
   LevelHint,
   StageRows,
+  StoriesLink,
   upcomingBatches,
   UpcomingLine,
   wordCount,
@@ -64,6 +65,7 @@ export function AlpenDashboard({ d, now, theme, levelTitle }: LayoutProps) {
       </div>
 
       <EarlyStageWarning d={d} theme={theme} />
+      <StoriesLink />
 
       <section className="stage-section">
         <div className="section-head">
@@ -109,6 +111,7 @@ export function BauhausDashboard({ d, now, theme, levelTitle }: LayoutProps) {
       </div>
 
       <EarlyStageWarning d={d} theme={theme} />
+      <StoriesLink />
 
       <section className="bauhaus-level">
         <div className="section-head">
@@ -179,6 +182,7 @@ export function BahnDashboard({ d, now, theme, levelTitle }: LayoutProps) {
       </section>
 
       <EarlyStageWarning d={d} theme={theme} />
+      <StoriesLink />
 
       <section className="card">
         <div className="card__head">
@@ -256,6 +260,7 @@ export function BackstubeDashboard({ d, now, theme, levelTitle }: LayoutProps) {
       </div>
 
       <EarlyStageWarning d={d} theme={theme} />
+      <StoriesLink />
 
       <section className="card">
         <div className="card__head">

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { buildLexicon, coverage, STORY_UNLOCK, tokenizeStory, type Story } from '../domain/stories';
 import type { Curriculum } from '../domain/types';
 
 const itemSchema = z
@@ -98,4 +99,62 @@ export function validateCurriculum(input: unknown): string[] {
   for (const id of byId.keys()) visit(id, []);
 
   return problems;
+}
+
+const storySchema = z
+  .object({
+    id: z.string().regex(/^s-[a-z0-9-]+$/, 'story ids look like s-der-handschuh'),
+    title: z.string().min(1),
+    titleEn: z.string().min(1),
+    level: z.number().int().positive(),
+    kind: z.enum(['story', 'dialogue']),
+    names: z.array(z.string().min(1)).optional(),
+    lines: z
+      .array(z.object({ speaker: z.string().min(1).optional(), de: z.string().min(1), en: z.string().min(1) }).strict())
+      .min(1),
+  })
+  .strict();
+
+export interface StoryReport {
+  id: string;
+  /** Share of words known once every item up to the story's level is known. */
+  coverage: number;
+  problems: string[];
+}
+
+/** Checks each story's shape, that every word resolves, and that it is readable at its level. */
+export function validateStories(input: unknown[], c: Curriculum): StoryReport[] {
+  const lexicon = buildLexicon(c.items);
+  const levels = new Set(c.levels.map((l) => l.number));
+  const ids = new Set<string>();
+  return input.map((raw, n) => {
+    const parsed = storySchema.safeParse(raw);
+    if (!parsed.success) {
+      return { id: `story #${n + 1}`, coverage: 0, problems: parsed.error.issues.map((i) => `${i.path.join('.')} ${i.message}`.trim()) };
+    }
+    const story = parsed.data as Story;
+    const problems: string[] = [];
+    if (ids.has(story.id)) problems.push('duplicate story id');
+    ids.add(story.id);
+    if (!levels.has(story.level)) problems.push(`level ${story.level} is not in curriculum.json`);
+
+    const lines = tokenizeStory(story, lexicon);
+    lines.forEach((tokens, i) => {
+      for (const t of tokens) {
+        if (t.type !== 'unresolved') continue;
+        problems.push(
+          t.candidates.length > 1
+            ? `line ${i + 1}: "${t.text}" could be ${t.candidates.join(' or ')}; annotate it, e.g. ${t.text}{${t.candidates[0]}}`
+            : `line ${i + 1}: "${t.text}" is not a taught word; add it to a level, or gloss it as ${t.text}{?meaning}, or mark a name as ${t.text}{-}`,
+        );
+      }
+    });
+
+    const levelOf = new Map(c.items.map((i) => [i.id, i.level]));
+    const cov = coverage(lines, (id) => (levelOf.get(id) ?? Infinity) <= story.level).ratio;
+    if (cov < STORY_UNLOCK) {
+      problems.push(`only ${(cov * 100).toFixed(1)}% of words are taught by level ${story.level}; needs ${STORY_UNLOCK * 100}%`);
+    }
+    return { id: story.id, coverage: cov, problems };
+  });
 }

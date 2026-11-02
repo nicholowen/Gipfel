@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import type { useDashboard } from '../../data/instance';
+import { useStories, type useDashboard } from '../../data/instance';
 import { EARLY_STAGE_WARNING } from '../../domain/dashboard';
 import { STAGE_INTERVAL, STAGE_KEYS, type StageKey, type Theme, type ThemeId } from '../../ui/themes';
 
@@ -241,4 +241,32 @@ export function StageIcon({ theme, stage }: { theme: ThemeId; stage: StageKey })
 
   // Schwarz-Rot-Gold: a coloured line badge, like a train category.
   return <span className={`stage-icon stage-icon--badge stage-icon--${n}`} aria-hidden="true" />;
+}
+
+/** The way into the graded stories, with how many can be read now. */
+export function StoriesLink() {
+  const all = useStories();
+  if (!all || all.length === 0) return null;
+  const ready = all.filter((s) => s.ready);
+  const fresh = ready.filter((s) => !s.read).length;
+  const next = all.find((s) => !s.ready);
+  const sub =
+    ready.length > 0
+      ? `${ready.length} ready to read${fresh > 0 ? ` · ${fresh} new` : ''}`
+      : next
+        ? `First story at ${Math.floor(next.coverage.ratio * 100)}% of its words known`
+        : '';
+  return (
+    <Link to="/stories" className={`stories-link${fresh > 0 ? ' has-new' : ''}`}>
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path d="M3 5c3-1 6-1 9 1 3-2 6-2 9-1v14c-3-1-6-1-9 1-3-2-6-2-9-1z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+        <path d="M12 6v14" stroke="currentColor" strokeWidth="1.8" />
+      </svg>
+      <span className="stories-link__text">
+        <span className="stories-link__title">Stories</span>
+        <span className="stories-link__sub">{sub}</span>
+      </span>
+      <span aria-hidden="true">→</span>
+    </Link>
+  );
 }
