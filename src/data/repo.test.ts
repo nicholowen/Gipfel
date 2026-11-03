@@ -96,3 +96,32 @@ describe('repo', () => {
     expect(currentStreak(streak, t0 + 72 * HOUR)).toBe(0);
   });
 });
+
+describe('onboarding', () => {
+  let db: GipfelDb;
+  let repo: Repo;
+  beforeEach(async () => {
+    db = new GipfelDb(`onboarding-${Math.random()}`);
+    repo = makeRepo(db, curriculum);
+    await repo.init(t0);
+  });
+  afterEach(() => db.delete());
+
+  it('saves and resets the intro flag', async () => {
+    expect(await repo.getMeta('onboarding', undefined)).toBeUndefined();
+    await repo.completeIntro(t0);
+    expect(await repo.getMeta('onboarding', undefined)).toEqual({ version: 1, completedAt: t0 });
+    await repo.resetIntro();
+    expect(await repo.getMeta('onboarding', undefined)).toBeUndefined();
+  });
+
+  it('remembers each hint once and can reset them', async () => {
+    await repo.markHintSeen('article');
+    await repo.markHintSeen('article');
+    await repo.markHintSeen('story-words');
+    expect(await repo.getMeta('hintsSeen', [])).toEqual(['article', 'story-words']);
+    await repo.resetHints();
+    expect(await repo.getMeta('hintsSeen', [])).toEqual([]);
+  });
+});
+

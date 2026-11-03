@@ -438,15 +438,15 @@ a {
   background: color-mix(in srgb, currentColor 14%, transparent);
 }
 
-.early-steps > span.is-empty {
-  opacity: 0.45;
-}
+/* Each step a little stronger tint of the theme accent, leading on to the next group. */
+.early-steps > .early-steps__step--1 { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.early-steps > .early-steps__step--2 { background: color-mix(in srgb, var(--accent) 22%, transparent); }
+.early-steps > .early-steps__step--3 { background: color-mix(in srgb, var(--accent) 30%, transparent); }
+.early-steps > .early-steps__step--4 { background: color-mix(in srgb, var(--accent) 38%, transparent); }
 
-.early-steps > .early-steps__arrow {
-  min-width: 0;
-  padding: 0;
-  background: none;
-  color: var(--ink-soft);
+.early-steps > span.is-empty {
+  background: color-mix(in srgb, currentColor 14%, transparent);
+  opacity: 0.45;
 }
 
 .stage-row__count {
@@ -1294,4 +1294,202 @@ a {
   background: color-mix(in srgb, var(--line) 45%, transparent);
   text-align: left;
   cursor: pointer;
+}
+
+/* One-time hints */
+
+.hint {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 4px 10px;
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--ink);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.hint__icon {
+  margin-top: 1px;
+  color: var(--accent);
+}
+
+.hint__text {
+  margin: 0;
+}
+
+.hint__dismiss {
+  grid-column: 2;
+  justify-self: end;
+  min-height: 32px;
+}
+
+/* First-run intro */
+
+.intro {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+}
+
+.intro__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+}
+
+.intro__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.intro__card {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  animation: intro-in 0.25s ease-out;
+}
+
+@keyframes intro-in {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro__card { animation: none; }
+}
+
+.intro__step {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.intro__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1.15;
+}
+
+.intro__body {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.intro__stages {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+}
+
+.intro__stages li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+}
+
+.intro__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.intro__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.intro__dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--line);
+}
+
+.intro__dots span.is-current {
+  width: 22px;
+  background: var(--accent);
+}
+
+.intro__buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.intro__buttons .button {
+  flex: 1 1 0;
+}
+
+.intro__next {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+
+.intro__gloss {
+  font-size: 0.72rem;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* Help page */
+
+.help__item h2 {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.help__item p {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.help__item + .help__item {
+  margin-top: 20px;
+}
+
+.help__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+/* Help link in the header menu */
+
+.menu__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  margin-top: 8px;
+  padding: 0 8px;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
 }

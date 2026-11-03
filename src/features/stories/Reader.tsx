@@ -5,6 +5,7 @@ import { storiesById, storyTokens } from '../../content/stories';
 import { repo, useKnownItems } from '../../data/instance';
 import type { Token } from '../../domain/stories';
 import { reportError } from '../../ui/errors';
+import { Hint, useOneTimeHint } from '../../ui/Hint';
 import { GermanWord } from '../../ui/ItemInfo';
 import { canSpeak, speak, speakLines, spokenForm } from '../../ui/speech';
 import { PageBar } from '../lessons/Lessons';
@@ -23,6 +24,7 @@ export function Reader() {
   const [allEnglish, setAllEnglish] = useState(false);
   const [playing, setPlaying] = useState(-1);
   const stop = useRef<(() => void) | null>(null);
+  const wordsHint = useOneTimeHint('story-words', !!story);
 
   useEffect(() => {
     if (story) repo.markStoryRead(story.id).catch(reportError);
@@ -78,6 +80,7 @@ export function Reader() {
             <span>English</span>
           </label>
         </div>
+        <Hint id="story-words" show={wordsHint.show} onDismiss={wordsHint.dismiss} />
       </header>
 
       <ol className={`reader__lines reader__lines--${story.kind}`}>

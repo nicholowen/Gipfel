@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { useStories, type useDashboard } from '../../data/instance';
+import { useHintsSeen, useStories, type useDashboard } from '../../data/instance';
+import { dashboardHint } from '../../domain/onboarding';
 import { DAILY_NEW_ITEMS, EARLY_STAGE_LIMIT } from '../../domain/pacing';
+import { Hint, useOneTimeHint } from '../../ui/Hint';
 import { STAGE_INTERVAL, STAGE_KEYS, type StageKey, type Theme, type ThemeId } from '../../ui/themes';
 
 export type DashboardData = NonNullable<ReturnType<typeof useDashboard>>;
@@ -150,11 +152,10 @@ function EarlySteps({ d }: { d: DashboardData }) {
   return (
     <span className="early-steps" role="img" aria-label={label} title={`Steps 1–4 of 4: ${label}`}>
       {d.earlySteps.map((n, i) => (
-        <span key={i} className={n === 0 ? 'is-empty' : ''}>
+        <span key={i} className={`early-steps__step early-steps__step--${i + 1}${n === 0 ? ' is-empty' : ''}`}>
           {n}
         </span>
       ))}
-      <span className="early-steps__arrow" aria-hidden="true">→</span>
     </span>
   );
 }
@@ -295,4 +296,23 @@ export function StoriesLink() {
       <span aria-hidden="true">→</span>
     </Link>
   );
+}
+
+/** The one home-screen hint due now (see onboarding.ts), shown under the stage list. */
+export function DashboardHint({ d }: { d: DashboardData }) {
+  const seen = useHintsSeen();
+  const id =
+    seen === undefined
+      ? null
+      : dashboardHint(
+          {
+            first: d.groups[1],
+            second: d.groups[2],
+            known: d.groups[2] + d.groups[3] + d.groups[4] + d.groups[5],
+            scheduled: d.nextReviewAt !== null || d.reviewsDue > 0,
+          },
+          seen,
+        );
+  const { show, dismiss } = useOneTimeHint(id, id !== null);
+  return <Hint id={id} show={show} onDismiss={dismiss} />;
 }

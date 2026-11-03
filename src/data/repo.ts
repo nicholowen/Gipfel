@@ -1,3 +1,4 @@
+import { ONBOARDING_VERSION, type HintId, type OnboardingState } from '../domain/onboarding';
 import { FINAL_STAGE, nextReviewAt, nextStage } from '../domain/scheduler';
 import type { CompletedItem } from '../domain/review-session';
 import type { Curriculum, ItemProgress } from '../domain/types';
@@ -132,6 +133,27 @@ export function makeRepo(db: GipfelDb, curriculum: Curriculum) {
         const read = await getMeta<string[]>('storiesRead', []);
         if (!read.includes(storyId)) await setMeta('storiesRead', [...read, storyId]);
       });
+    },
+
+    /** The intro was finished or skipped (see onboarding.ts). */
+    async completeIntro(now: number): Promise<void> {
+      await setMeta('onboarding', { version: ONBOARDING_VERSION, completedAt: now } satisfies OnboardingState);
+    },
+
+    /** Show the intro again on the next visit home. */
+    async resetIntro(): Promise<void> {
+      await db.meta.delete('onboarding');
+    },
+
+    async markHintSeen(id: HintId): Promise<void> {
+      await db.transaction('rw', [db.meta], async () => {
+        const seen = await getMeta<string[]>('hintsSeen', []);
+        if (!seen.includes(id)) await setMeta('hintsSeen', [...seen, id]);
+      });
+    },
+
+    async resetHints(): Promise<void> {
+      await setMeta('hintsSeen', []);
     },
 
     async getSettings(): Promise<Settings> {

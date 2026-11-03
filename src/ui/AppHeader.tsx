@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { useTheme } from './theme-context';
 import { darkQuery } from './theme-dom';
 import { paletteFor, THEMES } from './themes';
@@ -87,6 +88,13 @@ export function AppHeader({ logo = MOUNTAIN_LOGO, kicker, name = 'Gipfel', tagli
       {open && (
         <div ref={panel} id={panelId} className="menu">
           <ThemePicker />
+          <Link to="/help" className="menu__link">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.8" />
+              <path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17v.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+            How Gipfel works
+          </Link>
         </div>
       )}
     </header>

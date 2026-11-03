@@ -16,6 +16,7 @@ import {
   type SessionState,
 } from '../../domain/review-session';
 import { AnswerInput, type AnswerInputHandle } from '../../ui/AnswerInput';
+import { Hint, useOneTimeHint } from '../../ui/Hint';
 import { ItemInfo } from '../../ui/ItemInfo';
 import { speak, spokenForm } from '../../ui/speech';
 import { useTheme } from '../../ui/theme-context';
@@ -28,6 +29,8 @@ interface Props {
   onSettled?: (items: CompletedItem[]) => void;
   onFinished: (state: SessionState) => void;
   allowWrapUp?: boolean;
+  /** Reviews move words down a step when wrong; the lesson quiz doesn't, so its hints differ. */
+  mode?: 'lessons' | 'reviews';
 }
 
 interface Shown {
@@ -35,11 +38,11 @@ interface Shown {
   result: CheckResult;
 }
 
-export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false }: Props) {
+export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false, mode = 'lessons' }: Props) {
   const [state, setState] = useState(() => startSession(itemIds, Math.random));
   const [input, setInput] = useState('');
   const [shown, setShown] = useState<Shown | null>(null);
-  const [shake, setShake] = useState<{ message?: string; n: number } | null>(null);
+  const [shake, setShake] = useState<{ message?: string; about?: 'article'; n: number } | null>(null);
   const [infoOpen, setInfoOpen] = useState(false);
   const [wrappingUp, setWrappingUp] = useState(false);
   const field = useRef<AnswerInputHandle>(null);
@@ -79,6 +82,12 @@ export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false }: Pr
   }, [state]);
 
   // Queue finished: the parent is saving and will move on.
+  // One-time hints, marked seen as soon as they appear (they go with the question).
+  const articleMoment = (!!shake && !shown && shake.about === 'article') || shown?.result.about === 'article';
+  const wrongMoment = mode === 'reviews' && shown?.result.outcome === 'wrong' && !articleMoment;
+  const articleHint = useOneTimeHint('article', articleMoment, { markOnShow: true });
+  const wrongHint = useOneTimeHint('wrong-answer', wrongMoment, { markOnShow: true });
+
   if (!question || !item) return <p className="muted centred-text">Saving…</p>;
 
   const finishIfDone = (next: SessionState) => {
@@ -103,7 +112,7 @@ export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false }: Pr
     }
     const result = check(item, question.type, input, { synonyms, shookAlready: hasShaken(state, question) });
     if (result.outcome === 'shake') {
-      setShake((s) => ({ message: result.message, n: (s?.n ?? 0) + 1 }));
+      setShake((s) => ({ message: result.message, about: result.about, n: (s?.n ?? 0) + 1 }));
       setState((s) => answer(s, 'shake', Math.random));
       return;
     }
@@ -164,6 +173,7 @@ export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false }: Pr
       />
       <div className="quiz__feedback" aria-live="polite">
         {shake && !shown && <p className="notice notice--shake">{shake.message}</p>}
+        <Hint id="article" show={articleHint.show} />
         {shown && (
           <>
             <p className={`notice ${passed ? 'notice--good' : 'notice--bad'}`}>
@@ -177,6 +187,7 @@ export function Quiz({ itemIds, onSettled, onFinished, allowWrapUp = false }: Pr
                 </span>
               )}
             </p>
+            <Hint id="wrong-answer" show={wrongHint.show} />
             <div className="quiz__actions">
               <button type="button" className="link-button" onClick={undoLast}>
                 Undo

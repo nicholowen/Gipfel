@@ -11,6 +11,8 @@ export type Outcome = 'correct' | 'close' | 'wrong' | 'shake';
 export interface CheckResult {
   outcome: Outcome;
   message?: string;
+  /** Set when the answer was held back by the noun's article (missing or wrong). */
+  about?: 'article';
 }
 
 export interface CheckContext {
@@ -90,18 +92,18 @@ function checkGerman(item: ContentItem, input: string, ctx: CheckContext): Check
     if (!article) {
       // Only nudge for the article when the word itself is right or nearly right.
       return levenshtein(rest, target) <= 1
-        ? { outcome: 'shake', message: 'Include the article: der, die or das.' }
+        ? { outcome: 'shake', message: 'Include the article: der, die or das.', about: 'article' }
         : { outcome: 'wrong' };
     }
     if (article !== item.article && levenshtein(rest, target) <= 1) {
-      return { outcome: 'wrong', message: `It’s ${item.article}, not ${article}.` };
+      return { outcome: 'wrong', message: `It’s ${item.article}, not ${article}.`, about: 'article' };
     }
   }
 
   const answer = item.kind === 'noun' ? rest : fold(input);
   if (targets.includes(answer)) {
     if (item.kind === 'noun' && article !== item.article) {
-      return { outcome: 'wrong', message: `It’s ${item.article}, not ${article}.` };
+      return { outcome: 'wrong', message: `It’s ${item.article}, not ${article}.`, about: 'article' };
     }
     if (item.kind === 'noun' && !nounIsCapitalised(input)) {
       return { outcome: 'shake', message: `Nouns are capitalised: ${item.article} ${item.german}.` };

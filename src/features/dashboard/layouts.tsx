@@ -7,6 +7,7 @@ import {
   clock,
   LevelBar,
   LevelHint,
+  DashboardHint,
   StageRows,
   StoriesLink,
   upcomingBatches,
@@ -75,6 +76,7 @@ export function AlpenDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         </div>
         <StageRows d={d} theme={theme} />
       </section>
+      <DashboardHint d={d} />
 
       <p className="upcoming">
         <span>Next reviews</span>
@@ -137,6 +139,7 @@ export function BauhausDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         </div>
         <StageRows d={d} theme={theme} bars />
       </section>
+      <DashboardHint d={d} />
 
       <p className="upcoming">
         <span>next round</span>
@@ -208,6 +211,7 @@ export function BahnDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         </div>
         <StageRows d={d} theme={theme} bars />
       </section>
+      <DashboardHint d={d} />
     </main>
   );
 }
@@ -288,6 +292,7 @@ export function BackstubeDashboard({ d, now, theme, levelTitle }: LayoutProps) {
         </div>
         <StageRows d={d} theme={theme} />
       </section>
+      <DashboardHint d={d} />
 
       <p className="upcoming">
         <em>Next tray</em>

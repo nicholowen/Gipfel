@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useStories, type StoryStatus } from '../../data/instance';
 import { STORY_UNLOCK } from '../../domain/stories';
+import { Hint, useOneTimeHint } from '../../ui/Hint';
 import { PageBar } from '../lessons/Lessons';
 
 const pct = (ratio: number) => `${Math.floor(ratio * 100)}%`;
@@ -25,6 +26,7 @@ export function Stories() {
           <div className="section-head">
             <h2>Ready to read</h2>
           </div>
+          <StoryHint />
           <ul className="story-list">
             {ready.map((s) => (
               <StoryRow key={s.story.id} s={s} />
@@ -82,4 +84,10 @@ function StoryRow({ s }: { s: StoryStatus }) {
       )}
     </li>
   );
+}
+
+/** Shown once, the first time a story is ready. */
+function StoryHint() {
+  const { show, dismiss } = useOneTimeHint('story-unlocked', true);
+  return <Hint id="story-unlocked" show={show} onDismiss={dismiss} />;
 }

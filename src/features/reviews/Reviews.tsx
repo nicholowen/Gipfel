@@ -1,3 +1,4 @@
+import { Hint, useOneTimeHint } from '../../ui/Hint';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getItem } from '../../content/curriculum';
@@ -57,6 +58,7 @@ export function Reviews() {
             <p className="muted">New words are waiting in your lessons.</p>
           </section>
         )}
+        {(summary.levelUp ?? levelUp) && <LevelHint />}
         <SummaryList title={`${summary.right.length} went up`} items={summary.right} tone="good" />
         <SummaryList title={`${summary.wrong.length} need more practice`} items={summary.wrong} tone="bad" />
         <div className="row">
@@ -73,6 +75,7 @@ export function Reviews() {
       <PageBar title="Reviews" />
       <Quiz
         itemIds={due}
+        mode="reviews"
         allowWrapUp
         onSettled={save}
         onFinished={(state) =>
@@ -105,4 +108,10 @@ function SummaryList({ title, items, tone }: { title: string; items: CompletedIt
       </ul>
     </section>
   );
+}
+
+/** Shown once, on the first level-up. */
+function LevelHint() {
+  const { show, dismiss } = useOneTimeHint('level-complete', true);
+  return <Hint id="level-complete" show={show} onDismiss={dismiss} />;
 }

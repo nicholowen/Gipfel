@@ -3,6 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { curriculum } from '../content/curriculum';
 import { stories, storyTokens } from '../content/stories';
 import { summarise } from '../domain/dashboard';
+import { introDone, type OnboardingState } from '../domain/onboarding';
 import { lessonAllowance, type LessonPause } from '../domain/pacing';
 import { KNOWN_STAGE } from '../domain/scheduler';
 import { coverage, STORY_UNLOCK, type Coverage, type Story } from '../domain/stories';
@@ -24,6 +25,10 @@ export const repo: typeof rawRepo = {
   finishLessons: (ids, now) => retry(() => rawRepo.finishLessons(ids, now)),
   recordReviews: (items, now) => retry(() => rawRepo.recordReviews(items, now)),
   markStoryRead: (id) => retry(() => rawRepo.markStoryRead(id)),
+  completeIntro: (now) => retry(() => rawRepo.completeIntro(now)),
+  resetIntro: () => retry(() => rawRepo.resetIntro()),
+  markHintSeen: (id) => retry(() => rawRepo.markHintSeen(id)),
+  resetHints: () => retry(() => rawRepo.resetHints()),
   getSettings: () => retry(() => rawRepo.getSettings()),
   saveSettings: (s) => retry(() => rawRepo.saveSettings(s)),
 };
@@ -74,6 +79,16 @@ export function loadStages(itemIds: string[]): Promise<Map<string, Stage>> {
     const rows = await db.progress.bulkGet(itemIds);
     return new Map(rows.filter((r) => r !== undefined).map((r) => [r.itemId, r.stage]));
   });
+}
+
+/** Whether the first-run intro still needs showing; undefined while loading. */
+export function useIntroDone(): boolean | undefined {
+  return useLiveQuery(async () => introDone(await repo.getMeta<OnboardingState | undefined>('onboarding', undefined)), []);
+}
+
+/** Ids of the one-time hints already seen; undefined while loading. */
+export function useHintsSeen(): string[] | undefined {
+  return useLiveQuery(() => repo.getMeta<string[]>('hintsSeen', []), []);
 }
 
 export function useSettings(): Settings {
