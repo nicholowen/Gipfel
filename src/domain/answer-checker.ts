@@ -79,7 +79,9 @@ function checkMeaning(item: ContentItem, input: string, ctx: CheckContext): Chec
 }
 
 function checkGerman(item: ContentItem, input: string, ctx: CheckContext): CheckResult {
-  if (matchesMeaning(item, input, ctx) === 'exact') {
+  // Some words are spelled the same in both languages (in, warm, Hand), so an
+  // answer that is also the German is never sent back as "the English".
+  if (matchesMeaning(item, input, ctx) === 'exact' && !isTheGerman(item, input)) {
     return { outcome: 'shake', message: 'That’s the English. Type it in German.' };
   }
   if (item.kind === 'phrase') return checkPhrase(item, input, ctx);

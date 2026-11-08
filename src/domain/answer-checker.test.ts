@@ -16,9 +16,22 @@ const heisse: ContentItem = { ...base, id: 'p-ich-heisse', kind: 'phrase', germa
 const ein: ContentItem = { ...base, id: 'o-ein', kind: 'other', german: 'ein', alternatives: ['eine'], forms: ['eine', 'einen'], meanings: ['a', 'an'] };
 const schnell: ContentItem = { ...base, id: 'a-schnell', kind: 'adjective', german: 'schnell', meanings: ['fast', 'quick'] };
 
+// Spelled the same in English and German
+const inPrep: ContentItem = { ...base, id: 'o-in', kind: 'other', german: 'in', meanings: ['in', 'into'] };
+const warm: ContentItem = { ...base, id: 'a-warm', kind: 'adjective', german: 'warm', meanings: ['warm'] };
+const hand: ContentItem = { ...base, id: 'n-hand', kind: 'noun', german: 'Hand', article: 'die', plural: 'Hände', meanings: ['hand'] };
+
 type Row = [ContentItem, QuestionType, string, Outcome, { synonyms?: string[]; shookAlready?: boolean }?];
 
 const rows: Row[] = [
+  // Words spelled the same in both languages: the German answer is never mistaken for English
+  [inPrep, 'german', 'in', 'correct'],
+  [inPrep, 'meaning', 'in', 'correct'],
+  [inPrep, 'german', 'into', 'shake'],
+  [warm, 'german', 'warm', 'correct'],
+  [hand, 'german', 'die Hand', 'correct'],
+  [hand, 'german', 'Hand', 'shake'],
+  [hand, 'german', 'der Hand', 'wrong'],
   // Phrases: whole-phrase answers, punctuation and apostrophes ignored, variants accepted
   [wieGehts, 'german', 'Wie geht’s?', 'correct'],
   [wieGehts, 'german', "wie gehts", 'correct'],
@@ -101,6 +114,10 @@ describe('check', () => {
 
   it('names the right article when the article is wrong', () => {
     expect(check(hund, 'german', 'die Hund', {}).message).toMatch(/der/);
+  });
+
+  it('asks for the article, not the German, when a same-spelled noun is typed bare', () => {
+    expect(check(hand, 'german', 'Hand', {}).about).toBe('article');
   });
 
   it('asks for an article when it is missing', () => {
