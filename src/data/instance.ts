@@ -29,6 +29,7 @@ export const repo: typeof rawRepo = {
   resetIntro: () => retry(() => rawRepo.resetIntro()),
   markHintSeen: (id) => retry(() => rawRepo.markHintSeen(id)),
   resetHints: () => retry(() => rawRepo.resetHints()),
+  saveNote: (itemId, text) => retry(() => rawRepo.saveNote(itemId, text)),
   getSettings: () => retry(() => rawRepo.getSettings()),
   saveSettings: (s) => retry(() => rawRepo.saveSettings(s)),
 };
@@ -97,6 +98,11 @@ export function useSettings(): Settings {
 
 export function useSynonyms(itemId: string | undefined): string[] {
   return useLiveQuery(async () => (itemId ? (await db.overrides.get(itemId))?.synonyms ?? [] : []), [itemId], []);
+}
+
+/** The learner's own note on an item; undefined while loading, '' when there is none. */
+export function useNote(itemId: string): string | undefined {
+  return useLiveQuery(async () => (await db.overrides.get(itemId))?.note ?? '', [itemId]);
 }
 
 export interface StoryStatus {

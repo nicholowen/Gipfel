@@ -115,6 +115,18 @@ describe('onboarding', () => {
     expect(await repo.getMeta('onboarding', undefined)).toBeUndefined();
   });
 
+  it('saves a note per item, keeps synonyms, and clears it when emptied', async () => {
+    await db.overrides.put({ itemId: 'n-a', synonyms: ['thing'] });
+    await repo.saveNote('n-a', '  Think of a Bear.  ');
+    expect(await db.overrides.get('n-a')).toEqual({ itemId: 'n-a', synonyms: ['thing'], note: 'Think of a Bear.' });
+    await repo.saveNote('n-b', 'Second note');
+    expect((await db.overrides.get('n-b'))?.note).toBe('Second note');
+    await repo.saveNote('n-a', '   ');
+    expect(await db.overrides.get('n-a')).toEqual({ itemId: 'n-a', synonyms: ['thing'] });
+    await repo.saveNote('n-b', '');
+    expect(await db.overrides.get('n-b')).toBeUndefined();
+  });
+
   it('remembers each hint once and can reset them', async () => {
     await repo.markHintSeen('article');
     await repo.markHintSeen('article');

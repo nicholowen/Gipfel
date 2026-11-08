@@ -73,6 +73,14 @@ export function Help() {
       </section>
 
       <section className="help__item">
+        <h2>Can I add my own notes?</h2>
+        <p>
+          Yes. If a mnemonic doesn’t click, or you have your own trick, tap <b>Add a note</b> under the mnemonic in a lesson, or under{' '}
+          <b>Show info</b> after answering a review. Notes stay on this device with the rest of your progress.
+        </p>
+      </section>
+
+      <section className="help__item">
         <h2>How do stories unlock?</h2>
         <p>
           A story opens once you know at least {Math.round(STORY_UNLOCK * 100)}% of its words. Tap any word you don’t know to see it, and tap{' '}

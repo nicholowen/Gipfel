@@ -678,6 +678,49 @@ a {
   gap: 2px;
 }
 
+.info__note {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+.info__note p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.info__note .row {
+  align-self: stretch;
+}
+
+.info__add-note {
+  align-self: flex-start;
+}
+
+.note-field {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 2px var(--line);
+  color: var(--ink);
+  font: inherit;
+  /* 16px+ stops iOS zooming into the field */
+  font-size: max(16px, 1rem);
+  resize: vertical;
+}
+
+.note-field:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
 /* Quiz */
 
 .quiz {

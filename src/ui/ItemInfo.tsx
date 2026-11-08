@@ -1,4 +1,5 @@
 import type { ContentItem } from '../domain/types';
+import { ItemNote } from './ItemNote';
 import { canSpeak, speak, spokenForm } from './speech';
 
 const KIND_LABEL = { noun: 'Noun', verb: 'Verb', adjective: 'Adjective', other: 'Word', phrase: 'Phrase' } as const;
@@ -99,6 +100,7 @@ export function ItemInfo({ item, showWord = true }: { item: ContentItem; showWor
           {item.mnemonic}
         </p>
       )}
+      <ItemNote key={item.id} itemId={item.id} />
     </div>
   );
 }

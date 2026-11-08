@@ -4,7 +4,7 @@ import type { CompletedItem } from '../domain/review-session';
 import type { Curriculum, ItemProgress } from '../domain/types';
 import { localDay } from '../domain/pacing';
 import { canLevelUp, itemsToUnlock } from '../domain/unlock';
-import type { GipfelDb } from './db';
+import type { GipfelDb, Override } from './db';
 
 export interface Streak {
   count: number;
@@ -154,6 +154,18 @@ export function makeRepo(db: GipfelDb, curriculum: Curriculum) {
 
     async resetHints(): Promise<void> {
       await setMeta('hintsSeen', []);
+    },
+
+    /** The learner's own note on an item. Blank text removes it (and the row, if nothing else is kept there). */
+    async saveNote(itemId: string, text: string): Promise<void> {
+      const note = text.trim();
+      await db.transaction('rw', [db.overrides], async () => {
+        const existing: Override = (await db.overrides.get(itemId)) ?? { itemId, synonyms: [] };
+        const { note: _old, ...rest } = existing;
+        const next: Override = note ? { ...rest, note } : rest;
+        if (!next.note && next.synonyms.length === 0 && !next.mnemonic) await db.overrides.delete(itemId);
+        else await db.overrides.put(next);
+      });
     },
 
     async getSettings(): Promise<Settings> {
